@@ -1,0 +1,62 @@
+{
+	"schema_version":1,
+	"status":"frozen-symbolic-direct-Psi22-dual-branch-pre-field-validation",
+	"candidate_id":"gl-psi22-dual-branch-gl2plus2-v1",
+	"scope":"stationary finite-depth forward-directional pure-sum Psi22, kd>=0.3",
+	"candidate_input_fields":[
+		"eta11"
+	],
+	"candidate_output_fields":[
+		"Psi22_plus"
+	],
+	"explicit_eta22_dependency":false,
+	"explicit_Phi22_dependency":false,
+	"time_evolution_used":false,
+	"sampled_selection_used":false,
+	"oracle_or_mf12_used":false,
+	"model_parent_kd_minimum":"3\/10",
+	"branch_definition":{
+		"slow":"Exp[-(omega12-Omega12) tau]",
+		"fast":"Exp[-(omega12+Omega12) tau]"
+	},
+	"quadrature":{
+		"rank_total":4,
+		"rank_per_branch":2,
+		"nodes_exact":[
+			"2 - Sqrt[2]",
+			"2 + Sqrt[2]"
+		],
+		"weights_exact":[
+			"(2 - Sqrt[2])\/(4*(-1 + Sqrt[2])^2)",
+			"(2 + Sqrt[2])\/(4*(1 + Sqrt[2])^2)"
+		],
+		"lambda_minus":"2*Sqrt[kpDBG*Tanh[kpDBG]] - Sqrt[2]*Sqrt[kpDBG*Tanh[2*kpDBG]]",
+		"lambda_plus":"2*Sqrt[kpDBG*Tanh[kpDBG]] + Sqrt[2]*Sqrt[kpDBG*Tanh[2*kpDBG]]"
+	},
+	"finite_depth_endpoint_kd":"3\/10",
+	"finite_depth_endpoint_scales":{
+		"lambda_minus":"(Sqrt[30*Tanh[3\/10]] - Sqrt[15*Tanh[3\/5]])\/5",
+		"lambda_plus":"(Sqrt[30*Tanh[3\/10]] + Sqrt[15*Tanh[3\/5]])\/5"
+	},
+	"deep_water_endpoint_scales_over_sqrt_kpd":{
+		"lambda_minus":"2 - Sqrt[2]",
+		"lambda_plus":"2 + Sqrt[2]"
+	},
+	"full_crossing_angle_dependence_retained":true,
+	"gates":{
+		"laguerre_moments":true,
+		"slow_integral":true,
+		"fast_integral":true,
+		"cosh_recovery":true,
+		"sinh_recovery":true,
+		"finite_slow_endpoint":true,
+		"finite_fast_endpoint":true,
+		"deep_slow_endpoint":true,
+		"deep_fast_endpoint":true
+	},
+	"overall_exact_gate_pass":true,
+	"generator":"symbolic\/wolfram\/order2_finite_depth_directional_psi22_dual_branch_gl_freeze.wl",
+	"generator_sha256":"4b92f4ed67900749f0141106f6030774462533606aa54a8c9efac5f2f5aaa3e1",
+	"residual_source":"symbolic\/residuals\/order2_finite_depth_directional_euler.wl",
+	"residual_source_sha256":"3896fa4979dd622b2ae42f10330d8aa1a635d210c02618f3715ed5dcea9cf3bc"
+}

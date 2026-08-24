@@ -1,0 +1,2 @@
+method,peak_kpd,crossing_angle_deg,spread_deg,grid_size,selected_component_count,quadrature_rank,physical_raw_relative_l2_pct,physical_raw_relative_linf_pct,candidate_over_mf12_norm_ratio
+GL8,1,120,30,256,1556,8,17.1401922045154,4.69287500866591,0.900711525668932

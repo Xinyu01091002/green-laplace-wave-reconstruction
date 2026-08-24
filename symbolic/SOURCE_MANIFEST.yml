@@ -1,0 +1,23 @@
+schema_version: 1
+project: green-laplace-wave-reconstruction
+extraction_source:
+  repository: https://github.com/Xinyu01091002/SWORD-VWA
+  commit: 0f4dfc40ff903fa52ba08ec046fa56c6778ef407
+  note: Selected Green--Laplace sources were extracted and made standalone.
+files:
+  - path: src/internal/finite_depth_directional_dual_branch_green_laplace_psi22.m
+    git_blob_sha1: 650354d6ee4d4e3818a13b955c0ef072a42898d9
+  - path: src/internal/finite_depth_directional_nested_gl_eta33_stable.m
+    git_blob_sha1: ed51d7404ee8b6d064643ca496b2af768253f64b
+  - path: src/internal/finite_depth_directional_pure_gl8_eta22.m
+    git_blob_sha1: b69d06e61e54d742340a791ee508f9cbe73da2c5
+  - path: src/internal/green_laplace_eta22.m
+    git_blob_sha1: 8dda3e393e5eda9404cb0879c25beb2c875517bf
+  - path: symbolic/generated/finite_depth_directional_order2_eta22_pure_gl8.json
+    git_blob_sha1: 980d269a3d5f58703fa3c2afe26b6612d1dd872e
+  - path: symbolic/generated/finite_depth_directional_order2_psi22_dual_branch_gl.json
+    git_blob_sha1: deca45a14bde28573c81549d0f4810fd28e94a02
+  - path: symbolic/generated/finite_depth_directional_order3_crossing_stokes_gate.json
+    git_blob_sha1: db85f45bb3cc37b90e2d7acc336b84ccb23e9740
+  - path: symbolic/generated/finite_depth_directional_order3_nested_green_laplace.json
+    git_blob_sha1: c0569935032baab8e9280c746ff0a74380576066

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository and the associated Green--Laplace paper."
+title: "Green--Laplace wave reconstruction"
+type: software
+authors:
+  - family-names: "Liu"
+    given-names: "Xinyu"
+version: 0.1.0
+date-released: 2026-08-24
+repository-code: "https://github.com/Xinyu01091002/green-laplace-wave-reconstruction"
+license: MIT

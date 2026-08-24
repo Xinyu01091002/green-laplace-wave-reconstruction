@@ -1,0 +1,8 @@
+artifacts/
+results/
+tmp/
+*.asv
+*.m~
+*.log
+*.mat
+!paper/reference/*.mat
