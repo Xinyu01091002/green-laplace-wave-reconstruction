@@ -1,0 +1,5 @@
+method,peak_kpd,crossing_angle_deg,spread_deg,grid_size,selected_component_count,method_order_or_rank,physical_raw_relative_l2_pct,physical_raw_relative_linf_pct,candidate_over_mf12_norm_ratio,surface_similarity_Q,evaluation_graph,strict_zero_mode
+GL12,1,120,30,256,1556,12,9.60865080700788,2.07366303380201,0.95111015174317,0.0492470955492865,fixed-FFT,set-to-zero-separate-sector
+R2,1,120,30,256,1556,2,1.76552020486572,0.816051202595694,0.987270438182925,0.00888414667145169,ordered-pair-validation,set-to-zero-separate-sector
+R4,1,120,30,256,1556,4,0.948261498555643,0.508882209377029,0.99211050357355,0.00476008482890183,ordered-pair-validation,set-to-zero-separate-sector
+R6,1,120,30,256,1556,6,0.406580611255347,0.265133080814016,0.996598168534273,0.00203636674451035,ordered-pair-validation,set-to-zero-separate-sector

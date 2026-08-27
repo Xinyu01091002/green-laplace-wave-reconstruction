@@ -13,7 +13,12 @@
 - Field metrics are computed in the same physical units without alignment or
   fitted rescaling.
 - Difference-frequency, strict-zero, free-wave, resonant and near-resonant
-  coupled-evolution sectors are outside version 0.1.
+  coupled-evolution sectors are outside the released total-field API.
+- The eta20 R2/R4/R6 package uses independent ordered-pair reconstruction to
+  validate approximation accuracy. It does not claim validated fixed-FFT
+  execution, timing, or production readiness.
+- GL12/GL16 eta20 results are post-baseline rank diagnostics on fixed inputs,
+  not new default settings or uniform weak-detuning guarantees.
 - Fourth- and fifth-order symbolic constructions are not advertised as
   released numerical surface APIs until their same-variable validation and
   dependency graphs are complete.

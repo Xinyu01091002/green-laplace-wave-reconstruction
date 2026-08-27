@@ -1,0 +1,2 @@
+method,peak_kpd,crossing_angle_deg,spread_deg,grid_size,selected_component_count,quadrature_rank,physical_raw_relative_l2_pct,physical_raw_relative_linf_pct,candidate_over_mf12_norm_ratio,surface_similarity_Q,low_output_cutoff_k_over_k0,low_quadrature_scale
+GL6 endpoint-band,1,120,30,256,1556,6,11.1182315907877,2.08469826414151,0.99801709163366,0.0556463287393452,0.3,1.24314438157245

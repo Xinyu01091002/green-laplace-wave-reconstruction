@@ -29,6 +29,6 @@ Although flat-potential states occur inside the order-three forcing graph,
 they are not exposed as public surface-potential components.
 
 The returned total fields are the sum of the explicitly listed components in
-`audit.included_components`. Version 0.1 contains the positive pure-sum
+`audit.included_components`. The released total-field API contains the positive pure-sum
 linear, second-order and third-order components only; it is not a silently
 truncated representation of every signed sector.

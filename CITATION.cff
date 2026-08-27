@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: "Liu"
     given-names: "Xinyu"
-version: 0.1.0
-date-released: 2026-08-24
+version: 0.2.0
+date-released: 2026-08-27
 repository-code: "https://github.com/Xinyu01091002/green-laplace-wave-reconstruction"
 license: MIT

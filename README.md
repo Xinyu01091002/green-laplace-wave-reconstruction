@@ -34,6 +34,17 @@ Use `gl_supported_sectors` for the machine-readable applicability table.
 Unsupported difference-frequency, strict-zero, free-wave, resonant and
 near-resonant sectors fail explicitly; they are never filled with zeros.
 
+Version 0.2 also includes a separate diagnostic package for nonzero
+difference-frequency `eta20`:
+
+- shared-scale GL6/GL12/GL16 rank diagnostics;
+- exact frozen Neumann R2/R4/R6 formulas;
+- independent ordered-pair field validation for the R sequence.
+
+These diagnostics are not silently added to the total field returned by
+`gl_spectral_surface`. R2/R4/R6 are not Green--Laplace ranks, and their
+fixed-FFT production implementation is not claimed as validated.
+
 ## Dependencies
 
 | Dependency | Purpose | Required |
@@ -92,6 +103,8 @@ shift or fitted rescaling is applied.
   MATLAB.
 - `paper/` contains the portable figure entry points and frozen manuscript
   reference assets.
+- `diagnostics/eta20/` contains the explicitly non-production GL-rank and
+  Neumann R-series difference-frequency studies.
 - `symbolic/SOURCE_MANIFEST.yml` records the extraction source and hashes.
 
 Regenerate the self-contained paper figure set with:
@@ -113,7 +126,7 @@ The released nonlinear graphs accept first-order surface elevation only.
 They assume strict-forward analytic support and alias-safe FFT grids. The
 order-two surface-potential graph requires parent `kh >= 0.3`; order three
 requires every parent `kh > 0.5`. The MF12-compatible `Ux`, `Uy` slots are
-present, but version 0.1 requires both to be zero. Evidence outside these
+present, but the released total-field API requires both to be zero. Evidence outside these
 declared domains is not a release claim.
 
 This software is a fixed-order computational reformulation of regular bound

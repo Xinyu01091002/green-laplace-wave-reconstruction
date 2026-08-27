@@ -2,9 +2,11 @@ function summary = run_release_tests()
 %RUN_RELEASE_TESTS Execute the self-contained Green--Laplace release checks.
 project_root = setup_green_laplace();
 addpath(fullfile(project_root,'tests'));
+addpath(fullfile(project_root,'diagnostics','eta20'));
+addpath(fullfile(project_root,'diagnostics','eta20','generated'));
 tests = {@test_linear_frontend,@test_eta22_ordered_parity, ...
     @test_unified_order3_surface,@test_domain_guard, ...
-    @test_frozen_interfaces};
+    @test_frozen_interfaces,@test_eta20_diagnostics};
 records = repmat(struct('name','','pass',false,'message',''),numel(tests),1);
 for index = 1:numel(tests)
     records(index).name = func2str(tests{index});
@@ -95,6 +97,51 @@ for index = 1:numel(names)
         assert(startsWith(lower(string(value.candidate_id)),"gl-"));
     end
 end
+eta20=jsondecode(fileread(fullfile( ...
+    root,'symbolic','generated','eta20_neumann_r_series.json')));
+assert(eta20.overall_exact_gate_pass && ~eta20.oracle_or_mf12_used ...
+    && ~eta20.sampled_selection_used);
+for power=[2,4,6]
+    record=eta20.records.(sprintf('x%d',power));
+    assert(startsWith(string(record.candidate_id),"neumann-eta20-r"));
+    assert(record.neumann_max_power==power ...
+        && record.neumann_layers==power+1 ...
+        && record.inverse_identity_pass && record.residual_identity_pass ...
+        && record.compiler_identity_pass);
+end
+end
+
+function test_eta20_diagnostics()
+n=64;dk=0.25;mode=[0:(n/2-1),-n/2:-1];
+[mx,my]=meshgrid(mode,mode);kx=dk*mx;ky=dk*my;
+spectrum=complex(zeros(n));
+modes=[3,0;4,1;5,-1;6,2];
+amplitudes=[0.017*exp(0.13i);0.012*exp(-0.41i); ...
+    0.009*exp(0.77i);0.006*exp(-1.04i)];
+for index=1:size(modes,1)
+    row=mod(modes(index,2),n)+1;
+    column=mod(modes(index,1),n)+1;
+    mirror_row=mod(-modes(index,2),n)+1;
+    mirror_column=mod(-modes(index,1),n)+1;
+    spectrum(row,column)=n*n*amplitudes(index)/2;
+    spectrum(mirror_row,mirror_column)=conj(spectrum(row,column));
+end
+root=string(fileparts(fileparts(mfilename('fullpath'))));
+for rank=[6,12,16]
+    [field,audit]=eta20_green_laplace_shared( ...
+        spectrum,kx,ky,1,"shared"+string(rank),root);
+    assert(all(isfinite(field),'all'));
+    assert(strcmp(audit.information_boundary,'eta11-only'));
+end
+for power=[2,4,6]
+    [field,audit,state]=eta20_neumann_r_series_ordered_pair( ...
+        spectrum,kx,ky,1,power,root);
+    assert(all(isfinite(field),'all') && isreal(field));
+    assert(~audit.production_candidate && ~audit.fixed_fft_validated);
+    assert(state.eta20_spectrum(1,1)==0);
+end
+diagnostics=gl_supported_diagnostics();
+assert(height(diagnostics)==6 && ~any(diagnostics.FixedFFTValidated(4:6)));
 end
 
 function value = relative_error(candidate,reference)

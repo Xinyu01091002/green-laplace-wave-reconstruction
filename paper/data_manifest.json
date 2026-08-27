@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "dataset": "psi33-mf12-g1-extreme-20260804T223826Z",
+  "domain_wavelengths": 8,
+  "grid": [512, 512],
+  "parent_count": 3000,
+  "environment_variable": "GL_PSI33_DATA_ROOT",
+  "files": [
+    {
+      "case_id": "kph-1p0-spread-30-cross-000",
+      "relative_path": "kph-1p0-spread-30-cross-000/fields.mat",
+      "bytes": 4251600,
+      "sha256": "0e3a534ae7fcbc8b479f62b5659f57bfa79643a2abf4ae00fd46343e66c19e1a"
+    },
+    {
+      "case_id": "kph-1p0-spread-30-cross-120",
+      "relative_path": "kph-1p0-spread-30-cross-120/fields.mat",
+      "bytes": 4190255,
+      "sha256": "0ba80aec7266900fb220328a015d7ab801e0b9cbe9911f556dbf93f0ed2d214c"
+    }
+  ]
+}

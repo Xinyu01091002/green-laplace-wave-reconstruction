@@ -1,0 +1,4 @@
+method,peak_kpd,crossing_angle_deg,spread_deg,grid_size,selected_component_count,quadrature_rank,physical_raw_relative_l2_pct,physical_raw_relative_linf_pct,candidate_over_mf12_norm_ratio,surface_similarity_Q,low_output_cutoff_k_over_k0,low_quadrature_scale
+GL6,2,120,30,256,1556,6,7.89025728692493,1.85514763905037,0.982593367495709,0.0397976580386296,NaN,NaN
+GL12,2,120,30,256,1556,12,2.23506442317616,0.302958059316771,0.996281364626477,0.0111961392956967,NaN,NaN
+GL16,2,120,30,256,1556,16,1.00297657986926,0.116031213687178,0.998478546750338,0.00501870075863545,NaN,NaN

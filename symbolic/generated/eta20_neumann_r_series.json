@@ -1,0 +1,72 @@
+{
+	"schema_version":1,
+	"status":"frozen-symbolic-neumann-even-power-R2-R4-R6-pre-validation",
+	"scope":"strict-nonzero finite-depth directional eta20",
+	"candidate_input_fields":[
+		"eta11"
+	],
+	"oracle_or_mf12_used":false,
+	"sampled_selection_used":false,
+	"strict_zero_mode":"separate and set to zero",
+	"source_compiler":"green-laplace-wave-reconstruction\\symbolic\\wolfram\\discovery\\order2_finite_depth_directional_eta20_neumann_resolvent_compiler.wl",
+	"source_compiler_sha256":"8f606d90603cae74a0af2c6035d323949403f41a504884a61597ac03741ab639",
+	"generator":"green-laplace-wave-reconstruction\\symbolic\\wolfram\\certification\\order2_finite_depth_directional_eta20_neumann_high_order_freeze.wl",
+	"generator_sha256":"813ace5be24565fb15d11f9b276385bd14d667e707dc40bb80987c0fb4921cff",
+	"records":{
+		"2":{
+			"candidate_id":"neumann-eta20-r2-series-v1",
+			"neumann_max_power":2,
+			"neumann_layers":3,
+			"kernel":"((-(Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]\/Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^2)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^2*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^4)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(3\/2))*((-I)*Cosh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])*(I*q1FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] - I*cosineFD2D20*q2FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] + I*cosineFD2D20*q1FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] - I*q2FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]]) + Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]*Sinh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(-(q1FD2D20*Tanh[q1FD2D20]) - q2FD2D20*Tanh[q2FD2D20] + Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] + cosineFD2D20*Coth[q1FD2D20]*Coth[q2FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]])))\/2",
+			"counts":{
+				"parent_filters":47,
+				"products":124,
+				"product_ffts":5,
+				"transforms":53,
+				"output_filters":5
+			},
+			"inverse_identity_pass":true,
+			"residual_identity_pass":true,
+			"angular_endpoint_pass":true,
+			"radial_endpoint_pass":true,
+			"compiler_identity_pass":true
+		},
+		"4":{
+			"candidate_id":"neumann-eta20-r4-series-v1",
+			"neumann_max_power":4,
+			"neumann_layers":5,
+			"kernel":"((-(Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]\/Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^2)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^2*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^4)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(3\/2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^3*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^6)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^2 - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^4*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^8)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(5\/2))*((-I)*Cosh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])*(I*q1FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] - I*cosineFD2D20*q2FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] + I*cosineFD2D20*q1FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] - I*q2FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]]) + Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]*Sinh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(-(q1FD2D20*Tanh[q1FD2D20]) - q2FD2D20*Tanh[q2FD2D20] + Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] + cosineFD2D20*Coth[q1FD2D20]*Coth[q2FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]])))\/2",
+			"counts":{
+				"parent_filters":79,
+				"products":316,
+				"product_ffts":7,
+				"transforms":87,
+				"output_filters":7
+			},
+			"inverse_identity_pass":true,
+			"residual_identity_pass":true,
+			"angular_endpoint_pass":true,
+			"radial_endpoint_pass":true,
+			"compiler_identity_pass":true
+		},
+		"6":{
+			"candidate_id":"neumann-eta20-r6-series-v1",
+			"neumann_max_power":6,
+			"neumann_layers":7,
+			"kernel":"((-(Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]\/Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^2)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^2*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^4)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(3\/2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^3*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^6)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^2 - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^4*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^8)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(5\/2) - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^5*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^10)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^3 - (Coth[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]^6*Csch[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])^12)\/(q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2)^(7\/2))*((-I)*Cosh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(Sqrt[q1FD2D20*Tanh[q1FD2D20]] - Sqrt[q2FD2D20*Tanh[q2FD2D20]])*(I*q1FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] - I*cosineFD2D20*q2FD2D20*Coth[q1FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]] + I*cosineFD2D20*q1FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] - I*q2FD2D20*Coth[q2FD2D20]*Sqrt[q2FD2D20*Tanh[q2FD2D20]]) + Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]*Sinh[Sqrt[q1FD2D20^2 - 2*cosineFD2D20*q1FD2D20*q2FD2D20 + q2FD2D20^2]]*(-(q1FD2D20*Tanh[q1FD2D20]) - q2FD2D20*Tanh[q2FD2D20] + Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]] + cosineFD2D20*Coth[q1FD2D20]*Coth[q2FD2D20]*Sqrt[q1FD2D20*Tanh[q1FD2D20]]*Sqrt[q2FD2D20*Tanh[q2FD2D20]])))\/2",
+			"counts":{
+				"parent_filters":111,
+				"products":596,
+				"product_ffts":9,
+				"transforms":121,
+				"output_filters":9
+			},
+			"inverse_identity_pass":true,
+			"residual_identity_pass":true,
+			"angular_endpoint_pass":true,
+			"radial_endpoint_pass":true,
+			"compiler_identity_pass":true
+		}
+	},
+	"overall_exact_gate_pass":true
+}

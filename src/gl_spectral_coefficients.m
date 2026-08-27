@@ -19,7 +19,7 @@ validateattributes(Ux,{'numeric'},{'scalar','real','finite'});
 validateattributes(Uy,{'numeric'},{'scalar','real','finite'});
 if Ux~=0 || Uy~=0
     error('green_laplace:UniformCurrent', ...
-        ['Version 0.1 preserves the MF12-compatible Ux, Uy input slots ' ...
+        ['The released API preserves the MF12-compatible Ux, Uy input slots ' ...
          'but has only been certified for Ux=Uy=0.']);
 end
 
@@ -41,7 +41,7 @@ if any(kx<=0)
 end
 if opts.sector~="pure-sum"
     error('green_laplace:Sector', ...
-        'Version 0.1 supports the positive pure-sum sector only.');
+        'The released total-field API supports the positive pure-sum sector only.');
 end
 validateattributes(opts.eta22_rank,{'numeric'}, ...
     {'scalar','integer','positive','<=',12});

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 - 2026-08-27
+
+- Added portable nonzero difference-frequency eta20 diagnostics.
+- Added frozen GL12/GL16 shared-scale rank configurations and figures.
+- Added exact Wolfram and JSON interfaces for the Neumann R2/R4/R6 sequence.
+- Added an independent eta11-only ordered-pair R-series evaluator; it is
+  explicitly validation code rather than a fixed-FFT production route.
+- Updated eta22 and surface-potential figures, metrics, centerlines and
+  mixed-rank cost--accuracy data.
+- Removed superseded GL8-only eta20 reference assets; they remain recoverable
+  from version 0.1 history.
+
 ## 0.1.0 - 2026-08-24
 
 - Added the MF12-compatible two-stage MATLAB interface.

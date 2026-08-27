@@ -4,6 +4,24 @@ extraction_source:
   repository: https://github.com/Xinyu01091002/SWORD-VWA
   commit: 0f4dfc40ff903fa52ba08ec046fa56c6778ef407
   note: Selected Green--Laplace sources were extracted and made standalone.
+v0_2_extraction:
+  date: 2026-08-27
+  implementation_head: 0f4dfc40ff903fa52ba08ec046fa56c6778ef407
+  manuscript_head: f1e0d25750a43f0bc685820d9ec931034d0da239
+  note: Source worktrees contained uncommitted research updates; exact source file hashes are recorded below.
+  source_files:
+    - name: finite_depth_eta20_directional_two_scale_gl.m
+      sha256: 24417a8ee5b28b3d65a739b05f15c6d03cdff4274fbc5560509a528930ce76e7
+    - name: finite_depth_eta20_directional_neumann_ordered_pair.m
+      sha256: 7fb961cc514bc3ed0535d4af95c55e5781be31609cc3ded507c3cc2f121b069d
+    - name: order2_finite_depth_directional_eta20_neumann_high_order_freeze.wl
+      sha256: 7ccf62d455e937bdacbce8cfaab74744cdf78adeda8a5efbe7fa9e63f42e081a
+    - name: plot_eta20_gl12_r246_appendix.m
+      sha256: e5f4085f3e456f90459904b21c65113e19dcc0d0f7b48e8578235316108cf8aa
+    - name: plot_eta20_gl8_waveform_ce.m
+      sha256: ed7c260a368decd9d49dfb4a3bac7a1a22e05571f0ac01da8ba810f81540a278
+    - name: plot_psi33_fixed_domain16_waveform.m
+      sha256: 2b2adefe0b6fed9eadbc6e4d58ed2b3e13067fd839034ae14b417db131faae63
 files:
   - path: src/internal/finite_depth_directional_dual_branch_green_laplace_psi22.m
     git_blob_sha1: 650354d6ee4d4e3818a13b955c0ef072a42898d9
