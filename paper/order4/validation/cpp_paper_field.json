@@ -1,0 +1,10 @@
+{
+  "grid": [
+    256,
+    256
+  ],
+  "rank": 6,
+  "raw_relative_l2": 1.7931507120292683E-10,
+  "stokes_correction_used": false,
+  "reference": "archived same-rank GL paper field"
+}

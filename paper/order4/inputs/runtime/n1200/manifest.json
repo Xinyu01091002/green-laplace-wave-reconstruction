@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "name": "runtime_cross120_s30_kph1_N1200",
+  "purpose": "MF12 GL WIT field-construction runtime input",
+  "componentCount": 1200,
+  "masterComponentCount": 1500,
+  "selectionMode": "nested descending linear-energy prefix",
+  "retainedLinearEnergyFraction": 0.9814768000666102,
+  "representedCellMassFraction": 0.96907587636818471,
+  "crossingAngleDeg": 120,
+  "angularSigmaDeg": 30,
+  "jonswapGamma": 3.3,
+  "kp": 1,
+  "g": 1,
+  "h": 1,
+  "peakDepth": 1,
+  "sourceMasterCrest": 0.1,
+  "finiteInputCrest": 0.098147680006661131,
+  "focusTime": 0,
+  "focusPoint": [
+    0,
+    0
+  ],
+  "phaseConvention": "eta1=Re(sum(c_j exp(i(k_j.x-omega_j t)))) at focus",
+  "domainPeakWavelengths": 10,
+  "nx": 512,
+  "ny": 512,
+  "dk": 0.1,
+  "minimumParentKd": 0.41231056256176607,
+  "maximumParentKd": 3.1064449134018135,
+  "referenceOrHigherOrderFieldIncluded": false
+}

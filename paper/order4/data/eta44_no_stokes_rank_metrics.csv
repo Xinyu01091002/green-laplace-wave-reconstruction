@@ -1,0 +1,4 @@
+quadrature_rank,raw_relative_l2_pct,raw_relative_linf_pct,surface_similarity_Q,gl_over_exact_norm_ratio,one_shot_elapsed_seconds,fft_ifft_count,pointwise_product_count,all_nested_stokes_corrections_used,existing_gl6_raw_relative_l2_pct,existing_gl6_max_abs_field_difference
+6,9.1656674905729,15.5820536315641,0.0463836659260542,0.976054998581827,14.5734916,7141,11004,0,9.1656674905729,0
+8,4.20839343830129,6.83858418291898,0.021130643194651,0.991606880838633,31.7264352,15377,23744,0,NaN,NaN
+10,2.03486173251526,3.19305990944608,0.0101911604069476,0.996692870350691,55.369686,28301,43740,0,NaN,NaN

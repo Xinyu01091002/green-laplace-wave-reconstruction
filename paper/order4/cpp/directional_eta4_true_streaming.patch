@@ -1,0 +1,41 @@
+--- directional_eta4_openmp.cpp
++++ directional_eta4_streaming.cpp
+@@ -690,19 +690,15 @@
+         } else {
+-            std::vector<std::array<uint16_t, 4>> quadruples;
+-            for (uint16_t first = 0; first < modeCount; ++first) {
++            const uint64_t n = modeCount;
++            totalCandidates = n * (n + 1) * (n + 2) * (n + 3) / 24;
++#pragma omp parallel for schedule(dynamic, 1) reduction(+:kept,near,strictZeroOutput,strictZeroIntermediate) reduction(max:maximumResidual,maximumStrictZeroSource) reduction(min:minimumDetuning)
++            for (int64_t firstValue = 0;
++                 firstValue < static_cast<int64_t>(modeCount); ++firstValue) {
++                const auto first = static_cast<uint16_t>(firstValue);
++                const int thread = omp_get_thread_num();
+                 for (uint16_t second = first; second < modeCount; ++second) {
+                     for (uint16_t third = second; third < modeCount; ++third) {
+                         for (uint16_t fourth = third; fourth < modeCount; ++fourth) {
+-                            quadruples.push_back({first, second, third, fourth});
+-                        }
+-                    }
+-                }
+-            }
+-            totalCandidates = quadruples.size();
+-#pragma omp parallel for schedule(static) reduction(+:kept,near,strictZeroOutput,strictZeroIntermediate) reduction(max:maximumResidual,maximumStrictZeroSource) reduction(min:minimumDetuning)
+-            for (int64_t index = 0;
+-                 index < static_cast<int64_t>(quadruples.size()); ++index) {
+-                const int thread = omp_get_thread_num();
+-                const auto plus = quadruples[index];
+-                const Mode2 target = modes[plus[0]] + modes[plus[1]] +
+-                    modes[plus[2]] + modes[plus[3]];
++                            const std::array<uint16_t, 4> plus{
++                                first, second, third, fourth};
++                            const Mode2 target = modes[plus[0]] + modes[plus[1]] +
++                                modes[plus[2]] + modes[plus[3]];
+@@ -731,4 +727,7 @@
+                 maximumStrictZeroSource = std::max(maximumStrictZeroSource,
+                     value.strictZeroSourceMaximum);
++                        }
++                    }
++                }
+             }
+         }

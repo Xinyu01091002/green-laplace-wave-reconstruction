@@ -47,6 +47,12 @@ Additional preserved GL research implementations are available separately:
 These research interfaces do not extend the supported order range of
 `gl_spectral_coefficients` or silently add components to the total field.
 
+The paper's [fourth-order GL--WIT comparison package](paper/order4/README.md)
+includes the C++ implementations, frozen field and timing inputs, original
+reference outputs, GL6/8/10 fields, measured timing rows, and standalone
+reproduction commands. All GL execution paths in that package omit Stokes
+corrections. Historical timings and newly rerun validation are distinguished.
+
 Use `gl_supported_sectors` for the machine-readable applicability table.
 Unsupported difference-frequency, strict-zero, free-wave, resonant and
 near-resonant sectors fail explicitly; they are never filled with zeros.

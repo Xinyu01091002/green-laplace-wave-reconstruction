@@ -1,0 +1,394 @@
+{
+  "files": [
+    {
+      "path": "build.sh",
+      "normalization": "LF",
+      "sha256": "f10ac274f11d212c0de757b027f1fd178f395503205373c98336b568bc2d1bbc"
+    },
+    {
+      "path": "cpp/directional_eta4_openmp.cpp",
+      "normalization": "LF",
+      "sha256": "bb1b6feaf3954a44a4ba35ba47f3a6e8fb93458081bf7239e39ca9bcd39c612c"
+    },
+    {
+      "path": "cpp/directional_eta4_true_streaming.patch",
+      "normalization": "LF",
+      "sha256": "8727a99aad1936c8b4072ae5fb0ba7cf31b8070608fa4b5a7ba7de0212db331f"
+    },
+    {
+      "path": "cpp/gl_eta44_fftw.cpp",
+      "normalization": "LF",
+      "sha256": "6bd01d6c25fc146bd96eba1d16bd19b64972792d10187b79b8bbaf4b058fd201"
+    },
+    {
+      "path": "cpp/merge_eta44_outer.cpp",
+      "normalization": "LF",
+      "sha256": "7bdb0c018e46933411a70eaeee3f28f534cd2a7762f8724de6d30a44266a313b"
+    },
+    {
+      "path": "data/eta44_no_stokes_rank_fields.mat",
+      "normalization": "none",
+      "sha256": "a7b6396be00400c2580ca4eb87c18bca57027798ee619c7c2f5c777fbc9acbff"
+    },
+    {
+      "path": "data/eta44_no_stokes_rank_metrics.csv",
+      "normalization": "LF",
+      "sha256": "57bb8e0087d24a8ecf31926c7caf36b7d41f2a89ab589906bae14bec89ef49ba"
+    },
+    {
+      "path": "data/runtime/energy_fraction_component_thresholds.csv",
+      "normalization": "LF",
+      "sha256": "56b9714c9ff4ea653d9ccaab11004d51aec625d192cc4d637bb53ec61059acf5"
+    },
+    {
+      "path": "data/runtime/eta44_runtime_figure_data.csv",
+      "normalization": "LF",
+      "sha256": "593becdad648a7360dee6605516978e5109243811854ec85a52aa57fd0fda278"
+    },
+    {
+      "path": "data/runtime/eta44_runtime_ratios.csv",
+      "normalization": "LF",
+      "sha256": "71fc002ff11dee6a998d2563028931b3b135697cf923509bdaeb340129ec026d"
+    },
+    {
+      "path": "data/runtime/order4_original_raw_times.csv",
+      "normalization": "LF",
+      "sha256": "9ac7d9b70580cce0dd60844809caf41c4a8b7e68152d179a9545f4a616982897"
+    },
+    {
+      "path": "data/runtime/rank_scaling_summary.csv",
+      "normalization": "LF",
+      "sha256": "7e444a4fadf70c82fb95e0a9e2f681500c8284f796420019e41be97274a75c37"
+    },
+    {
+      "path": "data/runtime/remote_ladder_summary.csv",
+      "normalization": "LF",
+      "sha256": "4bb68e4208f744a57a18c31892828d48f6a02a48aa3063a4b3084e226ab8e6b3"
+    },
+    {
+      "path": "data/runtime/timings.csv",
+      "normalization": "LF",
+      "sha256": "6ce97fb0c6a1770360f93409b46d5c6655be69fdc1be05f8c15f83ff6c252df9"
+    },
+    {
+      "path": "data/runtime/timings_n1500.csv",
+      "normalization": "LF",
+      "sha256": "1751e966a2f8c3195a18e68d2bb2aa7a5b1d6c4e4cb880aa2cb1de50577e5ef9"
+    },
+    {
+      "path": "data/runtime/wit_n0800.csv",
+      "normalization": "LF",
+      "sha256": "3fa46bd4a1d9326fccd321ca7465e5c6effa3acbdf102506ca8ca61fc753be0c"
+    },
+    {
+      "path": "data/wit_field_n0382.bin",
+      "normalization": "none",
+      "sha256": "0e25b98f20ec785142fa880985e2e895ae6a6e7cf970c4dd6ff7d6d0fd4a886f"
+    },
+    {
+      "path": "export_cpp_gl_runtime_input.m",
+      "normalization": "LF",
+      "sha256": "e8b06e6b1c1d0d866201a137ef81a1176575f0a49bb1927dddab33f73dabd99b"
+    },
+    {
+      "path": "figures/eta44_gl_wit_fields.png",
+      "normalization": "none",
+      "sha256": "0b1846353a950b25424f40df8f0e1fd49cb3301b9bbab5e015a779ac0d7d97c5"
+    },
+    {
+      "path": "figures/eta44_gl_wit_runtime.png",
+      "normalization": "none",
+      "sha256": "1dd650b70447534ebdfdaa314face3b770829ca9106a673be6cca08e9d4909be"
+    },
+    {
+      "path": "inputs/field_n0382/components.csv",
+      "normalization": "LF",
+      "sha256": "c25510b3f511e542bce8a40b9fec49c69ad29c90ba7db29288f3d8c064d25536"
+    },
+    {
+      "path": "inputs/field_n0382/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "b0704ecc36c75009b33549182bc1fa5894632ebf1e45043e636de93abcec2206"
+    },
+    {
+      "path": "inputs/field_n0382/manifest.json",
+      "normalization": "LF",
+      "sha256": "3888c89b71aed8caf17537938fdcbc74e597294488d51e779c7910b5ae658fd2"
+    },
+    {
+      "path": "inputs/runtime/n0050/components.csv",
+      "normalization": "LF",
+      "sha256": "185574454569449893f0cbc5cd6603ce4194d3e2120f51f628e319267f37791f"
+    },
+    {
+      "path": "inputs/runtime/n0050/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "ea094cf0e32cf1082b5c23ceb957e96f5258184bf6125f061fcdaad231a2b45f"
+    },
+    {
+      "path": "inputs/runtime/n0050/manifest.json",
+      "normalization": "LF",
+      "sha256": "4b6f29da25aeacd3e5e8c56aa0d84398862a4843dca3294df78737f92456d4ee"
+    },
+    {
+      "path": "inputs/runtime/n0100/components.csv",
+      "normalization": "LF",
+      "sha256": "4aa2f18e7293e17a387ec8c67edc65409544ae9e29e1e331ce023c5b15df4539"
+    },
+    {
+      "path": "inputs/runtime/n0100/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "924db6882bc2ae0074045b3f07f329498e0baa33fb286fd56434b620eef56437"
+    },
+    {
+      "path": "inputs/runtime/n0100/manifest.json",
+      "normalization": "LF",
+      "sha256": "75b3a7637baaa7099335da84eff66aa92e9b2b1c131e60f15d248fed2d6c3fdf"
+    },
+    {
+      "path": "inputs/runtime/n0200/components.csv",
+      "normalization": "LF",
+      "sha256": "5abe02800bf693b8724d3f2fc1f731d06d59b449ec7e990afd6b4b3d6e9f9a07"
+    },
+    {
+      "path": "inputs/runtime/n0200/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "b12b8cdfb7ea51c22c92ef8bc344f18bbd2a051839e7e959933127b4536577de"
+    },
+    {
+      "path": "inputs/runtime/n0200/manifest.json",
+      "normalization": "LF",
+      "sha256": "6d92e3280d90c84a9b5251074bd54513705c5018d04dc30815711dd70df6ccab"
+    },
+    {
+      "path": "inputs/runtime/n0250/components.csv",
+      "normalization": "LF",
+      "sha256": "c0bbe50bb07dee82ee2778a5cfe2456cfdb74a716c1203366d524f8fa2ec05b1"
+    },
+    {
+      "path": "inputs/runtime/n0250/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "535129acf0e7107674f65fb81e3009cb4f7df33f45f7119c0baba493aaf02644"
+    },
+    {
+      "path": "inputs/runtime/n0250/manifest.json",
+      "normalization": "LF",
+      "sha256": "0b2c108d380daf5cc4dcede7bc67ed7928d4efdd211e8fca5f7415015db7a630"
+    },
+    {
+      "path": "inputs/runtime/n0300/components.csv",
+      "normalization": "LF",
+      "sha256": "fe4e2300a2bfda05d0599a6906842ecb7752b3229ab80dd1cd6c5e97c461f7e2"
+    },
+    {
+      "path": "inputs/runtime/n0300/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "f4ea5c8a04737288172fe50518e257eaa0f1966bc91f2a54081975497f14cf33"
+    },
+    {
+      "path": "inputs/runtime/n0300/manifest.json",
+      "normalization": "LF",
+      "sha256": "317e4f7a56eb890c3acba5e4d49686be72aab742e6dc3dea5d1e54e7624d89b4"
+    },
+    {
+      "path": "inputs/runtime/n0400/components.csv",
+      "normalization": "LF",
+      "sha256": "0fd9cbff5e277ea47358554151e18a55e56634309ba431773db5b33b3aee5c05"
+    },
+    {
+      "path": "inputs/runtime/n0400/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "c749ff7aee5fcc712ec5effa0d403da67057cd171459a01b02e873c17c7c5854"
+    },
+    {
+      "path": "inputs/runtime/n0400/manifest.json",
+      "normalization": "LF",
+      "sha256": "5c3a1264762cabbcb67ccfac898e13f42f21d22c79126367421b79884e661a17"
+    },
+    {
+      "path": "inputs/runtime/n0500/components.csv",
+      "normalization": "LF",
+      "sha256": "6a805325660783719da8caab9fc232aa3e11f691675b14d8f91d30480443e2b3"
+    },
+    {
+      "path": "inputs/runtime/n0500/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "23e326ca21666bd9fae6041f1b2e83d9ffea03df9be33583b06430be4f229eff"
+    },
+    {
+      "path": "inputs/runtime/n0500/manifest.json",
+      "normalization": "LF",
+      "sha256": "550dbdcbbaefeb3eb2c0bda39d1d7675071308ceb0e3e95f831d20476bce9fab"
+    },
+    {
+      "path": "inputs/runtime/n0600/components.csv",
+      "normalization": "LF",
+      "sha256": "c269f14b59c8c5350a6c9068bba82e81559014c1737d9156a58716099ade6711"
+    },
+    {
+      "path": "inputs/runtime/n0600/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "ca5f2a01e2aa3f5bd4e980bd8b1532d46cee0b8e1dbb36eb4c391529d2cb7b60"
+    },
+    {
+      "path": "inputs/runtime/n0600/manifest.json",
+      "normalization": "LF",
+      "sha256": "1886e422c27526e8510d2b0b8298e05dea260c0bd4fd451525178225d5391dcf"
+    },
+    {
+      "path": "inputs/runtime/n0800/components.csv",
+      "normalization": "LF",
+      "sha256": "0500ab815c57e228ea7786459eb51207c6d3422d6b2e239654dd940f9c59b5c8"
+    },
+    {
+      "path": "inputs/runtime/n0800/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "06cb411db12cca3ef1174675ce01fa879aaac5daef4fc1536f79e4198474e918"
+    },
+    {
+      "path": "inputs/runtime/n0800/manifest.json",
+      "normalization": "LF",
+      "sha256": "ff625add4af48bc73ac0b6cec3e7ed008e1bd31e51517e8b5044fbd52be073fa"
+    },
+    {
+      "path": "inputs/runtime/n1000/components.csv",
+      "normalization": "LF",
+      "sha256": "bd9beea8babb4eb36dbc10d3af96b652676442b190e5a5ad2592ffe79b9e0858"
+    },
+    {
+      "path": "inputs/runtime/n1000/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "c1710a13a255e64a36c333b34d9fe51d3448344a9455b9205c28ad3b182a70a1"
+    },
+    {
+      "path": "inputs/runtime/n1000/manifest.json",
+      "normalization": "LF",
+      "sha256": "0ba746f839ecc38ca3831c387ceeecc49d4cdb9d317b56e2979883a574fd5f68"
+    },
+    {
+      "path": "inputs/runtime/n1200/components.csv",
+      "normalization": "LF",
+      "sha256": "67699f831da935a3571da6d12b1abc2a4f92ff166a759b5cbf6a441d04b4bca6"
+    },
+    {
+      "path": "inputs/runtime/n1200/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "1456c727b34652ac1207e1ea5cae97af47bb1aa7370c42bf104f3b26669d3785"
+    },
+    {
+      "path": "inputs/runtime/n1200/manifest.json",
+      "normalization": "LF",
+      "sha256": "41fa592ad49ee72c32c79707bfdf5a99fa2706293eb2368926aac26a35af70e6"
+    },
+    {
+      "path": "inputs/runtime/n1500/components.csv",
+      "normalization": "LF",
+      "sha256": "39007cf3cee4dbcf7735a3042fab7db97ccc00eb8cc97b94095c6da89922ed0c"
+    },
+    {
+      "path": "inputs/runtime/n1500/directional_eta44_input.bin",
+      "normalization": "none",
+      "sha256": "03215d40a085f3fe8ea7082819f1a0149af54edd0433bc90351ab970ab593846"
+    },
+    {
+      "path": "inputs/runtime/n1500/manifest.json",
+      "normalization": "LF",
+      "sha256": "ba979789d5829059c8c11dd3a3e6bdd572afa898eef8a0dccb19857ca9398722"
+    },
+    {
+      "path": "prepare_order4_cpp_smoke.m",
+      "normalization": "LF",
+      "sha256": "1f4270246178f1d3097575db058439bc166615beeee7f5f7313657c4578431ab"
+    },
+    {
+      "path": "prepare_order4_inputs.m",
+      "normalization": "LF",
+      "sha256": "71b1265bf5b3e3c7daa1ad2bae76d5e6ff565d0577047136238d4b66e40b53a9"
+    },
+    {
+      "path": "read_directional_eta4_cpp_input.m",
+      "normalization": "LF",
+      "sha256": "b79f5c4fb88eb65f3df51a0a920613c4c942c2f0fa1200488ffb836f2d49ef3a"
+    },
+    {
+      "path": "read_directional_eta4_cpp_output.m",
+      "normalization": "LF",
+      "sha256": "b0b28621f3765541bd5b14d7dd77e779aab10f7b5fa2f96a68dd0094e6c7d2d9"
+    },
+    {
+      "path": "README.md",
+      "normalization": "LF",
+      "sha256": "092b12c65b10f2ef8fc5b9ce1484ec068ab6817af73785ebba1a0c75fafc2e74"
+    },
+    {
+      "path": "reproduce_order4_fields.m",
+      "normalization": "LF",
+      "sha256": "d24669b6e9182726cad5aa9e7184af634b667673059ac2df1dddf601f75f2944"
+    },
+    {
+      "path": "reproduce_order4_runtime.m",
+      "normalization": "LF",
+      "sha256": "e780813309a664af8aab272077536810e2a228358d13b122718688985b5d2119"
+    },
+    {
+      "path": "run_cpp.py",
+      "normalization": "LF",
+      "sha256": "3249660277ab859f26b634946d8154adb217ce544a04fb732eb946757a63ec73"
+    },
+    {
+      "path": "run_cpp_smoke.sh",
+      "normalization": "LF",
+      "sha256": "08c743e4379e8a7ff263c9c659e7b74edfb7990d6d353855111e22b52c3be482"
+    },
+    {
+      "path": "run_gl_split.sh",
+      "normalization": "LF",
+      "sha256": "18db935d9188f62894ee1f01d37b3cd15ed84bb50a949b9d5b312cf556cb989e"
+    },
+    {
+      "path": "source_manifest.json",
+      "normalization": "LF",
+      "sha256": "331366f563860f5af19bfd22ca8afe7e4fa14e648e80a21c0a78c05861f79837"
+    },
+    {
+      "path": "validate_order4_cpp_paper.m",
+      "normalization": "LF",
+      "sha256": "1fe519a98e775aaad27e265552cc5be073fd57a5e26b5229961c1638d0e4aaf9"
+    },
+    {
+      "path": "validate_order4_cpp_smoke.m",
+      "normalization": "LF",
+      "sha256": "1225b5ab062dad8aacc5fecf113937a31c8be41fcee19d64b8c8cd15ee114151"
+    },
+    {
+      "path": "validation/cpp_matlab_smoke.json",
+      "normalization": "LF",
+      "sha256": "928490b080b3c4a27170f7abc8c47e918cfc22492a6e5e0e40d75c35321ac022"
+    },
+    {
+      "path": "validation/cpp_paper_field.json",
+      "normalization": "LF",
+      "sha256": "b5cae3c745223f0d2527e4509fe333c68ee139d4ae54a77976ed5bccbaa6f113"
+    },
+    {
+      "path": "validation/recomputed_field_metrics.csv",
+      "normalization": "LF",
+      "sha256": "f721975d9d5b5e3fb0b1e4bcfdd990dc8f41839002a76002b511b7e7ad194344"
+    },
+    {
+      "path": "verify_order4_inputs.m",
+      "normalization": "LF",
+      "sha256": "0b27028e6395f902dc373df57faf653324a58787775d257f3b170356421d6283"
+    },
+    {
+      "path": "verify_package.py",
+      "normalization": "LF",
+      "sha256": "5738d6f0d374fe78f3d6af2897cf420fe4447d2034fa69331286b64ee94b087a"
+    },
+    {
+      "path": "write_directional_eta4_cpp_input.m",
+      "normalization": "LF",
+      "sha256": "5cfaf24e52ff8eefbad4f2a9e966acf9ba24b2578d79c74797d0a558ca59f114"
+    }
+  ]
+}

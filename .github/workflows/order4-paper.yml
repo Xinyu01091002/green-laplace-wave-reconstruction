@@ -1,0 +1,30 @@
+name: Fourth-order paper reproduction
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install FFTW development dependencies
+        run: sudo apt-get update && sudo apt-get install -y libfftw3-dev
+      - name: Verify frozen sources and data
+        run: python3 paper/order4/verify_package.py
+      - name: Build preserved GL and WIT sources
+        run: bash paper/order4/build.sh
+      - uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2022b
+      - name: Prepare shared C++ fixture and verify paper data
+        uses: matlab-actions/run-command@v3
+        with:
+          command: setup_green_laplace; addpath('paper/order4'); prepare_order4_cpp_smoke; verify_order4_inputs; reproduce_order4_fields(true); reproduce_order4_runtime;
+      - name: Run C++ implementations
+        run: bash paper/order4/run_cpp_smoke.sh
+      - name: Verify C++ against MATLAB
+        uses: matlab-actions/run-command@v3
+        with:
+          command: setup_green_laplace; addpath('paper/order4'); validate_order4_cpp_smoke;

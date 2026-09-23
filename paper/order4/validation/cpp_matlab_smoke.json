@@ -1,0 +1,27 @@
+{
+  "matlab_release": "2022b",
+  "precision": "double",
+  "grid": [
+    32,
+    32
+  ],
+  "ranks": [
+    6,
+    8,
+    10
+  ],
+  "cpp_matlab_gl_relative_l2": [
+    4.8229158694131431E-16,
+    3.6098141904674535E-16,
+    4.361287421685759E-16
+  ],
+  "wit_materialized_streaming_relative_l2": 0,
+  "gl6_split_matlab_relative_l2": 5.9702527607303742E-16,
+  "gl_wit_raw_relative_l2": [
+    0.028693176699293679,
+    0.009226906849614044,
+    0.0034847786460708808
+  ],
+  "stokes_correction_used": false,
+  "scope": "migration and implementation parity; GL-WIT errors are non-selecting diagnostics"
+}

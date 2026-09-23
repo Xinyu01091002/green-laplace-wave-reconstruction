@@ -1,5 +1,9 @@
 # Paper figures
 
+The [fourth-order GL--WIT package](order4/README.md) reproduces the fourth-order
+field and timing panels independently of the older multi-order entry points.
+It includes C++ sources, frozen inputs, reference outputs and measured data.
+
 The current third-order entry points use the no-Stokes runtime described in
 [`docs/no_stokes_migration.md`](../docs/no_stokes_migration.md). Previously
 committed reference assets are version-specific records and were not all

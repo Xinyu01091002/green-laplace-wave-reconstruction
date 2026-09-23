@@ -6,3 +6,5 @@ tmp/
 *.log
 *.mat
 !paper/reference/*.mat
+!paper/order4/data/*.mat
+__pycache__/

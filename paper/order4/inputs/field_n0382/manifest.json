@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "name": "article_nested_energy_L5_N382",
+  "purpose": "article-original nested-energy eta44 component convergence",
+  "componentCount": 382,
+  "selectionMode": "nested-energy Cartesian cells",
+  "maximumComponents": 382,
+  "crossingAngleDeg": 120,
+  "angularSigmaDeg": 30,
+  "jonswapGamma": 3.3,
+  "representedCellMassFraction": 0.990045986223152,
+  "representedDeclaredEnvelopeMassFraction": 0.78866717058426183,
+  "forwardSupportMassFraction": 0.796596503151218,
+  "combinedRealizedRmsSpreadDeg": 54.478818795868229,
+  "kp": 1,
+  "g": 1,
+  "h": 1,
+  "peakDepth": 1,
+  "crest": 0.1,
+  "focusTime": 0,
+  "focusPoint": [
+    0,
+    0
+  ],
+  "phaseConvention": "eta1=Re(sum(c_j exp(i(k_j.x-omega_j t)))); c_j real at focus",
+  "domainPeakWavelengths": 5,
+  "nx": 256,
+  "ny": 256,
+  "dk": 0.2,
+  "radialCountPerLobe": 0,
+  "angularCountPerRadial": 0
+}

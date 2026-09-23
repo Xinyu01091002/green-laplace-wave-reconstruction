@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "source": "archived-run/cpp-gl-eta44-split-20260831T1030Z/source/gl_eta44_fftw.cpp",
+      "destination": "cpp/gl_eta44_fftw.cpp",
+      "sha256": "6bd01d6c25fc146bd96eba1d16bd19b64972792d10187b79b8bbaf4b058fd201",
+      "bytes": 16582,
+      "recovery": "Retrieved from the original compute archive; digest matches the preserved campaign sha256 record"
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/benchmarks/mf12_gl_wit_runtime/cpp/merge_eta44_outer.cpp",
+      "destination": "cpp/merge_eta44_outer.cpp",
+      "sha256": "7bdb0c018e46933411a70eaeee3f28f534cd2a7762f8724de6d30a44266a313b",
+      "bytes": 1506
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/benchmarks/mf12_gl_wit_runtime/cpp/directional_eta4_true_streaming.patch",
+      "destination": "cpp/directional_eta4_true_streaming.patch",
+      "sha256": "8727a99aad1936c8b4072ae5fb0ba7cf31b8070608fa4b5a7ba7de0212db331f",
+      "bytes": 2329
+    },
+    {
+      "source": "stokes_wave_definition_fifth_order_matlab_spectral/wave_interaction_theory_through_fifth_order/outputs/article_eta44_cpp_gl_95_99_remote/submission/source/cpp/directional_eta4_openmp.cpp",
+      "destination": "cpp/directional_eta4_openmp.cpp",
+      "sha256": "bb1b6feaf3954a44a4ba35ba47f3a6e8fb93458081bf7239e39ca9bcd39c612c",
+      "bytes": 36110
+    },
+    {
+      "source": "finite_depth_waveform_reconstruction/src/matlab/directional_order4/write_directional_eta4_cpp_input.m",
+      "destination": "write_directional_eta4_cpp_input.m",
+      "sha256": "5cfaf24e52ff8eefbad4f2a9e966acf9ba24b2578d79c74797d0a558ca59f114",
+      "bytes": 1582
+    },
+    {
+      "source": "finite_depth_waveform_reconstruction/src/matlab/directional_order4/read_directional_eta4_cpp_output.m",
+      "destination": "read_directional_eta4_cpp_output.m",
+      "sha256": "b0b28621f3765541bd5b14d7dd77e779aab10f7b5fa2f96a68dd0094e6c7d2d9",
+      "bytes": 1896
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/benchmarks/mf12_gl_wit_runtime/export_cpp_gl_runtime_input.m",
+      "destination": "export_cpp_gl_runtime_input.m",
+      "sha256": "7b529500c53cc39e3b52257804e44b55c55de30720c83d9c0ccc8067eeb18fd3",
+      "bytes": 1879
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0050/components.csv",
+      "destination": "inputs/runtime/n0050/components.csv",
+      "sha256": "5df356f5e24d2412ce7db816e659f3c502ed06794aa53ff24d44f3a831902fd9",
+      "bytes": 4500
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0050/manifest.json",
+      "destination": "inputs/runtime/n0050/manifest.json",
+      "sha256": "4b6f29da25aeacd3e5e8c56aa0d84398862a4843dca3294df78737f92456d4ee",
+      "bytes": 874
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0050/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0050/directional_eta44_input.bin",
+      "sha256": "ea094cf0e32cf1082b5c23ceb957e96f5258184bf6125f061fcdaad231a2b45f",
+      "bytes": 1280
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0100/components.csv",
+      "destination": "inputs/runtime/n0100/components.csv",
+      "sha256": "5ad77a61e311b821cf627b06b5cd5c4736f6bf6e10508b1d00e0f864af4a1ceb",
+      "bytes": 9042
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0100/manifest.json",
+      "destination": "inputs/runtime/n0100/manifest.json",
+      "sha256": "75b3a7637baaa7099335da84eff66aa92e9b2b1c131e60f15d248fed2d6c3fdf",
+      "bytes": 877
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0100/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0100/directional_eta44_input.bin",
+      "sha256": "924db6882bc2ae0074045b3f07f329498e0baa33fb286fd56434b620eef56437",
+      "bytes": 2480
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0200/components.csv",
+      "destination": "inputs/runtime/n0200/components.csv",
+      "sha256": "947f1c93364030a009b7eee918ea90c5d5e34241b3a181bf1ddbcb1790572de4",
+      "bytes": 18182
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0200/manifest.json",
+      "destination": "inputs/runtime/n0200/manifest.json",
+      "sha256": "6d92e3280d90c84a9b5251074bd54513705c5018d04dc30815711dd70df6ccab",
+      "bytes": 877
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0200/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0200/directional_eta44_input.bin",
+      "sha256": "b12b8cdfb7ea51c22c92ef8bc344f18bbd2a051839e7e959933127b4536577de",
+      "bytes": 4880
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0250/components.csv",
+      "destination": "inputs/runtime/n0250/components.csv",
+      "sha256": "82bb8cdc50a67c7145f1322d0b828db087e11d4e5dd4e92931c3e727418e2a32",
+      "bytes": 22748
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0250/manifest.json",
+      "destination": "inputs/runtime/n0250/manifest.json",
+      "sha256": "0b2c108d380daf5cc4dcede7bc67ed7928d4efdd211e8fca5f7415015db7a630",
+      "bytes": 873
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0250/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0250/directional_eta44_input.bin",
+      "sha256": "535129acf0e7107674f65fb81e3009cb4f7df33f45f7119c0baba493aaf02644",
+      "bytes": 6080
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0300/components.csv",
+      "destination": "inputs/runtime/n0300/components.csv",
+      "sha256": "d23c5c152507c78ca773ba4304c70bca091c7fce96aa4ed64fbecdd9fccfc061",
+      "bytes": 27291
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0300/manifest.json",
+      "destination": "inputs/runtime/n0300/manifest.json",
+      "sha256": "317e4f7a56eb890c3acba5e4d49686be72aab742e6dc3dea5d1e54e7624d89b4",
+      "bytes": 861
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0300/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0300/directional_eta44_input.bin",
+      "sha256": "f4ea5c8a04737288172fe50518e257eaa0f1966bc91f2a54081975497f14cf33",
+      "bytes": 7280
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0400/components.csv",
+      "destination": "inputs/runtime/n0400/components.csv",
+      "sha256": "ce3439f5e4c20f048c8c1d2283620c6ef4c3826f4e509087b3933f69e05ec97d",
+      "bytes": 36570
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0400/manifest.json",
+      "destination": "inputs/runtime/n0400/manifest.json",
+      "sha256": "5c3a1264762cabbcb67ccfac898e13f42f21d22c79126367421b79884e661a17",
+      "bytes": 861
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0400/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0400/directional_eta44_input.bin",
+      "sha256": "c749ff7aee5fcc712ec5effa0d403da67057cd171459a01b02e873c17c7c5854",
+      "bytes": 9680
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0500/components.csv",
+      "destination": "inputs/runtime/n0500/components.csv",
+      "sha256": "6b5fb269035c3a61fb47ab6095228cb09ae68adcbfb5f076b77af9e69970c13e",
+      "bytes": 45839
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0500/manifest.json",
+      "destination": "inputs/runtime/n0500/manifest.json",
+      "sha256": "550dbdcbbaefeb3eb2c0bda39d1d7675071308ceb0e3e95f831d20476bce9fab",
+      "bytes": 875
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0500/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0500/directional_eta44_input.bin",
+      "sha256": "23e326ca21666bd9fae6041f1b2e83d9ffea03df9be33583b06430be4f229eff",
+      "bytes": 12080
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0600/components.csv",
+      "destination": "inputs/runtime/n0600/components.csv",
+      "sha256": "4166563a09e98fc9070ae6fc99fdca754f9966f891e3c82fb5627b5056d295f6",
+      "bytes": 55188
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0600/manifest.json",
+      "destination": "inputs/runtime/n0600/manifest.json",
+      "sha256": "1886e422c27526e8510d2b0b8298e05dea260c0bd4fd451525178225d5391dcf",
+      "bytes": 875
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0600/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0600/directional_eta44_input.bin",
+      "sha256": "ca5f2a01e2aa3f5bd4e980bd8b1532d46cee0b8e1dbb36eb4c391529d2cb7b60",
+      "bytes": 14480
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0800/components.csv",
+      "destination": "inputs/runtime/n0800/components.csv",
+      "sha256": "09c19b38c8842c41de0fc32e6a6a4d4342df5007cc3429b39cedf7bf9520a3a5",
+      "bytes": 74021
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0800/manifest.json",
+      "destination": "inputs/runtime/n0800/manifest.json",
+      "sha256": "ff625add4af48bc73ac0b6cec3e7ed008e1bd31e51517e8b5044fbd52be073fa",
+      "bytes": 874
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n0800/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n0800/directional_eta44_input.bin",
+      "sha256": "06cb411db12cca3ef1174675ce01fa879aaac5daef4fc1536f79e4198474e918",
+      "bytes": 19280
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1000/components.csv",
+      "destination": "inputs/runtime/n1000/components.csv",
+      "sha256": "b09da822c76b3cfbcd78eac5f4466e2702cc28edc90a0dc9e5a44c4e1d2c1e91",
+      "bytes": 92883
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1000/manifest.json",
+      "destination": "inputs/runtime/n1000/manifest.json",
+      "sha256": "0ba746f839ecc38ca3831c387ceeecc49d4cdb9d317b56e2979883a574fd5f68",
+      "bytes": 879
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1000/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n1000/directional_eta44_input.bin",
+      "sha256": "c1710a13a255e64a36c333b34d9fe51d3448344a9455b9205c28ad3b182a70a1",
+      "bytes": 24080
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1200/components.csv",
+      "destination": "inputs/runtime/n1200/components.csv",
+      "sha256": "829c2449261ffd00b58fd8436e44e89e3643932ba26900c661c27a901879cdbe",
+      "bytes": 111927
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1200/manifest.json",
+      "destination": "inputs/runtime/n1200/manifest.json",
+      "sha256": "41fa592ad49ee72c32c79707bfdf5a99fa2706293eb2368926aac26a35af70e6",
+      "bytes": 878
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1200/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n1200/directional_eta44_input.bin",
+      "sha256": "1456c727b34652ac1207e1ea5cae97af47bb1aa7370c42bf104f3b26669d3785",
+      "bytes": 28880
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1500/components.csv",
+      "destination": "inputs/runtime/n1500/components.csv",
+      "sha256": "b7f785f7802399cef37b45c18ff1ca4daa51fda5c1e6b6e3850a3c59740fde9e",
+      "bytes": 140567
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1500/manifest.json",
+      "destination": "inputs/runtime/n1500/manifest.json",
+      "sha256": "ba979789d5829059c8c11dd3a3e6bdd572afa898eef8a0dccb19857ca9398722",
+      "bytes": 859
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/mf12_gl_wit_runtime_inputs/n1500/directional_eta44_input.bin",
+      "destination": "inputs/runtime/n1500/directional_eta44_input.bin",
+      "sha256": "03215d40a085f3fe8ea7082819f1a0149af54edd0433bc90351ab970ab593846",
+      "bytes": 36080
+    },
+    {
+      "source": "stokes_wave_definition_fifth_order_matlab_spectral/wave_interaction_theory_through_fifth_order/outputs/article_eta44_cpp_gl_95_99_remote/submission/source/manifests/n382/components.csv",
+      "destination": "inputs/field_n0382/components.csv",
+      "sha256": "8cd8fe0ca31cbc2017d35466dcef6f33b6922675a71186758f8408d4e39e3187",
+      "bytes": 34554
+    },
+    {
+      "source": "stokes_wave_definition_fifth_order_matlab_spectral/wave_interaction_theory_through_fifth_order/outputs/article_eta44_cpp_gl_95_99_remote/submission/source/manifests/n382/manifest.json",
+      "destination": "inputs/field_n0382/manifest.json",
+      "sha256": "3888c89b71aed8caf17537938fdcbc74e597294488d51e779c7910b5ae658fd2",
+      "bytes": 870
+    },
+    {
+      "source": "stokes_wave_definition_fifth_order_matlab_spectral/wave_interaction_theory_through_fifth_order/outputs/article_eta44_cpp_gl_95_99_remote/submission/source/manifests/n382/directional_eta44_input.bin",
+      "destination": "inputs/field_n0382/directional_eta44_input.bin",
+      "sha256": "b0704ecc36c75009b33549182bc1fa5894632ebf1e45043e636de93abcec2206",
+      "bytes": 9248
+    },
+    {
+      "source": "stokes_wave_definition_fifth_order_matlab_spectral/wave_interaction_theory_through_fifth_order/outputs/article_eta44_cpp_gl_95_99_final/remote_results/results/n382/directional_eta44_output.bin",
+      "destination": "data/wit_field_n0382.bin",
+      "sha256": "0e25b98f20ec785142fa880985e2e895ae6a6e7cf970c4dd6ff7d6d0fd4a886f",
+      "bytes": 5242984
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/eta44_no_stokes_rank_diagnostic/eta44_no_stokes_rank_fields.mat",
+      "destination": "data/eta44_no_stokes_rank_fields.mat",
+      "sha256": "a7b6396be00400c2580ca4eb87c18bca57027798ee619c7c2f5c777fbc9acbff",
+      "bytes": 1939371
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/eta44_no_stokes_rank_diagnostic/eta44_no_stokes_rank_metrics.csv",
+      "destination": "data/eta44_no_stokes_rank_metrics.csv",
+      "sha256": "ec63a0f7329f2fb8be52a26d8c5c53209040021ea8badf3eee6d3538b6ca2900",
+      "bytes": 603
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/eta44_runtime_figure_data.csv",
+      "destination": "data/runtime/eta44_runtime_figure_data.csv",
+      "sha256": "02761c1e9aeacc400476f078676d3eb2b0aeb8834c25f41b3948806f144057ef",
+      "bytes": 3063
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/eta44_runtime_ratios.csv",
+      "destination": "data/runtime/eta44_runtime_ratios.csv",
+      "sha256": "602ff26a9d98123c7dd7e5cdc391a74a42bf4a4667eb58d22a2d53488b34d4c8",
+      "bytes": 1023
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/energy_fraction_component_thresholds.csv",
+      "destination": "data/runtime/energy_fraction_component_thresholds.csv",
+      "sha256": "66f469683027acdbe74e6d5afa57483cc907dc4510d35a49438c841fc962d08c",
+      "bytes": 182
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/timings.csv",
+      "destination": "data/runtime/timings.csv",
+      "sha256": "6ce97fb0c6a1770360f93409b46d5c6655be69fdc1be05f8c15f83ff6c252df9",
+      "bytes": 6270
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/remote_ladder_summary.csv",
+      "destination": "data/runtime/remote_ladder_summary.csv",
+      "sha256": "3b84bb86f8abdd1a9e18b733c14a21ec08a5d2dcd3928699e2b3266aca45c2e2",
+      "bytes": 1689
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/cpp_gl_eta44/remote_split/campaign/rank_scaling_summary.csv",
+      "destination": "data/runtime/rank_scaling_summary.csv",
+      "sha256": "44321eaab21df5d53d87a1c0f03e69e1ba40d76bc750e575257434011144e0f9",
+      "bytes": 383
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/benchmarks/mf12_gl_wit_runtime/run_cpp_eta44_split.sh",
+      "destination": "run_gl_split.sh",
+      "sha256": "18db935d9188f62894ee1f01d37b3cd15ed84bb50a949b9d5b312cf556cb989e",
+      "bytes": 1416
+    },
+    {
+      "source": "finite_depth_waveform_reconstruction/src/matlab/directional_order4/read_directional_eta4_cpp_input.m",
+      "destination": "read_directional_eta4_cpp_input.m",
+      "sha256": "b79f5c4fb88eb65f3df51a0a920613c4c942c2f0fa1200488ffb836f2d49ef3a",
+      "bytes": 1238
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/remote_runtime_results/cpp-gl-eta44-n1500-20260831T211004Z/timings.csv",
+      "destination": "data/runtime/timings_n1500.csv",
+      "sha256": "1751e966a2f8c3195a18e68d2bb2aa7a5b1d6c4e4cb880aa2cb1de50577e5ef9",
+      "bytes": 978
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/remote_runtime_results/wit-eta44-n0800-20260831T144500Z/runtime_row.csv",
+      "destination": "data/runtime/wit_n0800.csv",
+      "sha256": "93ff9ff4a6e63c2a4136285d04da0b7ae58fa610ddd029000c429c4f3054bf51",
+      "bytes": 216
+    },
+    {
+      "source": "SWORD-VWA-GL-PAPER/artifacts/remote_runtime_results/mf12-gl-wit-runtime-20260830T214148Z/extracted/results/raw_times.csv",
+      "destination": "data/runtime/order4_original_raw_times.csv",
+      "sha256": "fb93c2f9f8655f2dc9cd59be69ff52a6185bac48d8f4dcefa8bdd92a695f3f18",
+      "transformation": "Rows filtered to order=4; values unmodified"
+    }
+  ],
+  "policy": "Source migration only. No Stokes diagonal repair. WIT and GL remain separate implementations. Historical measurements are not newly rerun timings.",
+  "historical_cpp_gl_source_sha256": "6bd01d6c25fc146bd96eba1d16bd19b64972792d10187b79b8bbaf4b058fd201",
+  "migrated_cpp_gl_source_sha256": "6bd01d6c25fc146bd96eba1d16bd19b64972792d10187b79b8bbaf4b058fd201",
+  "historical_gl_source_match": true,
+  "historical_wit_source_match": true,
+  "historical_split_launcher_match": true
+}
