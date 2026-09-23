@@ -6,6 +6,12 @@ follows the two-stage MF12 pattern: prepare a spectral reconstruction once,
 then evaluate the surface elevation and the true free-surface potential on a
 regular FFT grid.
 
+The current third-order runtime is the pure Green--Laplace graph with all
+Stokes-diagonal repairs removed, including repairs in its nested second-order
+states. The paper entry points use that same implementation. This changes
+third-order results from earlier releases; an exact monochromatic diagonal
+is not imposed. See [the migration record](docs/no_stokes_migration.md).
+
 ```matlab
 setup_green_laplace
 
@@ -29,6 +35,17 @@ silently returned as surface potential.
 | 2 | `eta22` | positive pure sum | prescribed GL rank |
 | 2 | `psi22` | positive pure sum | dual-branch GL2+2 |
 | 3 | `eta33`, `psi33` | positive pure sum | bounded GL4 reconstruction |
+
+Additional preserved GL research implementations are available separately:
+
+- `gl_pure_sum_order4`: experimental no-Stokes `eta44` and surface `psi44`,
+  with dimensionless analytic inputs and outputs documented in its help;
+- [`research/two_scale`](research/two_scale/README.md): independent
+  Two-Scale/Shared-Scale third-order elevation and surface-potential graphs,
+  with direct ordered-triple parity checks.
+
+These research interfaces do not extend the supported order range of
+`gl_spectral_coefficients` or silently add components to the total field.
 
 Use `gl_supported_sectors` for the machine-readable applicability table.
 Unsupported difference-frequency, strict-zero, free-wave, resonant and

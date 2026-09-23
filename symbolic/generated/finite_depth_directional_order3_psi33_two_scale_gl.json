@@ -1,0 +1,36 @@
+{
+	"schema_version":1,
+	"status":"frozen_pre_validation",
+	"candidate":"finite_depth_directional_psi33_two_scale_gl",
+	"scope":"stationary strict-forward positive-pure-sum Psi33 q_parent>0.5",
+	"candidate_input_fields":[
+		"eta11"
+	],
+	"target":"Psi33=phi(x,y,z=eta,t)|order3",
+	"flat_phi33_is_internal_only":true,
+	"external_lower_order_fields":false,
+	"oracle_imported":false,
+	"mf12_imported":false,
+	"surface_trace_relation":"Psi33=Phi33+eta11 phi22_z+eta22 phi11_z+(1\/2) eta11^2 phi11_zz",
+	"outer_phi_numerator":"i d_tau F_D-F_K",
+	"exponential_balance":"c=(1\/2) min_active(omega\/k_parallel); input exp[-tau(omega-c k_parallel)]; exact output compensation uses sum k_parallel=K_parallel",
+	"gauge":{
+		"C3(t)":"0",
+		"strict_K0":"0"
+	},
+	"analytic_signal_normalization":{
+		"input":"U=2 eta11_positive",
+		"internal_input_factor":"1\/2",
+		"output_factor":"2",
+		"net_cubic_factor":"1\/4",
+		"ordered_permutations_over_grouped_factor":"6\/24=1\/4"
+	},
+	"reused_eta33_resolvent_json":"C:\\Users\\spet5947\\Documents\\green-laplace-wave-reconstruction\\symbolic\\generated\\finite_depth_directional_order3_two_scale_gl.json",
+	"reused_eta33_resolvent_sha256":"53b7eed11ef2535a0a0660a22ca712cdf4e67742baf86a23517dbe59e4107f3e",
+	"source_sha256":{
+		"order1_to_order3_symbolic_expansion_2d.wl":"d4172bec855859eb7d7fcf3c8068958870a128ac49714f8bc5831fe5946cea91",
+		"order2_finite_depth_directional_euler.wl":"3896fa4979dd622b2ae42f10330d8aa1a635d210c02618f3715ed5dcea9cf3bc",
+		"order3_finite_depth_directional_euler.wl":"dcd2ece62b7198816e5781abe713464f4f98ed9f72d8867cb50e8f935a4bd77b"
+	},
+	"claim_boundary":"surface-trace identity and frozen finite-node GL graph only; no uniform shallow-water or all-angle claim"
+}

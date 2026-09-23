@@ -1,0 +1,93 @@
+{
+  "sources": [
+    {
+      "source": "SWORD-VWA-GL-PAPER/benchmarks/green_laplace_scalar_convergence/private/finite_depth_directional_nested_gl_eta33_ranked.m",
+      "sha256": "e667b39f0dc18c6d36e236facbd107ed2a6a00462160029d93c0b8ca9374332d"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/matlab/finite_depth_directional_nested_green_laplace_eta33.m",
+      "sha256": "dccbfc31c24045da7b9b0fbdb31c9df8d5295b5716aa3d805e8f6a61f253c645"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/matlab/finite_depth_directional_green_laplace_eta44_three_kernels.m",
+      "sha256": "e573f0bb157e67d7e997d7db2693c7044ca646662a82b170aebe32eff83dd11e"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/sword_vwa/generated/finite_depth_directional_order3_nested_green_laplace.json",
+      "sha256": "4cf865295285b3ab3fe01488753ce152de231afffca7386e201de922a6ed413e"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/sword_vwa/generated/finite_depth_directional_order4_forcing_graph.json",
+      "sha256": "93673919e231770a5d1d9bd9459da8b720ecb608c6148f26c2cb4122fd62a708"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/wolfram/discovery/order4_finite_depth_directional_forcing_graph_freeze.wl",
+      "sha256": "725d441997506e8f3132b68aade8c3b268535d55e5ee629e4381933cecb5fc5a"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/wolfram/residuals/order1_to_order4_symbolic_expansion_2d.wl",
+      "sha256": "ad47e6a510577334f01f3cf4f2392108d5d78e54c82c0f9f1dafcaa1c4840c7e"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/finite_depth_directional_eta33_two_scale_gl.m",
+      "destination": "research/two_scale/finite_depth_directional_eta33_two_scale_gl.m",
+      "sha256": "55f7f3c631eb7759f0761c75e07cfb26d573c93df16d2bb21ca5f31206768ca8"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/finite_depth_directional_psi33_two_scale_gl.m",
+      "destination": "research/two_scale/finite_depth_directional_psi33_two_scale_gl.m",
+      "sha256": "12e5739895cde7ead9c5e62b4672ac32f7b71e8bc33c69379f3fd870502a8181"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/direct_ordered_eta33_two_scale_gl.m",
+      "destination": "research/two_scale/direct_ordered_eta33_two_scale_gl.m",
+      "sha256": "64e5b944b4d82badacbc5bf967a90779641fc4e834f24c4c302b67d744c86d64"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/direct_ordered_psi33_two_scale_gl.m",
+      "destination": "research/two_scale/direct_ordered_psi33_two_scale_gl.m",
+      "sha256": "39505ef56d513925c2db11f7457696fd70c2c11d7951f47e33e32642f36a7ad9"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/run_ordered_triple_parity.m",
+      "destination": "research/two_scale/run_ordered_triple_parity.m",
+      "sha256": "ae9dd3722595b601595bf3cc396896f4c63b9e2be345c60491eaa00df7e6de0e"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/run_psi33_ordered_triple_parity.m",
+      "destination": "research/two_scale/run_psi33_ordered_triple_parity.m",
+      "sha256": "dbefe629426c726bd7546a548ee098d36f5da9724ffe8da32be0d4e4ac912635"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/run_two_scale_gl_smoke.m",
+      "destination": "research/two_scale/run_two_scale_gl_smoke.m",
+      "sha256": "b5ff0c123520bad3090988bc461401be7db495c06fbd94527593a9d949ae198d"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/benchmarks/finite_depth_order3_directional_two_scale_gl/run_psi33_two_scale_gl_smoke.m",
+      "destination": "research/two_scale/run_psi33_two_scale_gl_smoke.m",
+      "sha256": "43313a7aa83696deadef494743e0af3e6de73f6919bd21c247adf3411d4511eb"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/sword_vwa/generated/finite_depth_directional_order3_two_scale_gl.json",
+      "destination": "symbolic/generated/finite_depth_directional_order3_two_scale_gl.json",
+      "sha256": "054557778c37674ea93dd56ee9fb4ee7f3188f444a5d14d92d0503d6fe857430"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/sword_vwa/generated/finite_depth_directional_order3_psi33_two_scale_gl.json",
+      "destination": "symbolic/generated/finite_depth_directional_order3_psi33_two_scale_gl.json",
+      "sha256": "20404541acd3d9ad03d0a0842ce3ce33cc2945aa3706dcec7fd0146ebfc152ea"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/wolfram/discovery/order3_finite_depth_directional_two_scale_gl_freeze.wl",
+      "destination": "symbolic/wolfram/order3_finite_depth_directional_two_scale_gl_freeze.wl",
+      "sha256": "1ea594abe0620d896030bec7095b5d414cca21ed61b97978d20bdd6cc76bb036"
+    },
+    {
+      "source": "SWORD-VWA-FORGE/src/wolfram/discovery/order3_finite_depth_directional_psi33_two_scale_gl_freeze.wl",
+      "destination": "symbolic/wolfram/order3_finite_depth_directional_psi33_two_scale_gl_freeze.wl",
+      "sha256": "313efa39c963c46e75418a61e93b72d330700018a5fc949a244a210f9e97edd9"
+    }
+  ],
+  "policy": "Only pure GL execution; no diagonal or angular repairs. Source hashes include uncommitted author changes."
+}

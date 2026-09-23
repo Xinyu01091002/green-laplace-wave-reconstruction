@@ -6,7 +6,8 @@ addpath(fullfile(project_root,'diagnostics','eta20'));
 addpath(fullfile(project_root,'diagnostics','eta20','generated'));
 tests = {@test_linear_frontend,@test_eta22_ordered_parity, ...
     @test_unified_order3_surface,@test_domain_guard, ...
-    @test_frozen_interfaces,@test_eta20_diagnostics};
+    @test_frozen_interfaces,@test_eta20_diagnostics,@test_no_stokes_migration, ...
+    @test_two_scale_migration};
 records = repmat(struct('name','','pass',false,'message',''),numel(tests),1);
 for index = 1:numel(tests)
     records(index).name = func2str(tests{index});

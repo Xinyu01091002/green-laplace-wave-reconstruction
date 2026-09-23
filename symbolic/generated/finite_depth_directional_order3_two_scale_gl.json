@@ -1,0 +1,109 @@
+{
+	"schema_version":1,
+	"status":"frozen_pre_validation",
+	"candidate":"finite_depth_directional_eta33_two_scale_gl",
+	"scope":"stationary strict-forward positive-pure-sum eta33 q_parent>0.5",
+	"candidate_input_fields":[
+		"eta11"
+	],
+	"external_lower_order_fields":false,
+	"oracle_imported":false,
+	"mf12_imported":false,
+	"q_star":1,
+	"primary_node_counts":{
+		"order2":{
+			"slow":4,
+			"fast":2
+		},
+		"order3":{
+			"slow":4,
+			"fast":2
+		}
+	},
+	"shared_control_node_counts":{
+		"order2":3,
+		"order3":3
+	},
+	"scales":{
+		"order2_slow_exact":"2*Sqrt[Tanh[1]] - Sqrt[2*Tanh[2]]",
+		"order2_fast_exact":"2*Sqrt[Tanh[1]] + Sqrt[2*Tanh[2]]",
+		"order2_shared_exact":"Sqrt[(2*Sqrt[Tanh[1]] - Sqrt[2*Tanh[2]])*(2*Sqrt[Tanh[1]] + Sqrt[2*Tanh[2]])]",
+		"order3_slow_exact":"3*Sqrt[Tanh[1]] - Sqrt[3*Tanh[3]]",
+		"order3_fast_exact":"3*Sqrt[Tanh[1]] + Sqrt[3*Tanh[3]]",
+		"order3_shared_exact":"Sqrt[(3*Sqrt[Tanh[1]] - Sqrt[3*Tanh[3]])*(3*Sqrt[Tanh[1]] + Sqrt[3*Tanh[3]])]",
+		"order2_slow":"0.3568429824536556332536190684546062441687613307443051967746`34.",
+		"order2_fast":"3.1339315011376631329208377302269108071205889188644757980449`34.",
+		"order2_shared":"1.0575071932007960505402853691533950752292987032371250338439`34.",
+		"order3_slow":"0.8903180719550754254254485418692894350199514332584421612085`34.",
+		"order3_fast":"4.3458436534319027238362366561529861419140739411547293310209`34.",
+		"order3_shared":"1.9670239303429159448410708054910223113662087254110969592323`34."
+	},
+	"gauss_laguerre":{
+		"n2":[
+			{
+				"node":"0.5857864376269049511983112757903019214303281246230519268233`34.",
+				"weight":"0.8535533905932737622004221810524245196424179688442370182949`34."
+			},
+			{
+				"node":"3.4142135623730950488016887242096980785696718753769480731767`34.",
+				"weight":"0.1464466094067262377995778189475754803575820311557629817057`34."
+			}
+		],
+		"n3":[
+			{
+				"node":"0.415774556783479083311533873128274473546617412693118465094`34.",
+				"weight":"0.7110930099291730154495901911425944313093937962895534451315`34."
+			},
+			{
+				"node":"2.2942803602790417198220503613595938689598617210602808340354`34.",
+				"weight":"0.2785177335692408488014448884567264810348900309863886718573`34."
+			},
+			{
+				"node":"6.2899450829374791968664157655121316574935208662466007008707`34.",
+				"weight":"0.0103892565015861357489649204006790876557161727240578830274`34."
+			}
+		],
+		"n4":[
+			{
+				"node":"0.3225476896193923118003614591043674797437572244742957671883`34.",
+				"weight":"0.6031541043416336016359660238180782113018371867659489319976`34."
+			},
+			{
+				"node":"1.7457611011583465756868167125179470236738745155310725017828`34.",
+				"weight":"0.3574186924377996866414920174580912817635783649193409217855`34."
+			},
+			{
+				"node":"4.5366202969211279832792853849571378801257843533868046497484`34.",
+				"weight":"0.0388879085150053842724381681562099137223071913482769020838`34."
+			},
+			{
+				"node":"9.3950709123011331292335364434205476164565839066078270812805`34.",
+				"weight":"0.0005392947055613274501037905676205932122772569665065724697`34."
+			}
+		]
+	},
+	"operator_graph":{
+		"outer_eta_numerator":"G(K) F_D + i d_tau F_K",
+		"outer_phi_numerator":"i d_tau F_D - F_K",
+		"two_scale":"(slow integral-fast integral)\/(2 omega_K)",
+		"shared_scale":"integral sinh(omega_K tau)\/omega_K"
+	},
+	"analytic_signal_normalization":{
+		"input":"U=2 eta11_positive",
+		"internal_input_factor":"1\/2",
+		"output_factor":"2",
+		"net_cubic_factor":"1\/4",
+		"ordered_permutations_over_grouped_factor":"6\/24=1\/4"
+	},
+	"source_sha256":{
+		"order1_to_order3_symbolic_expansion_2d.wl":"d4172bec855859eb7d7fcf3c8068958870a128ac49714f8bc5831fe5946cea91",
+		"order2_finite_depth_directional_euler.wl":"3896fa4979dd622b2ae42f10330d8aa1a635d210c02618f3715ed5dcea9cf3bc",
+		"order3_finite_depth_directional_euler.wl":"dcd2ece62b7198816e5781abe713464f4f98ed9f72d8867cb50e8f935a4bd77b"
+	},
+	"moment_certification":{
+		"n2":3,
+		"n3":5,
+		"n4":7
+	},
+	"claim_boundary":"finite GL moments only; no uniform shallow-water or all-angle convergence claim"
+}

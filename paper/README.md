@@ -1,5 +1,12 @@
 # Paper figures
 
+The current third-order entry points use the no-Stokes runtime described in
+[`docs/no_stokes_migration.md`](../docs/no_stokes_migration.md). Previously
+committed reference assets are version-specific records and were not all
+regenerated in this migration. Recompute a figure before citing it as a result
+of the current runtime; a historical corrected inner state is not equivalent
+to removing only the final third-order correction.
+
 The portable manuscript entry points are:
 
 - `figure_01_scalar_convergence.m`: scalar modal-resolvent convergence;

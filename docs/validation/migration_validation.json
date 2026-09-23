@@ -1,0 +1,31 @@
+{
+  "matlab_release": "2022b",
+  "precision": "double",
+  "grid": [
+    64,
+    64
+  ],
+  "third_order_rank_eta_psi_errors": [
+    [
+      4,
+      0,
+      0
+    ],
+    [
+      6,
+      0,
+      0
+    ],
+    [
+      8,
+      0,
+      0
+    ]
+  ],
+  "fourth_order_eta_psi_errors": [
+    0,
+    0
+  ],
+  "comparison": "raw same-unit fields; no rescaling or alignment",
+  "scope": "migration parity only; not new exact-theory accuracy certification"
+}

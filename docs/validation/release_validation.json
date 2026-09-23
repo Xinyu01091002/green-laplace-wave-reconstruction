@@ -1,0 +1,46 @@
+{
+  "matlab_release": "2022b",
+  "records": [
+    {
+      "name": "test_linear_frontend",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_eta22_ordered_parity",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_unified_order3_surface",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_domain_guard",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_frozen_interfaces",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_eta20_diagnostics",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_no_stokes_migration",
+      "pass": true,
+      "message": "pass"
+    },
+    {
+      "name": "test_two_scale_migration",
+      "pass": true,
+      "message": "pass"
+    }
+  ],
+  "overall_pass": true
+}
