@@ -15,6 +15,18 @@ support reaches a Nyquist boundary.
 
 ## Optional
 
+### Fourth-order C++ reproduction
+
+The [fourth-order GL--WIT package](../paper/order4/README.md) requires Linux
+or WSL, a C++17 compiler, OpenMP, FFTW3 with its threads library, GNU patch,
+and Python 3 for process orchestration. MATLAB R2022b provides independent
+numerical validation. FFTW is an external build dependency; its installation
+can be selected with `FFTW_PREFIX`.
+
+These dependencies are needed to build and rerun the C++ calculations.
+Replotting the preserved fourth-order fields and timings, or recomputing the
+GL fields against the preserved WIT reference, needs only base MATLAB.
+
 ### MF12 MATLAB implementation
 
 MF12 is needed only for comparison examples. It is kept external so that its
@@ -42,3 +54,9 @@ wolframscript -file symbolic/wolfram/order3_finite_depth_directional_nested_gree
 ```
 
 Generated run reports are written under the ignored `artifacts/` directory.
+
+The retained third-order symbolic sources include historical Stokes traces
+and correction identities. These are mathematical reference records; the
+version 0.3.0 MATLAB execution path does not apply those repairs. See the
+[migration record](no_stokes_migration.md) before regenerating historical
+interfaces.

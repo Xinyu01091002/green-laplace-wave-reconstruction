@@ -1,16 +1,62 @@
 # Green--Laplace wave reconstruction
 
-MATLAB implementation and reproducibility material for Green--Laplace
-reconstruction of finite-depth directional bound waves. The public interface
-follows the two-stage MF12 pattern: prepare a spectral reconstruction once,
-then evaluate the surface elevation and the true free-surface potential on a
-regular FFT grid.
+MATLAB implementations and paper reproduction material for Green--Laplace
+reconstruction of finite-depth directional bound waves from first-order
+surface elevation. The repository also includes the C++ implementations,
+inputs and results used for the paper's fourth-order comparison with Wave
+Interaction Theory (WIT).
 
-The current third-order runtime is the pure Green--Laplace graph with all
-Stokes-diagonal repairs removed, including repairs in its nested second-order
-states. The paper entry points use that same implementation. This changes
-third-order results from earlier releases; an exact monochromatic diagonal
-is not imposed. See [the migration record](docs/no_stokes_migration.md).
+| I want to... | Start here |
+|---|---|
+| Run a GL reconstruction in MATLAB | [Quick start](#quick-start), then the [minimal example](examples/run_minimal_example.m) |
+| Reproduce the paper's results | [Paper guide](paper/README.md); for fourth-order fields and timings, use the [GL--WIT package](paper/order4/README.md) |
+| Inspect the derivation and frozen formulas | [Euler residuals](symbolic/residuals), [Wolfram generators](symbolic/wolfram), and [exported interfaces](symbolic/generated) |
+
+## Quick start
+
+The example requires **MATLAB R2022b and base MATLAB only**. No additional
+toolbox, Mathematica, MF12 installation or C++ build is needed. R2022b is the
+tested release; newer MATLAB releases have not been separately certified here.
+
+Clone the repository, or download and extract its ZIP from GitHub:
+
+```bash
+git clone https://github.com/Xinyu01091002/green-laplace-wave-reconstruction.git
+cd green-laplace-wave-reconstruction
+```
+
+Set MATLAB's current folder to the repository root, then run:
+
+```matlab
+setup_green_laplace
+run('examples/run_minimal_example.m')
+```
+
+The example reconstructs the released first- to third-order positive pure-sum
+components, displays the third-order elevation and surface potential, and
+saves fields and a figure under `results/minimal_example/`.
+
+To check the installation:
+
+```matlab
+addpath('tests')
+run_release_tests
+```
+
+## Available outputs and interfaces
+
+**The unified spectral API supports orders one to three. Fourth-order
+components and the paper's fourth-order comparison have separate entry points.**
+
+| Order | Components | Interface | Scope |
+|---:|---|---|---|
+| 1 | `eta11`, `psi11` | Unified spectral API | Linear |
+| 2 | `eta22`, `psi22` | Unified spectral API | Positive pure sum; prescribed GL rank for elevation, dual-branch GL2+2 for surface potential |
+| 3 | `eta33`, `psi33` | Unified spectral API | Positive pure sum; bounded GL4 reconstruction |
+| 4 | `eta44`, `psi44` | [`gl_pure_sum_order4`](src/gl_pure_sum_order4.m) | Experimental positive pure-sum component interface; dimensionless analytic inputs and outputs |
+| 4 | Paper's `eta44` comparisons | [`paper/order4`](paper/order4/README.md) | GL6/8/10 versus WIT on the declared paper cases |
+
+The unified API follows the two-stage MF12 calling pattern:
 
 ```matlab
 setup_green_laplace
@@ -27,14 +73,9 @@ The first four outputs of `gl_spectral_surface` match the ordering of
 `phi(x,z=eta,t)`. Flat bulk-potential traces are internal states and are not
 silently returned as surface potential.
 
-## Released outputs
-
-| Order | Components | Sector | Status |
-|---:|---|---|---|
-| 1 | `eta11`, `psi11` | linear | released |
-| 2 | `eta22` | positive pure sum | prescribed GL rank |
-| 2 | `psi22` | positive pure sum | dual-branch GL2+2 |
-| 3 | `eta33`, `psi33` | positive pure sum | bounded GL4 reconstruction |
+Passing `order=4` to `gl_spectral_coefficients` is not supported. The
+fourth-order paper comparison concerns elevation; it is not a general
+validation of all fourth-order surface-potential cases.
 
 Additional preserved GL research implementations are available separately:
 
@@ -57,8 +98,8 @@ Use `gl_supported_sectors` for the machine-readable applicability table.
 Unsupported difference-frequency, strict-zero, free-wave, resonant and
 near-resonant sectors fail explicitly; they are never filled with zeros.
 
-Version 0.2 also includes a separate diagnostic package for nonzero
-difference-frequency `eta20`:
+The [separate nonzero difference-frequency `eta20` diagnostics](diagnostics/eta20/README.md)
+include:
 
 - shared-scale GL6/GL12/GL16 rank diagnostics;
 - exact frozen Neumann R2/R4/R6 formulas;
@@ -68,35 +109,23 @@ These diagnostics are not silently added to the total field returned by
 `gl_spectral_surface`. R2/R4/R6 are not Green--Laplace ranks, and their
 fixed-FFT production implementation is not claimed as validated.
 
-## Dependencies
+## Dependencies by task
 
-| Dependency | Purpose | Required |
-|---|---|---|
-| MATLAB R2022b | GL execution, tests and figures | yes |
-| Base MATLAB | FFT, JSON, tables and plotting | yes |
-| External MF12 MATLAB repository | GL--MF12 examples | optional |
-| Wolfram Mathematica / WolframScript | regenerate exact frozen interfaces | optional |
+| Task | Dependencies |
+|---|---|
+| Run the example, release tests, or preserved fourth-order plots | MATLAB R2022b; base MATLAB only |
+| Recompute fourth-order GL fields against the preserved WIT reference | MATLAB R2022b; base MATLAB only |
+| Build and rerun the fourth-order C++ comparison | Linux or WSL, C++17 compiler, OpenMP, FFTW3 with its threads library, GNU patch, Python 3 for process orchestration |
+| Run GL--MF12 comparison examples | MATLAB plus an external MF12 MATLAB implementation |
+| Regenerate exact symbolic interfaces | Wolfram Mathematica / WolframScript |
 
 The release tests use base MATLAB only. No Python package or MATLAB toolbox is
 required. The current local release gate was executed with MATLAB R2022b;
 newer releases are not claimed until the same checks run there.
 
-## Quick start
-
-Run the self-contained example:
-
-```matlab
-setup_green_laplace
-run("examples/run_minimal_example.m")
-```
-
-Run the release checks:
-
-```matlab
-setup_green_laplace
-addpath("tests")
-run_release_tests
-```
+MATLAB also provides independent validation of C++ results. See
+[dependency details](docs/dependencies.md) and the
+[fourth-order build instructions](paper/order4/README.md#build-and-check-c).
 
 ## MF12 comparison
 
@@ -120,6 +149,22 @@ shift or fitted rescaling is applied.
 
 ## Reproducibility
 
+For the fourth-order comparison, run from the repository root:
+
+```matlab
+setup_green_laplace
+addpath('paper/order4')
+reproduce_order4_fields(false) % plot the preserved GL and WIT fields
+reproduce_order4_fields(true)  % recompute GL6/8/10 against the preserved WIT reference
+reproduce_order4_runtime      % plot historical measured timing data
+```
+
+Outputs go to `results/order4/`. The [fourth-order guide](paper/order4/README.md)
+also explains how to compile and run C++ on the supplied inputs. Plotting
+historical timing measurements does not rerun the 32-core timing campaign.
+
+The source and data directories are organized as follows:
+
 - `symbolic/residuals/` contains the exact Euler residual sources.
 - `symbolic/wolfram/` freezes the Green--Laplace interfaces.
 - `symbolic/generated/` contains the machine-readable interfaces consumed by
@@ -139,25 +184,45 @@ run_all_figures("self-contained")
 ```
 
 The `"full"` mode adds the MF12-dependent second-order field calculations.
-Data-heavy manuscript comparisons remain identified separately in
-`paper/README.md`; the repository does not pretend that a locked raster is an
-end-to-end numerical reproduction.
+`run_all_figures` does not run the separate fourth-order package. See the
+[paper guide](paper/README.md) for all entry points, comparisons requiring
+external data, and the status of historical reference assets.
+
+The [MATLAB release checks](https://github.com/Xinyu01091002/green-laplace-wave-reconstruction/actions/workflows/matlab.yml)
+and [fourth-order reproduction checks](https://github.com/Xinyu01091002/green-laplace-wave-reconstruction/actions/workflows/order4-paper.yml)
+run in GitHub Actions. The latter check frozen inputs, compile C++, recompute
+the paper GL fields and compare C++ outputs with MATLAB.
+
+The original extraction manifest is supplemented by the
+[no-Stokes migration manifest](docs/no_stokes_source_manifest.json) and the
+[fourth-order source manifest](paper/order4/source_manifest.json).
 
 ## Scope
 
 The released nonlinear graphs accept first-order surface elevation only.
-They assume strict-forward analytic support and alias-safe FFT grids. The
-order-two surface-potential graph requires parent `kh >= 0.3`; order three
-requires every parent `kh > 0.5`. The MF12-compatible `Ux`, `Uy` slots are
-present, but the released total-field API requires both to be zero. Evidence outside these
-declared domains is not a release claim.
+The unified API requires strict-forward analytic support and alias-safe FFT
+grids. Its order-two surface-potential graph requires every parent `kh >= 0.3`;
+order three requires every parent `kh > 0.5`. Its `Ux` and `Uy` slots must
+both be zero. Separate research and paper interfaces have their own declared
+domains; these unified API restrictions must not be assumed to describe
+every research case. Evidence outside the declared domains is not a release claim.
 
 This software is a fixed-order computational reformulation of regular bound
 wave interaction kernels. It is not a solver for strict-zero modes, mean
 flow, resonant primary-harmonic corrections or coupled nonlinear evolution.
 
+## Version 0.3.0
+
+**Version 0.3.0 uses the pure GL graph without Stokes-diagonal repairs.**
+The third-order API and paper entry points omit repairs in both the nested
+second-order states and the third-order response. Results therefore differ
+from earlier corrected versions; an exact monochromatic diagonal is not
+imposed. The Taylor terms needed to evaluate potential at the free surface
+are retained. See the [changelog](CHANGELOG.md) and
+[migration record](docs/no_stokes_migration.md).
+
 ## License and citation
 
-Source code is released under the MIT License. Cite the repository using
-`CITATION.cff`; cite the Green--Laplace paper and MF12 theory separately when
+Source code is released under the [MIT License](LICENSE). Cite the repository using
+[`CITATION.cff`](CITATION.cff); cite the Green--Laplace paper and MF12 theory separately when
 using the associated methods or comparison implementation.

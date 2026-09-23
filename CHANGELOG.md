@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 - 2026-09-23
+
+- Replaced the third-order API and paper executors with the pure GL graph,
+  removing Stokes-diagonal repairs in the nested second-order states and
+  the third-order elevation and surface-potential responses. This changes
+  numerical results from earlier releases; an exact diagonal is not imposed.
+- Added the independent no-Stokes fourth-order component interface and the
+  third-order Two-Scale/Shared-Scale research graphs. The unified spectral
+  API continues to accept orders one through three only.
+- Added the fourth-order GL--WIT paper package: historical C++ sources,
+  frozen inputs, WIT reference output, GL6/8/10 fields, timing measurements,
+  plotting commands and build instructions. Historical timings remain
+  distinct from newly executed migration checks.
+- Added source-integrity, input-reconstruction, C++/MATLAB parity and
+  fourth-order paper reproduction checks, including a dedicated CI workflow.
+- Reorganized the public guide around reconstruction, paper reproduction
+  and symbolic sources; documented dependencies for each task.
+
 ## 0.2.0 - 2026-08-27
 
 - Added portable nonzero difference-frequency eta20 diagnostics.
