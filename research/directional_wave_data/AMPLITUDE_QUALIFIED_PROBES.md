@@ -17,10 +17,10 @@ also reported (centerline 0.03033928369611 m), as is the main-group peak ratio.
 The lateral points have identical pass/fail classification under peak and
 whole-record peak-to-trough definitions. No sub-sample maximum is inferred.
 
-All these near/far/multiple-probe checks use nominal initial Akp=0.02,
+The original near/far/multiple-probe checks use nominal initial Akp=0.02,
 kh=1 and direction-spread label 25 degrees. The separate parameter sweep
-also contains Akp=0.12, but that larger steepness was not used for these
-off-centerline checks. Akp is the source-case label, not a newly fitted local
+also contains Akp=0.12. The subsequent user-requested off-centerline extension
+at that larger steepness is recorded below. Akp is the source-case label, not a newly fitted local
 steepness. Each record still has 4 s sampling.
 
 On-centerline x-offset probes are reported separately. Their same-x centerline
@@ -73,3 +73,46 @@ convention audit is reused. No previous result is overwritten.
 Both new MATLAB functions pass Code Analyzer. The threshold uses the OW3D
 reference rather than GL output, and neither pass/fail nor the reported
 relative errors rescale any waveform.
+
+## Extension to Akp=0.12
+
+The same one-third criterion and fixed nominal offsets are applied to the
+test6 kh=1/spread25/Akp=.12 four-phase family. The case has a different native
+grid/domain from test1, so actual off-centerline coordinates must be reported;
+this is not an otherwise-identical controlled change of steepness alone.
+The center is (11250,4500) m. Its previously verified initial spectrum, center
+record and propagation convention are reused only after exact extraction
+parity checks. No GL formula, rank, angle grid, input band or gain is adjusted.
+
+```matlab
+run_directional_amplitude_gate( ...
+    'C:/Research/VWA/VWA Unidirectinal/Directional/test6',0.12);
+```
+
+Outputs are separate under `results/directional_amplitude_gate_akp012/`;
+the Akp=.02 directory is unchanged. The driver retains its old one-argument
+default for reproducing the weak-steepness case.
+
+The 484 source snapshots (121 times, four phases) were read and hashed. Center
+raw data, initial spectrum, time grid and physical metadata agree with the
+previous test6 extraction. The center peak is 0.5699585867 m, making the gate
+0.1899861956 m; center peak-to-trough range is 1.0806051667 m. All four new
+points pass both peak and peak-to-trough criteria before their GL errors
+are computed. The geometry's native spacing makes the actual nominal .35
+wavelength offsets +/-70.3125 m, rather than the +/-79.1015625 m in test1.
+
+| Point | Actual dy (m) | eta22 peak (m) | Peak ratio | eta22 L2 (%) | psi22 L2 (%) |
+|---|---:|---:|---:|---:|---:|
+| center, reused benchmark | 0 | 0.569959 | 1 | 4.43060 | 2.66841 |
+| y_m0p25 | -52.734375 | 0.403199 | 0.70742 | 3.34695 | 2.10785 |
+| y_p0p25 | +52.734375 | 0.405965 | 0.71227 | 3.45759 | 1.73533 |
+| y_m0p35 | -70.3125 | 0.307014 | 0.53866 | 2.76700 | 2.33976 |
+| y_p0p35 | +70.3125 | 0.310511 | 0.54480 | 2.93249 | 1.88384 |
+
+Both variables remain within a few percent on the saved main-group samples,
+but errors are larger than in the Akp=.02 experiment. The data have different
+domains/grids, and larger-steepness phase sectors are not pure perturbation
+orders, so the change is not assigned solely to one source of error. Full-
+record metrics remain in each probe's output; the table is main-group evidence.
+The modified runner and plotting function pass Code Analyzer. No physical
+kernel, GL rank, directional weight rule or fitted alignment was changed.

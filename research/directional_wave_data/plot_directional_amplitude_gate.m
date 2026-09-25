@@ -13,6 +13,6 @@ for j=ids(:).'
     end
 end
 lg=legend('OW3D saved samples','Joint GL, 7.5 deg');lg.Layout.Tile='south';
-title(tl,'Amplitude-qualified lateral probes | kh=1, spread=25 deg, Akp=0.02 | sampled eta22 peak >= centerline / 3');
+title(tl,sprintf('Amplitude-qualified lateral probes | kh=1, spread=25 deg, Akp=%.2f | sampled eta22 peak >= centerline / 3',s.criteria.Akp));
 exportgraphics(f,fullfile(base,'qualified_probes.png'),'Resolution',170);exportgraphics(f,fullfile(base,'qualified_probes.pdf'),'ContentType','vector');close(f);
 end

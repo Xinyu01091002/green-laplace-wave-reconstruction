@@ -1,31 +1,44 @@
-function run_directional_amplitude_gate(dataRoot)
+function run_directional_amplitude_gate(dataRoot,Akp)
 % User-defined eligibility: sampled OW3D eta22 peak >= same-x centerline / 3.
 % This selects a useful signal region, not GL coefficients or error minima.
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));
-oldBase=fullfile(root,'results','directional_joint_input');
-centerFolder=fullfile(oldBase,'verified_convention');center=load(fullfile(centerFolder,'joint_pilot.mat'));
+if nargin<2,Akp=.02;end
+assert(ismember(Akp,[.02,.12]));
+cfg=struct('kph',1,'spread',25,'Akp',Akp,'lastStep',900);
+if Akp==.02
+    oldBase=fullfile(root,'results','directional_joint_input');centerFolder=fullfile(oldBase,'verified_convention');
+    outputName='directional_amplitude_gate';
+else
+    oldBase=fullfile(root,'results','directional_sweep','kh1_s25_a012');centerFolder=fullfile(oldBase,'center');
+    outputName='directional_amplitude_gate_akp012';cfg.lastStep=1200;
+end
+center=load(fullfile(centerFolder,'joint_pilot.mat'));assert(center.report.metadata.Akp==Akp);
 referencePeak=max(abs(center.d.eta2));referenceRange=range(center.d.eta2);
 centerMainPeak=max(abs(center.d.eta2(center.focus)));
-near=load(fullfile(root,'results','directional_joint_input_multiprobe','summary.mat'));
-farNames=["x_m3","x_p3","y_m1","y_p1","y_m1p5","y_p1p5"];
-folders=[string(near.folders(:));strings(numel(farNames),1)];labels=[string(near.labels(:));farNames(:)];
-farBase=fullfile(root,'results','directional_sweep','kh1_s25_a002');
-for j=1:numel(farNames)
-    folders(numel(near.folders)+j)=string(fullfile(farBase,char(farNames(j))));
+folders=string(centerFolder);labels="center";
+if Akp==.02
+    near=load(fullfile(root,'results','directional_joint_input_multiprobe','summary.mat'));
+    farNames=["x_m3","x_p3","y_m1","y_p1","y_m1p5","y_p1p5"];
+    folders=[string(near.folders(:));strings(numel(farNames),1)];labels=[string(near.labels(:));farNames(:)];
+    farBase=fullfile(root,'results','directional_sweep','kh1_s25_a002');
+    for j=1:numel(farNames)
+        folders(numel(near.folders)+j)=string(fullfile(farBase,char(farNames(j))));
+    end
 end
 rows=cell(0,13);
 for j=1:numel(folders)
     d=load(fullfile(folders(j),'joint_pilot.mat'));
     rows(end+1,:)=record(labels(j),d,referencePeak,referenceRange,centerMainPeak,center.report.metadata.probe); %#ok<AGROW>
 end
-base=fullfile(root,'results','directional_amplitude_gate');if ~isfolder(base),mkdir(base);end
+base=fullfile(root,'results',outputName);if ~isfolder(base),mkdir(base);end
 oldTable=cell2table(rows,'VariableNames',columns());writetable(oldTable,fullfile(base,'existing_points.csv'));disp(oldTable);
 % Fixed closer lateral locations, not a search for minimum high-order error.
 offsets=[0,0;0,-.25;0,.25;0,-.35;0,.35];newLabels=["center","y_m0p25","y_p0p25","y_m0p35","y_p0p35"];
-extract_directional_joint_input(dataRoot,offsets,'directional_amplitude_gate');
+extract_directional_joint_input(dataRoot,offsets,outputName,cfg);
 old=load(fullfile(oldBase,'extracted.mat'));raw=load(fullfile(base,'extracted.mat'));
 assert(isequal(old.initialSpectrum,raw.initialSpectrum) && isequal(old.t,raw.t));
 assert(isequal(old.eta2,raw.eta2(:,1)) && isequal(old.probe1,raw.probe1(:,1)));
+assert(old.metadata.h==raw.metadata.h && old.metadata.g==raw.metadata.g && raw.metadata.Akp==Akp);
 copyfile(fullfile(oldBase,'initial_convention.json'),fullfile(base,'initial_convention.json'));
 newFolders=strings(5,1);newFolders(1)=string(centerFolder);ran=false(5,1);ran(1)=true;
 for j=2:5
@@ -45,7 +58,8 @@ summary=cell2table(rows,'VariableNames',columns());writetable(summary,fullfile(b
 criteria=struct('primary','max(abs(OW3D eta22)) over full saved record, same-x centerline baseline', ...
     'threshold',1/3,'center_peak_m',referencePeak,'center_peak_to_trough_m',referenceRange, ...
     'center_main_peak_m',centerMainPeak,'Akp',center.report.metadata.Akp, ...
-    'selection_requested_after_previous_results',true,'kernel_tuned',false);
+    'selection_requested_after_previous_results',true,'criterion_defined_before_new_probe_errors',true, ...
+    'nominal_probe_offsets_wavelengths',offsets,'actual_probe_coordinates_m',raw.metadata.probes,'kernel_tuned',false);
 save(fullfile(base,'summary.mat'),'summary','criteria','newFolders','newLabels','ran','offsets');
 fid=fopen(fullfile(base,'criteria.json'),'w');fprintf(fid,'%s',jsonencode(criteria));fclose(fid);
 plot_directional_amplitude_gate(base);disp(summary);
