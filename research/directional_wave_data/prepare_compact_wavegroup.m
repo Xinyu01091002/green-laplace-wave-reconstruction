@@ -1,6 +1,9 @@
-function report=prepare_compact_wavegroup(designFile,mf12Root,out)
+function report=prepare_compact_wavegroup(designFile,mf12Root,out,phaseRandomizationSource)
 % Independent MF12 order-2 initial fields; no GL formula or OW3D run here.
 % Read an immutable first-order design snapshot and write a new remote case set.
+% Optional fourth argument: preserve that family's modal amplitudes and
+% randomize phases only. Export periodic fields, not closed-wall OW3D inputs.
+randomized=nargin>=4;
 if isfolder(out),error('Case directory already exists.');end
 addpath(mf12Root);mkdir(out);d=load(designFile);r=d.report;
 g=r.g;h=r.h;kp=r.kp;nx=r.unique_FFT_nodes(1);ny=r.unique_FFT_nodes(2);
@@ -10,6 +13,23 @@ active=d.weights>=max(d.weights,[],'all')*threshold;
 omitted=sum(d.weights(~active))/sum(d.weights,'all');
 w=d.weights(active);w=w/sum(w);kx=d.kx(active).';ky=d.ky(active).';om=d.omega(active).';
 C=A*w.'.*exp(-1i*(kx*Lx/2+ky*Ly/2)+1i*om*tf);
+family='wavegroup';randomization=struct();
+if randomized
+    parent=load(phaseRandomizationSource,'C','kx','ky','om');
+    assert(isequal(kx,parent.kx) && isequal(ky,parent.ky) && isequal(om,parent.om));
+    rng(20260925,'twister');phaseIncrements=2*pi*rand(size(parent.C));
+    C=parent.C.*exp(1i*phaseIncrements);family='randomphase';tf=NaN;
+    relativeAmplitudeChange=max(abs(abs(C)-abs(parent.C)))/max(abs(parent.C));
+    assert(relativeAmplitudeChange<1e-14);
+    sigma=sqrt(sum(abs(C).^2)/2);
+    randomization=struct('rule','C_random=C_group*exp(i*independent_uniform_phase); no amplitude change', ...
+        'seed',20260925,'phase_increments',phaseIncrements,'source',phaseRandomizationSource, ...
+        'maximum_relative_amplitude_change',relativeAmplitudeChange, ...
+        'linear_spatial_rms_m',sigma,'linear_Hs_4sigma_m',4*sigma, ...
+        'kp_Hs_over_2',kp*2*sigma,'focusing_Akp_label',kp*sum(abs(C)), ...
+        'physical_space_taper',false,'amplitude_renormalization',false);
+    fprintf('Random phases only: linear Hs=%.9g m, kp*Hs/2=%.9g.\n',4*sigma,kp*2*sigma);
+end
 fprintf('Preparing %d declared first-order parents; omitted modal L1 fraction %.6g.\n',numel(C),omitted);
 % Verify the external preallocated spectral path includes both order-2 sectors.
 % Its superharmonic_only flag controls third-order retention, not these pairs.
@@ -40,9 +60,15 @@ for ip=1:4
     assert(all(isfinite(eta),'all') && all(isfinite(psi),'all'));
     assert(abs(mean(eta,'all'))<1e-10 && abs(mean(psi,'all'))<1e-9);
     E(:,:,ip)=eta;P(:,:,ip)=psi;
-    name=sprintf('wavegroup_kpd1_akp012_phi%03d',phases(ip));folder=fullfile(out,name);mkdir(folder);
-    write_initial(fullfile(folder,'OceanWave3D.init'),eta,psi,Lx,Ly,0);
-    write_input(fullfile(folder,'OceanWave3D.inp'),Lx,Ly,h,nx+1,ny+1,17,g,dt,duration);
+    name=sprintf('%s_kpd1_akp012_phi%03d',family,phases(ip));folder=fullfile(out,name);mkdir(folder);
+    if randomized
+        % Same unique periodic grid for future HOS import. No taper changes
+        % the user-prescribed amplitudes; closed-wall OW3D is not configured.
+        save(fullfile(folder,'initial_surface.mat'),'eta','psi','Lx','Ly','g','h','-v7.3');
+    else
+        write_initial(fullfile(folder,'OceanWave3D.init'),eta,psi,Lx,Ly,0);
+        write_input(fullfile(folder,'OceanWave3D.inp'),Lx,Ly,h,nx+1,ny+1,17,g,dt,duration);
+    end
     metrics(ip,:)=[phases(ip),max(abs(eta),[],'all'),max(abs(psi),[],'all'), ...
         max(abs(eta(edge)))/A,max(abs(psi(edge)))/(g/(2*pi/r.Tp_s)*A), ...
         min(eta,[],'all'),max(eta,[],'all')];
@@ -67,6 +93,16 @@ report=struct('status','INITIAL_FIELDS_PREPARED_NOT_PROPAGATION_VALIDATED','desi
     'boundary','Native straight-wall boundary; packet edge audit required. No periodic OW3D boundary is claimed.', ...
     'initial_output_source','Use EP_00000.bin for eta/psi at t=0; kinematics begins at dt', ...
     'kinematics_physical_node_range',[1,nx+1,1,ny/2-3,ny/2+5,1,2,round(duration/dt)+1,1]);
+if randomized
+    report.status='PERIODIC_RANDOM_INITIAL_FIELDS_PREPARED_SOLVER_IMPORT_PENDING';
+    report.randomization=randomization;
+    report.boundary='Periodic realization; no taper or closed-wall OW3D run configuration';
+    report.initial_output_source='initial_surface.mat eta and true surface psi on the unique periodic grid';
+    report.kinematics_physical_node_range=[];
+    report.design=rmfield(report.design,{'random_prototype','nonlinear_initialization','status'});
+    measuredSigma=sqrt(mean(real(eta1).^2,'all'));
+    assert(abs(measuredSigma/randomization.linear_spatial_rms_m-1)<1e-12);
+end
 save(fullfile(out,'initial_fields.mat'),'report','C','kx','ky','om','E','P','eta1','psi1','eta20','psi20','eta22','psi22','-v7.3');
 fid=fopen(fullfile(out,'initialization.json'),'w');assert(fid>=0);guard=onCleanup(@()fclose(fid));
 fprintf(fid,'%s',jsonencode(report));disp(metrics);disp(report.status);

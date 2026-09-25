@@ -1,5 +1,11 @@
 # Compact directional OW3D redesign, 2026-09-25
 
+**Update:** the user chose phase randomization only, preserving every
+first-order modal amplitude. Four random initial field pairs now exist;
+the earlier tapered, unscaled prototype below is historical and not used.
+See [HOS_OCEAN_ASSESSMENT.md](HOS_OCEAN_ASSESSMENT.md) for the actual random
+normalization, concurrency budget and proposed periodic HOS-Ocean route.
+
 This replaces the previous depth/steepness/time-step campaign proposal.
 The user selected only **kpd=1, Akp=.12, a focused wavegroup and a random-wave
 case**, with no dt study or solver parallelization project. New fields and
@@ -19,9 +25,10 @@ processing remain remote. Published GL code and all historical runs are unchange
   not a successful two-step propagation test or proof of instability.
 - Native t=0 kinematics surface phi does not match the prescribed surface
   potential. Initial eta/psi must come from EP; kinematics begins at t=.2 s.
-- Random-wave physical normalization remains pending the user question.
-  Absorbing-zone evolution and usable record duration are not yet validated.
-  No production OW3D campaign or random nonlinear initial state was launched.
+- Random-wave normalization has been resolved as phase-only randomization.
+  Independent second-order random fields are prepared for periodic solver
+  import. Their propagation and boundary configuration have not been tested.
+  No production OW3D or HOS simulation has been launched.
 
 ## Wavegroup input
 
@@ -105,7 +112,7 @@ therefore skips the t=0 kinematics record. Later top-level phi/EP parity
 still requires a completed advance; the timed smoke attempt did not supply
 one. The default two-step audit retains that requirement.
 
-## Random-wave design still pending a physical definition
+## Earlier random-wave boundary prototype (not selected)
 
 The prototype uses a fixed seed 20260925 and the same modal-amplitude shape,
 with independent random phases. It is a **finite random field with an interior
@@ -120,11 +127,10 @@ x/lambda=10--40, y/lambda=5--15, the relative eta change from the untapered
 prototype is 1.113e-4. Wall eta / core RMS is 3.690e-4; wall psi / (g*sigma/wp)
 is about .0062. These checks concern initial fields only.
 
-The pending user choice is whether Akp=.12 means **kp*Hs/2=.12**
-(Hs=8.602150538 m, sigma_eta=2.150537634 m), or unchanged wavegroup modal
-amplitudes with randomized phases and a separately reported actual Hs.
-No physical normalization was chosen silently. Nonlinear random initial
-conditions, absorbing-zone input and an accepted duration remain unfinished.
+The user subsequently selected unchanged wavegroup modal amplitudes with
+randomized phases. The Hs=8.602150538 m alternative was not selected.
+The resulting untapered random fields have linear Hs=0.4076151725 m and
+kp*Hs/2=.005686231656. They are separate from this earlier prototype.
 
 ## Resources and provenance
 
@@ -162,8 +168,8 @@ All new numerical execution and field processing occurred remotely. Only
 small logs/status metrics were read through SSH; no new raw fields were
 downloaded. No active production OW3D process is left by this design task.
 
-Next steps are to settle the random normalization, complete its boundary
-configuration, and determine whether the actual serial OW3D first advance
-finishes within an acceptable time. The two-step smoke has not passed, so
+Next steps are to evaluate the proposed HOS-Ocean route with the prepared
+periodic input pairs, and determine whether the actual serial OW3D first
+advance finishes within an acceptable time if it is retained. The two-step smoke has not passed, so
 the present input package is not labelled propagation-validated or ready
 for an unattended large campaign.

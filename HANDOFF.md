@@ -1,5 +1,12 @@
 # 初始化交接 — 2026-09-25
 
+最新：用户已选“保持波组一阶谱幅值，只随机化相位”。四相位随机初始eta/psi
+已在远程 `random-phase-only-v1/` 生成，未加窗/重定标；线性Hs=0.407615 m，
+kp*Hs/2=0.00568623，Akp=.12是潜在聚焦陡度。旧随机边缘衰减原型不采用。
+同一初始场适合评估HOS-Ocean周期演化；HOS尚未安装/运行或计时验证。
+见 `research/directional_wave_data/HOS_OCEAN_ASSESSMENT.md`。OW3D按已观测
+启动峰值留25%余量，8/16任务约234/468 GiB；不是已验证的并发吞吐量。
+
 最新范围和实际设计见 `research/directional_wave_data/COMPACT_OW3D_DESIGN.md`，
 优先于下文旧队列：只做kpd=1、Akp=.12的波组与随机波，不做dt对照。
 远程独立克隆已建立在 `/home/lxy/green-laplace-unidirectional-time-series`；
