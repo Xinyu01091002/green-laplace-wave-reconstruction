@@ -10,6 +10,12 @@ Remote project: `/home/lxy/green-laplace-unidirectional-time-series`.
 
 ## OW3D background campaign
 
+Launch verified: **2026-09-25 21:37:46 UTC**. Sixteen actual `ow3d` processes
+were observed running, and the separate mail watcher was observed waiting.
+Execution source commit: `1d4edd7d255b4ad7c50d2681db7ec9b8ee2450f5`.
+This launch observation is not completion or propagation validation; consult
+the live status files below. Later handoff-only commits do not change the run.
+
 The user explicitly authorized sixteen independent OW3D jobs and completion
 email, while HOS work continues in this project. Sixteen means **one focused
 wavegroup plus three random realizations, each at four global phases**, not
