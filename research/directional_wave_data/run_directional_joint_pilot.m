@@ -1,10 +1,16 @@
-function run_directional_joint_pilot()
+function run_directional_joint_pilot(base,outputName,probeIndex)
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));addpath(root);setup_green_laplace;
 addpath(fullfile(root,'research','unidirectional_time_series'));
-base=fullfile(root,'results','directional_joint_input');
+if nargin<1,base=fullfile(root,'results','directional_joint_input');end
+if nargin<2,outputName='verified_convention';end
+if nargin<3,probeIndex=1;end
 d=load(fullfile(base,'extracted.mat'));m=d.metadata;t=d.t;tr=t-t(1);N=numel(t);dt=m.dt;
+assert(probeIndex<=size(d.probe1,2));
+d.probe1=d.probe1(:,probeIndex);d.eta2=d.eta2(:,probeIndex);d.psi2=d.psi2(:,probeIndex);
+if isfield(m,'probes'),m.probe=m.probes(probeIndex,:);end
+m.selected_probe_index=probeIndex;d.metadata=m;
 convention=jsondecode(fileread(fullfile(base,'initial_convention.json')));
-out=fullfile(base,'verified_convention');if ~isfolder(out),mkdir(out);end
+out=fullfile(base,outputName);if ~isfolder(out),mkdir(out);end
 g=m.g;h=m.h;kp=m.kp;wp=sqrt(g*kp*tanh(kp*h));Tp=2*pi/wp;
 realInput=real(d.probe1);F=fft(realInput)/N;allbins=(1:floor((N-1)/2))';
 allw=2*pi*allbins/(N*dt);allk=zeros(size(allw));

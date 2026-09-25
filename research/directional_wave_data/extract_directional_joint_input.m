@@ -1,9 +1,12 @@
-function output=extract_directional_joint_input(dataRoot)
+function output=extract_directional_joint_input(dataRoot,probeOffsets,outputName)
 % Read-only directional OW3D pilot; future fields supply only probe eta1.
+if nargin<2,probeOffsets=[0,0];end
+if nargin<3,outputName='directional_joint_input';end
+assert(size(probeOffsets,2)==2 && all(isfinite(probeOffsets),'all'));
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));
-out=fullfile(root,'results','directional_joint_input');if ~isfolder(out),mkdir(out);end
+out=fullfile(root,'results',outputName);if ~isfolder(out),mkdir(out);end
 steps=(0:10:900)';phases=[0,90,180,270];N=numel(steps);
-probe1=complex(zeros(N,1));eta2=zeros(N,1);psi2=eta2;
+probe1=complex(zeros(N,size(probeOffsets,1)));eta2=zeros(size(probe1));psi2=eta2;
 files=cell(N*4,1);hashes=files;counter=0;
 for it=1:N
     first=[];second=[];potential=[];
@@ -22,7 +25,13 @@ for it=1:N
             ix=find(x>=-1e-7 & x<grid(1)-dx/2);iy=find(y>=-1e-7 & y<grid(2)-dy/2);
             assert(numel(ix)==grid(4)-1 && numel(iy)==grid(5)-1);
             x=x(ix);y=y(iy);nx=numel(x);ny=numel(y);
-            [~,px]=min(abs(x-grid(1)/2));[~,py]=min(abs(y-grid(2)/2));
+            requested=[grid(1)/2,grid(2)/2]+probeOffsets*(2*pi/.0279);
+            px=zeros(size(probeOffsets,1),1);py=px;
+            for ip=1:numel(px)
+                [~,px(ip)]=min(abs(x-requested(ip,1)));[~,py(ip)]=min(abs(y-requested(ip,2)));
+                assert(abs(x(px(ip))-requested(ip,1))<=dx/2+1e-6 && abs(y(py(ip))-requested(ip,2))<=dy/2+1e-6);
+            end
+            probeIndices=sub2ind([ny,nx],py,px);
             [kx,ky]=meshgrid(2*pi/grid(1)*[0:nx/2-1,-nx/2:-1], ...
                 2*pi/grid(2)*[0:ny/2-1,-ny/2:-1]);
             forward=kx>0;
@@ -36,8 +45,8 @@ for it=1:N
         counter=counter+1;files{counter}=file;hashes{counter}=hash_file(file);
     end
     spectrum=fft2(first);spectrum(~forward)=0;
-    f=ifft2(spectrum);probe1(it)=f(py,px);
-    eta2(it)=second(py,px);psi2(it)=potential(py,px);
+    f=ifft2(spectrum);probe1(it,:)=reshape(f(probeIndices),1,[]);
+    eta2(it,:)=reshape(second(probeIndices),1,[]);psi2(it,:)=reshape(potential(probeIndices),1,[]);
     if it==1
         initialSpectrum=spectrum/(nx*ny);
         initialBoundaryRatio=norm([f(1,:),f(end,:),f(:,1).',f(:,end).'])/norm(f(:));
@@ -46,7 +55,9 @@ for it=1:N
 end
 g=parameters(7);h=parameters(3);kp=.0279;t=steps*parameters(6);
 metadata=struct('h',h,'g',g,'kp',kp,'kph',h*kp,'alpha','not certified from historical generator', ...
-    'spread_label_degrees',25,'Akp',.02,'dt',10*parameters(6),'probe',[x(px),y(py)], ...
+    'spread_label_degrees',25,'Akp',.02,'dt',10*parameters(6),'probe',[x(px(1)),y(py(1))], ...
+    'probes',[x(px),y(py)],'probe_offsets_wavelengths',probeOffsets, ...
+    'requested_probes',requested, ...
     'grid',[ny,nx],'domain',[parameters(1),parameters(2)],'initial_boundary_ratio',initialBoundaryRatio, ...
     'first_input','positive-kx projection of four-phase first sector, not exact eta11 certification', ...
     'snapshot_reference','raw second phase sector at probe; no temporal filtering');
