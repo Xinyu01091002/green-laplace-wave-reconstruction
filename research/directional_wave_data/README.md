@@ -89,6 +89,7 @@ Direction information must come from the declared directional input/spatial
 spectrum or adequate observations; the single-point eta1(t) workflow cannot
 simply assume every temporal frequency has a unique propagation direction.
 The user subsequently accepted knowledge of the initial linear spatial
-wave-number spectrum. See [INPUT_ASSUMPTION.md](INPUT_ASSUMPTION.md) for the
-complex-spectrum forward baseline and its distinction from using only a
-directional energy spectrum as a prior for an observed eta1(t).
+wave-number spectrum together with the observed probe eta1(t). See
+[INPUT_ASSUMPTION.md](INPUT_ASSUMPTION.md) for their distinct roles and the
+directional allocation assumption still to be established. Agreement of a
+linearly propagated initial spectrum with the observed record is not a gate.

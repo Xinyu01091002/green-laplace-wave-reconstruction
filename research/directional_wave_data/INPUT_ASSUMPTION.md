@@ -1,42 +1,54 @@
-# Accepted directional information: initial linear spatial spectrum
+# Joint input: initial linear spatial spectrum and observed eta1(t)
 
 The user permits directional assumptions and proposes knowing the initial
-linear spatial wave-number spectrum. This supplies the directional input for
-the next study, without renaming the project or launching new OW3D runs.
+linear spatial wave-number spectrum together with the probe's first-order
+time series. The user clarified that linear propagation of the initial
+spectrum need not reproduce the probe record at larger steepness. Matching
+that linear prediction is therefore not a prerequisite for this research.
+No project rename or new OW3D run is implied.
 
-## Deterministic baseline interpretation
+## Roles of the two inputs
 
-For the first forward baseline, explicitly interpret this as the complex
-linear spectrum at a declared initial time: wave vectors (kx,ky), complex
+When available, retain the complex linear spectrum at a declared initial
+time: wave vectors (kx,ky), complex
 amplitudes/phases, water depth, gravity, spatial origin and time origin.
 One-sided analytic and two-sided real-field FFT normalizations must be stated.
 The total nonlinear OceanWave3D.init field is not automatically this linear
 spectrum; its true first-order component must be sourced independently or
 labelled as a phase-sector approximation.
 
-The linear dispersion relation determines omega from |k|. Linear propagation
-of each declared parent then produces a predicted first-order record at the
-probe. The directional GL kernels retain pair/triple wave-vector sums and
-dot products; temporal output frequencies are the corresponding signed sums
-of the parent frequencies. No averaged propagation angle replaces the actual
-parent directions. High-order fields are generated only from those parents.
+The initial spatial spectrum supplies a prior on directional structure and,
+if complex coefficients are available, relative directional phases. The
+observed eta1(t) supplies the actual local temporal amplitude and phase after
+propagation. It is not replaced by the initial spectrum's linearly propagated
+probe signal. The two inputs have distinct roles rather than competing as
+alternative predictions of the same first-order record.
 
-First compare this predicted first-order time record to the OW3D first phase
-sector at the same location and saved times, without fitted shifts or scaling.
-This distinguishes disagreement in assumed linear parent evolution from a
-higher-order GL reconstruction error. The forward baseline is not a nonlinear
-evolution solver. The local 4 s snapshots support same-time sample comparisons,
-not a claim of resolved high-harmonic temporal FFT data.
+Linear propagation of the initial spectrum may be retained as an optional
+diagnostic or synthetic implementation fixture. Its disagreement with the
+observed probe does not reject the joint-input reconstruction and must not
+trigger fitted time shifts or use of high-order references to change the
+input. This study is not a nonlinear evolution solver.
 
 ## Relation to the eta1(t)-driven objective
 
-Knowing a complete initial complex spectrum permits a deterministic forward
-baseline. If the intended input remains the *observed* eta1(t), and the initial
-spectrum is used only to supply directional structure, an additional model
-is needed to distribute each observed temporal component among its directions.
-A fixed directional structure could be a declared assumption, but it has not
-been derived, implemented or validated by accepting the initial spectrum.
-It must not be silently replaced by a unique angle for each frequency.
+The primary goal is now the observed eta1(t) plus initial directional structure.
+An explicit model is still needed to distribute each observed temporal
+component among its directions. A first candidate is to retain the initial
+relative directional structure over the main-group window, while enforcing
+that the sum of directional complex amplitudes at the probe reproduces the
+observed temporal coefficient. This assumption has not yet been derived,
+implemented or validated. It is not an assertion that nonlinear directional
+redistribution is absent, nor a unique inversion from the available inputs.
+
+Directional energy weights are not automatically complex amplitude weights.
+Spatial phase at the probe and the common time origin must be included.
+Frequency-to-wave-number association also needs a declared convention; no
+average angle or output-frequency linear-dispersion substitution may replace
+true vector interactions. If initial directional components nearly cancel
+at the probe, dividing by their summed complex amplitude can be ill-conditioned.
+That condition must be audited rather than hidden with an arbitrary floor.
+No model coefficient may be selected against an OW3D high-order reference.
 
 If only the initial energy spectrum S(kx,ky) is known, realization phases are
 still missing. This is a distinct, weaker assumption and does not uniquely
@@ -45,10 +57,14 @@ determine a deterministic bound-wave time record.
 ## Next bounded comparison
 
 Use the existing small-amplitude directional kh=1, spread=25, Akp=0.02 family.
-Identify and verify its actual first-order initial spectrum and conventions;
-audit strict-forward support against the released executor's domain. Establish
-linear probe-record consistency, then eta22 and true surface psi22 spatial/
-temporal parity, and compare at OW3D's saved times. Preserve the larger-steepness
-and crossing-wave cases for subsequent checks. No directional eta20 zero-
+Identify and verify its initial first-order spectrum and the observed local
+first-order record; audit strict-forward support against the released domain.
+Define and validate the directional allocation model and its exact recovery
+of the supplied eta1(t), then test eta22 and true surface psi22. A known-parent
+synthetic case can check vector-kernel implementation independently. The local
+4 s snapshots provide spatial fields but are not automatically an adequately
+resolved temporal input; probe-record sampling must be checked separately.
+Preserve larger-steepness and crossing-wave cases for subsequent checks.
+No directional eta20 zero-
 frequency projection is inherited from the unidirectional trial: zero temporal
 frequency can have a nonzero spatial difference wave vector.
