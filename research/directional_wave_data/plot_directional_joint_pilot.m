@@ -13,11 +13,13 @@ for variable=1:2
     nexttile;plot(d.t,ref,'ko','MarkerSize',5,'LineWidth',1.2);hold on;
     for j=1:4,plot(d.t,pred(:,j),styles{j},'Color',colors(j,:),'LineWidth',1.3);end
     xlim(d.report.display_limits_s);grid on;ylabel(label);
-    legend('OW3D samples','Joint input: 15 deg','Joint input: 7.5 deg','Initial only','Single direction', ...
+    legend(["OW3D samples","Joint input: "+string(d.report.angle_widths_degrees(1))+" deg", ...
+        "Joint input: "+string(d.report.angle_widths_degrees(2))+" deg","Initial only","Single direction"], ...
         'Location','southoutside','Orientation','horizontal','NumColumns',3);
 end
 xlabel('Simulation elapsed time (s); lines connect the saved sample times');
-sgtitle('Directional joint-input trial: k_p h = 1, spread label 25 deg, Ak_p = 0.02 | 4 s samples');
+sgtitle(sprintf('Directional joint input: k_p h=%.3g, spread label %g deg, Ak_p=%.3g | x=%.1f, y=%.1f m', ...
+    d.report.metadata.kph,d.report.metadata.spread_label_degrees,d.report.metadata.Akp,d.report.metadata.probe));
 exportgraphics(f,fullfile(out,'joint_input_comparison.png'),'Resolution',180);
 exportgraphics(f,fullfile(out,'joint_input_comparison.pdf'),'ContentType','vector');close(f);
 end

@@ -1,17 +1,19 @@
-function output=extract_directional_joint_input(dataRoot,probeOffsets,outputName)
+function output=extract_directional_joint_input(dataRoot,probeOffsets,outputName,cfg)
 % Read-only directional OW3D pilot; future fields supply only probe eta1.
 if nargin<2,probeOffsets=[0,0];end
 if nargin<3,outputName='directional_joint_input';end
+if nargin<4,cfg=struct('kph',1,'spread',25,'Akp',.02,'lastStep',900);end
 assert(size(probeOffsets,2)==2 && all(isfinite(probeOffsets),'all'));
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));
 out=fullfile(root,'results',outputName);if ~isfolder(out),mkdir(out);end
-steps=(0:10:900)';phases=[0,90,180,270];N=numel(steps);
+steps=(0:10:cfg.lastStep)';phases=[0,90,180,270];N=numel(steps);
 probe1=complex(zeros(N,size(probeOffsets,1)));eta2=zeros(size(probe1));psi2=eta2;
+eta0=eta2;
 files=cell(N*4,1);hashes=files;counter=0;
 for it=1:N
-    first=[];second=[];potential=[];
+    first=[];second=[];potential=[];zeroPhase=[];firstPotential=[];
     for p=1:4
-        folder=fullfile(dataRoot,sprintf('kd1.0_spread_25_Akp_0.02_phi_shift_%d',phases(p)));
+        folder=fullfile(dataRoot,sprintf('kd%.1f_spread_%d_Akp_%.2f_phi_shift_%d',cfg.kph,cfg.spread,cfg.Akp,phases(p)));
         if it==1
             lines=splitlines(string(fileread(fullfile(folder,'OceanWave3D.inp'))));
             grid=sscanf(lines(3),'%f');clock=sscanf(lines(5),'%f');grav=sscanf(lines(6),'%f');
@@ -38,30 +40,38 @@ for it=1:N
         end
         assert(all(isfinite([e(:);phi(:)])));
         e=e(ix,iy).';phi=phi(ix,iy).';
-        if p==1,first=complex(zeros(ny,nx));second=zeros(ny,nx);potential=second;end
+        if p==1
+            first=complex(zeros(ny,nx));second=zeros(ny,nx);potential=second;zeroPhase=second;
+            if it==1,firstPotential=first;end
+        end
         first=first+.5*exp(-1i*deg2rad(phases(p)))*e;
         second=second+(-1)^(p-1)*e/4;
         potential=potential+(-1)^(p-1)*phi/4;
+        zeroPhase=zeroPhase+e/4;
+        if it==1,firstPotential=firstPotential+.5*exp(-1i*deg2rad(phases(p)))*phi;end
         counter=counter+1;files{counter}=file;hashes{counter}=hash_file(file);
     end
     spectrum=fft2(first);spectrum(~forward)=0;
     f=ifft2(spectrum);probe1(it,:)=reshape(f(probeIndices),1,[]);
     eta2(it,:)=reshape(second(probeIndices),1,[]);psi2(it,:)=reshape(potential(probeIndices),1,[]);
+    eta0(it,:)=reshape(zeroPhase(probeIndices),1,[]);
     if it==1
         initialSpectrum=spectrum/(nx*ny);
+        initialPsiSpectrum=fft2(firstPotential)/(nx*ny);initialPsiSpectrum(~forward)=0;
         initialBoundaryRatio=norm([f(1,:),f(end,:),f(:,1).',f(:,end).'])/norm(f(:));
     end
     if mod(it-1,15)==0,fprintf('Read directional snapshot %d/%d\n',it,N);end
 end
 g=parameters(7);h=parameters(3);kp=.0279;t=steps*parameters(6);
 metadata=struct('h',h,'g',g,'kp',kp,'kph',h*kp,'alpha','not certified from historical generator', ...
-    'spread_label_degrees',25,'Akp',.02,'dt',10*parameters(6),'probe',[x(px(1)),y(py(1))], ...
+    'spread_label_degrees',cfg.spread,'Akp',cfg.Akp,'dt',10*parameters(6),'probe',[x(px(1)),y(py(1))], ...
     'probes',[x(px),y(py)],'probe_offsets_wavelengths',probeOffsets, ...
     'requested_probes',requested, ...
     'grid',[ny,nx],'domain',[parameters(1),parameters(2)],'initial_boundary_ratio',initialBoundaryRatio, ...
     'first_input','positive-kx projection of four-phase first sector, not exact eta11 certification', ...
     'snapshot_reference','raw second phase sector at probe; no temporal filtering');
-output=fullfile(out,'extracted.mat');save(output,'initialSpectrum','kx','ky','probe1','eta2','psi2','t','metadata','-v7.3');
+assert(abs(h*kp-cfg.kph)<1e-5);
+output=fullfile(out,'extracted.mat');save(output,'initialSpectrum','initialPsiSpectrum','kx','ky','probe1','eta2','psi2','eta0','t','metadata','-v7.3');
 writetable(table(files,hashes,'VariableNames',{'source','sha256'}),fullfile(out,'source_files.csv'));
 disp(metadata);
 end

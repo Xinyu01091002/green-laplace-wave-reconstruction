@@ -1,12 +1,16 @@
-function run_directional_joint_pilot(base,outputName,probeIndex)
+function run_directional_joint_pilot(base,outputName,probeIndex,include20,angleWidths)
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));addpath(root);setup_green_laplace;
 addpath(fullfile(root,'research','unidirectional_time_series'));
 if nargin<1,base=fullfile(root,'results','directional_joint_input');end
 if nargin<2,outputName='verified_convention';end
 if nargin<3,probeIndex=1;end
+if nargin<4,include20=false;end
+if nargin<5,angleWidths=[15,7.5];end
+assert(numel(angleWidths)==2 && all(mod(180,angleWidths)==0));
 d=load(fullfile(base,'extracted.mat'));m=d.metadata;t=d.t;tr=t-t(1);N=numel(t);dt=m.dt;
 assert(probeIndex<=size(d.probe1,2));
 d.probe1=d.probe1(:,probeIndex);d.eta2=d.eta2(:,probeIndex);d.psi2=d.psi2(:,probeIndex);
+if isfield(d,'eta0'),d.eta0=d.eta0(:,probeIndex);end
 if isfield(m,'probes'),m.probe=m.probes(probeIndex,:);end
 m.selected_probe_index=probeIndex;d.metadata=m;
 convention=jsondecode(fileread(fullfile(base,'initial_convention.json')));
@@ -21,6 +25,8 @@ radial=hypot(d.kx,d.ky);frequency=sqrt(g*radial.*tanh(radial*h));
 initialEligible=d.kx>0 & h*radial>=.3 & frequency<pi/dt;
 initialMass=abs(d.initialSpectrum).^2;
 initialRetained=sum(initialMass(initialEligible))/sum(initialMass,'all');
+spectralEnergy=initialMass/sum(initialMass,'all');meanOmega=sum(frequency.*spectralEnergy,'all');
+relativeBandwidth=sqrt(sum((frequency-meanOmega).^2.*spectralEnergy,'all'))/meanOmega;
 ids=find(initialEligible);kx0=d.kx(ids);ky0=d.ky(ids);w0=frequency(ids);
 A0=d.initialSpectrum(ids).*exp(1i*(kx0*m.probe(1)+ky0*m.probe(2)));
 if convention.stored_positive_k_has_positive_time
@@ -32,7 +38,6 @@ if convention.stored_positive_k_has_positive_time
 end
 angles=atan2(ky0,kx0)*180/pi;
 eta=zeros(N,4);psi=eta;allocation=cell(1,2);condition=cell(1,2);predictedInput=zeros(N,2);
-angleWidths=[15,7.5];
 for resolution=1:2
     width=angleWidths(resolution);centers=(-90+width/2:width:90-width/2)';
     group=1+floor((angles+90)/width);assert(all(group>=1 & group<=numel(centers)));
@@ -53,19 +58,21 @@ for resolution=1:2
     [KX,TH]=ndgrid(k,deg2rad(centers));KY=KX.*sin(TH);KX=KX.*cos(TH);
     OM=repmat(w,1,numel(centers));
     fprintf('Directional width %.1f deg, parents %d, max conditioning %.4g\n',width,numel(joint),condition{resolution}.max);
-    [e,p]=gl_directional_sum_time(joint(:),OM(:),KX(:),KY(:),g,h,kp,tr,8);
+    pairBins=repmat(bins,1,numel(centers));
+    [e,p]=gl_directional_sum_time(joint(:),OM(:),KX(:),KY(:),g,h,kp,tr,8,pairBins(:));
     eta(:,resolution)=real(e);psi(:,resolution)=real(p);
     if resolution==1
-        [e,p]=gl_directional_sum_time(prior(:),OM(:),KX(:),KY(:),g,h,kp,tr,8);
+        [e,p]=gl_directional_sum_time(prior(:),OM(:),KX(:),KY(:),g,h,kp,tr,8,pairBins(:));
         eta(:,3)=real(e);psi(:,3)=real(p);
     end
     allocation{resolution}=struct('angles_degrees',centers,'prior',prior,'joint',joint, ...
         'kx',KX,'ky',KY,'omega',OM);
 end
 % Declared direction-blind control; not selected to improve an error metric.
-[e,p]=gl_directional_sum_time(observed,w,k,zeros(size(k)),g,h,kp,tr,8);
+[e,p]=gl_directional_sum_time(observed,w,k,zeros(size(k)),g,h,kp,tr,8,bins);
 eta(:,4)=real(e);psi(:,4)=real(p);
-names=["Joint input, 15 deg","Joint input, 7.5 deg","Initial spectrum only","Eta1 only, all directions zero"];
+names=["Joint input, "+string(angleWidths(1))+" deg","Joint input, "+string(angleWidths(2))+" deg", ...
+    "Initial spectrum only","Eta1 only, all directions zero"];
 [~,peak]=max(abs(exp(-1i*tr*w.')*observed));limits=t(peak)+[-2,2]*Tp;
 focus=t>=limits(1)&t<=limits(2);
 rows=cell(0,6);
@@ -85,6 +92,7 @@ writetable(metrics,fullfile(out,'metrics.csv'));
 report=struct('metadata',m,'initial_convention',convention, ...
     'angle_widths_degrees',angleWidths,'temporal_bins',bins.', ...
     'initial_spectrum_domain_retained_energy',initialRetained, ...
+    'initial_frequency_std_over_mean',relativeBandwidth, ...
     'temporal_input_retained_energy',sum(abs(F(bins+1)).^2)/sum(abs(F(allbins+1)).^2), ...
     'input_projection_relative_L2',norm(input-realInput)/norm(realInput), ...
     'linear_prior_probe_relative_L2',norm(predictedInput(:,1)-input)/norm(input), ...
@@ -92,9 +100,35 @@ report=struct('metadata',m,'initial_convention',convention, ...
     'angular_refinement_psi22_relative_L2',norm(psi(focus,2)-psi(focus,1))/norm(psi(focus,2)), ...
     'conditioning',{condition},'display_limits_s',limits, ...
     'reference_interpolated',false,'output_sums_above_nyquist','evaluated at saved times, not claimed temporally resolved', ...
+    'main_window_complete',limits(1)>=t(1)&&limits(2)<=t(end), ...
     'initial_first_order_exact',false,'high_order_reference_used_for_allocation',false);
 save(fullfile(out,'joint_pilot.mat'),'report','metrics','allocation','t','realInput','input', ...
     'predictedInput','eta','psi','names','d','focus','-v7.3');
 fid=fopen(fullfile(out,'report.json'),'w');fprintf(fid,'%s',jsonencode(report));fclose(fid);
 plot_directional_joint_pilot(out);disp(report);disp(metrics);
+if include20
+    alloc=allocation{2};nangles=numel(alloc.angles_degrees);ib=repmat(bins,1,nangles);
+    eta20raw=zeros(N,3);audits20=cell(1,3);ranks=[6,12,16];
+    for j=1:3
+        [eta20raw(:,j),audits20{j}]=gl_directional_difference_time(alloc.joint(:),alloc.omega(:), ...
+            alloc.kx(:),alloc.ky(:),h,tr,ranks(j),ib(:));
+    end
+    om=2*pi*[0:ceil(N/2)-1,-floor(N/2):-1]'/(N*dt);rows20=cell(0,6);
+    varying=cell(1,2);reference20=cell(1,2);ratios=[.5,3];
+    for band=1:2
+        mask=abs(om)>0 & abs(om)<ratios(band)*wp;
+        varying{band}=real(ifft(fft(eta20raw).*mask));reference20{band}=real(ifft(fft(d.eta0).*mask));
+        for region=1:2
+            use=true(N,1);label="full";if region==2,use=focus;label="main_group";end
+            for j=1:3
+                r=reference20{band}(use);v=varying{band}(use,j);
+                rows20(end+1,:)={ranks(j),ratios(band),nnz(mask),label,norm(v-r)/max(norm(r),realmin),max(abs(v-r))/max(max(abs(r)),realmin)}; %#ok<AGROW>
+            end
+        end
+    end
+    metrics20=cell2table(rows20,'VariableNames',{'rank','cutoff_ratio','nonzero_bins','window','relative_L2','relative_Linf'});
+    writetable(metrics20,fullfile(out,'eta20_metrics.csv'));
+    save(fullfile(out,'eta20_fields.mat'),'t','eta20raw','audits20','varying','reference20','ratios','focus','report','d','metrics20','-v7.3');
+    plot_directional_eta20(out);disp(metrics20);
+end
 end
