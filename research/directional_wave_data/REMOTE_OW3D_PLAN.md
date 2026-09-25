@@ -7,7 +7,13 @@ run launched. Previous Akp=0.12 results are committed and pushed at
 interfaces or OW3D equations. All new simulation data and MATLAB processing
 will remain remote; there is no bulk-download or automatic deletion step.
 
-## Native eta/phi output: no kinematics or source patch required
+The current proposal uses native **format 20**, a limited time window and
+a narrow horizontal strip. The user accepts 20 samples per third-harmonic
+period, interpreted here as the period at **3fp**; output every **0.2 s**
+meets that criterion for the two audited cases. Full-domain EP remains a
+sparse diagnostic and a documented alternative, not the production output.
+
+## Native EP alternative and local kinematics
 
 The documented input line is `StoreDataOnOff formattype`. Use a positive
 integer stride and `formattype=1`, for example:
@@ -31,16 +37,27 @@ EP covers the full horizontal surface, including ghost nodes in this
 configuration; it is not a native point-probe file. MATLAB can extract
 arbitrary on-grid probe records afterwards, remotely.
 
-The earlier suggestion that eta/phi-only output requires a new Fortran
-writer was incorrect: it conflated selecting variables with selecting
-spatial probes. Neither a compiler nor a solver modification is required
-for this plan. A probe-only storage optimization is not part of this task.
+Native format 20 instead permits `xbeg xend xstride ybeg yend ystride
+tbeg tend tstride`. It writes selected horizontal nodes and time levels
+to one appended file per selection. Its stock Cartesian layout contains
+three surface arrays (eta and its two gradients), volume phi, three
+velocities and nine velocity gradients at all Nz levels. There is no
+vertical-subset or eta/phi-only switch in this format's audited reader.
+The user now explicitly proposes using this format for local output;
+retain the native file and extract only eta and top-level phi for analysis.
+Confirm top-level phi agrees with EP surface P at matching times in the
+smoke run, including any effects of end-of-step filtering.
+
+Neither output choice requires a source patch or compiler. Format 22 is
+not the selected option: its off-grid interpolation is unimplemented for
+this two-horizontal-dimensional setup in the audited source.
 
 Evidence read on 2026-09-25:
 
 - [Official annotated input](https://github.com/apengsigkarup/OceanWave3D-Fortran90/blob/master/examples/inputfiles/OceanWave3D.inp), data-storage line.
 - [Official input reader](https://github.com/apengsigkarup/OceanWave3D-Fortran90/blob/master/src/IO/ReadInputFileParameters.f90), DATA STORAGE branch.
 - [Official EP writer](https://github.com/apengsigkarup/OceanWave3D-Fortran90/blob/master/src/IO/StoreData.f90).
+- [Official kinematics writer](https://github.com/apengsigkarup/OceanWave3D-Fortran90/blob/master/src/IO/StoreKinematicData.f90).
 - Read-only local source: `C:/Research/OW3D_benchmark/OceanWave3D-Fortran90-master/`.
   Local `StoreData.f90` SHA-256 is
   `2bca0a3ee2cd6f44fe6e65f6af4b10e79fda41fba33771c6bcf3b06b1e953514`;
@@ -99,12 +116,17 @@ both cases. Spatially separated values at the saved instants remain usable,
 but a densely interpolated curve does not recover the missing temporal
 information. This particularly limits temporal separation of higher harmonics.
 
-Recommend `dt=0.1 s`, EP stride 1, for the first fine run. This gives about
-20--21 samples per period at five times the tabulated frequency. At
-`dt_out=0.2 s`, there are still about 17--18 samples per period at three
-times that frequency, making 0.2 s a useful coarser comparison. Neither is
-certified sufficient before testing. Integration step and saved sampling
-must be distinguished: interpolation of a 0.2 s run is not a 0.1 s result.
+The user's 20-point target at 3fp gives
+`dt_out <= Tp/(3*20)`: 0.22937 s at kh=1 and 0.20018 s at kh=5.
+Output every 0.2 s therefore gives 22.94 and 20.02 samples respectively.
+This is a peak-frequency criterion. At three times the tabulated 99.99%
+frequency it gives only 17.77 and 16.79 samples; a stricter requirement
+covering that band would instead need about 0.15 s. No universal 20-point
+claim is made for broad spectra or later nonlinear spectral broadening.
+Use 0.2 s as the first output choice and check the actual spectrum.
+Integration and output are separate: a 0.1 s integrator can save every two
+steps, and a 0.2 s integrator every step. Compare integration accuracy on
+their common saved times; interpolating a coarse record adds no resolution.
 
 For the existing strong-case EP dimensions 2051 by 515 (including ghosts),
 one uncompressed EP file is `32*Nx*Ny+32 = 33800512` bytes: coordinates
@@ -118,14 +140,49 @@ are repeated in every file. For 0--480 s inclusive:
 | 0.1 | 4801 | 604.53 |
 | 0.05 | 9601 | 1208.93 |
 
-These estimates exclude restart files, logs and processed products and
-assume no compression. Four 0.1 s phases plus one full 0.2 s control phase
-use 680.11 GiB, leaving about 165 GiB at the audited free-space level.
-Two complete four-phase batches at 0.1 and 0.2 s would need 906.85 GiB
-before overhead and do not fit. Do not start a full depth/bandwidth sweep
-or duplicate the full EP archive into a second format. Recheck free space
-and actual pilot I/O cost before launch; reduced output cadence is an
-explicit future choice, never silently substituted.
+These full-domain figures are alternatives for comparison, not the revised
+storage request. The current center and all four qualified lateral probes
+have the same old sampled envelope-peak time, 240 s, with the established
+main-group display window 212.476--267.524 s. Propose **120--360 s** output
+to preserve buffers for the Fourier operations and eta20. Stop integration
+at 360 s instead of 480 s. Integration must still begin from the original
+initial state; starting output at 120 s does not authorize restarting the
+physics there without a valid checkpoint.
+
+For native kinematics, Nz=9 plus one bottom ghost gives 10 saved vertical
+levels. With 8-byte reals and 4-byte record markers, each time sample uses
+`8*(3+13*10)*Nx_out*Ny_out + 16*8` bytes. All native extra fields are
+included in these estimates. At 0.2 s, 120--360 s gives 1201 samples:
+
+| Horizontal selection | Nodes | Four-phase kinematics (GiB) |
+| --- | ---: | ---: |
+| Complete x, 9 near-center y rows | 2049 x 9 | 87.790 |
+| Local patch, approximately +/-2 peak wavelengths along x | 81 x 9 | 3.471 |
+| Nine probes on the center x column | 1 x 9 | 0.0434 |
+
+Prefer the complete-x strip for the first reference: existing first-sector
+extraction applies a positive-kx spatial projection. A full x line at each
+selected y preserves that operation; a short x patch or a few probes do
+not. The same-x off-centerline nodes are y indices 253--261, covering
+y=4429.6875--4570.3125 m. No y Fourier decomposition is required for this
+particular projection. The full two-dimensional *initial* spectrum must
+still be retained for the joint directional input, independent of the
+reduced later output. The smaller patch can follow after a separately
+validated local temporal/phase separator; it is not a drop-in replacement.
+
+`check_strip_projection.m` checked the existing four-phase fields at 120,
+240 and 360 s. Strip versus full-field positive-kx projection differed by
+at most 3.395e-16 relative L2. At the five saved probes, maximum absolute
+difference was 8.90e-16 m; relative errors at the extremely small tail
+signals reached 2.24e-12. These are floating-point extraction checks, not
+new physical-accuracy or kinematics-binary validation results.
+
+Sparse full EP every 60 s from 0--360 s adds about 0.882 GiB for four
+phases, so the preferred total is about **88.7 GiB**, before small logs,
+checkpoints and extracted products. Kinematics still computes velocity
+derivatives over the full numerical domain before writing the subset;
+this storage saving is not a measured CPU saving. Time-window restriction
+avoids that output work outside the window. Measure its overhead in the pilot.
 
 ## Bounded first campaign and validation
 
@@ -135,33 +192,54 @@ explicit future choice, never silently substituted.
    boundaries and hashes, and freeze one input manifest. A previous output
    snapshot is not a substitute for an initial first-order spectrum.
 2. Run only a short native-output smoke/pilot first, with a new run ID:
-   check eta/psi record layout, no `Kinematics*` output, initial/final
-   time and step indexing, finite fields, CPU/RSS and output cost. The
-   stock path rewrites an ASCII restart every EP dump, so disk capacity
-   alone does not predict its throughput.
-3. Compare one fixed phase at integration/output 0.2 and 0.1 s over the
-   original time window. Then, if stable and within the storage budget,
-   complete phases 0/90/180/270 at 0.1 s. For a zero start time,
-   `Nsteps=4801`, `dt=0.1`, output line `1 1` gives 480 s;
-   the 0.2 s control uses `Nsteps=2401`. Check the actual initial-file
-   start time instead of assuming it. A single-phase integration comparison
-   is a pilot, not full four-phase harmonic convergence certification.
+   request a delayed-start kinematics interval and overlapping EP output.
+   Check header and record lengths, indexing and actual sample count,
+   finite fields, eta/top-phi parity with EP, CPU/RSS and output cost.
+   The stock path rewrites an ASCII restart every EP dump; the revised
+   sparse EP cadence avoids doing that at every sample.
+3. Compare one fixed phase at integration steps 0.2 and 0.1 s, both saved
+   every 0.2 s. Complete phases 0/90/180/270 using the verified step. A
+   single-phase check is a pilot, not four-phase harmonic convergence.
+   Example parameter lines for `dt=0.1 s`, start time zero and end 360 s:
+
+   ```text
+   3601 0.1 1 0.0 1       <- time integration line, not adjacent to storage
+   600 20 1 1            <- storage line: sparse EP, format, kinematics on, one file
+   1 2049 1 253 261 1 1201 3601 2
+   ```
+
+   Physical node indices exclude ghost nodes; the writer adds their offset.
+   Time levels are one-based: `(index-1)*dt + initial_time`. Here 1201 and
+   3601 give 120 and 360 s and stride 2 gives 0.2 s output. For the 0.2 s
+   integration control use Nsteps=1801, EP stride 300, time indices
+   601--1801 and output stride 1. Validate the real binary before deployment;
+   these are proposed fragments, not a newly executed input file.
 4. Extract and phase-separate in MATLAB remotely, retaining the existing
    spatial separation convention and audited temporal sign. Process frames
    in a stream and save compact probe/spectrum products rather than a
-   duplicate full space-time array. Retain raw EP files. Reuse center and
+   duplicate full space-time array. Retain native raw files. Reuse center and
    off-centerline probes, including dy=+/-52.734375 and +/-70.3125 m at
    x=11250 m, with same-x center y=4500 m. Apply the user's sampled eta22
    peak >= one-third centerline criterion independently of GL errors.
-5. On the fine four-phase records, repeat the same analysis using 0.2,
-   0.4 and 4 s subsets. This tests output sampling at fixed integration.
+5. On the four-phase records, repeat the same analysis using longer and
+   shorter *retained windows*, and 0.4 and 4 s subsets. Window truncation
+   changes the frequency resolution and can affect eta20 and Hilbert/FFT
+   edges. Compare the common core, not a cropped display alone. The 120 s
+   start requires preserving the original absolute time in the directional
+   prior: the old driver assumes records begin at its initial-spectrum time
+   and cannot simply be passed a cropped record with the same unshifted
+   coefficients. Use the declared phase evolution, never fitted alignment.
+   If eta20 is not window-stable, extending the same strip to 0--360 s
+   would cost about 131.65 GiB, still far below dense full EP output.
    Compare main-group waveform L2 and maximum absolute error, sampled
    extrema and spectrum, in physical units without alignment or fitted
-   gain. Proposed sampling targets: below 0.5% relative L2 change in eta22
+   gain. Proposed convergence targets: below 0.5% relative L2 change in eta22
    and psi22, below 1% in eta33 and oscillatory eta20; include absolute
    errors for small signals. These are proposed convergence checks, not
    already achieved accuracies against the physical reference. If they
-   fail, reserve a finer run before making a sufficiency claim.
+   fail, extend the record or reserve a finer short sampling check before
+   making a sufficiency claim. Twenty points at 3fp is the user's sampling
+   target; it does not replace an integration or window-convergence check.
 6. Four phase sectors are not exact perturbation orders. In particular,
    the zero phase sector can contain fourth harmonics; denser time sampling
    helps frequency separation but does not isolate eta20 by itself.
@@ -194,8 +272,10 @@ codex/unidirectional-time-series`, `git ls-remote origin
 refs/heads/codex/unidirectional-time-series`; local `Get-FileHash` and `rg`;
 and MATLAB `design_remote_sampling`. Estimate JSON, CSV, log and the live
 resource transcript are under ignored `artifacts/remote_campaign_design/`.
-The updated estimate function ran successfully in local MATLAB R2022b;
-its Code Analyzer result was empty. `git diff --check` also passed.
+The updated estimate function and strip check ran successfully in local
+MATLAB R2022b; both Code Analyzer results were empty. The projection result
+is in `artifacts/remote_campaign_design/strip_projection.json`, and local
+kinematics sizes in `local_kinematics_storage.csv`. `git diff --check` passed.
 
 SSH used `-o BatchMode=yes -o ConnectTimeout=10 60.188.112.99:60093` for
 `nproc`, `lscpu`, `uptime`, `free`, `df`, exact-name `pgrep`, `command -v`,
