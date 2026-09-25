@@ -99,6 +99,92 @@ been created. On deployment, use an independent clone of
 pin the research commit, and use a new `results/ow3d/<run-id>/` directory.
 Recheck the destination before creation; never overwrite an existing run.
 
+## Proposed queue and concurrency, 19:19 UTC update
+
+The user now prefers independent serial OW3D jobs without modifying the
+solver for OpenMP/MPI/GPU. A **job** below means one phase; a physical
+parameter group contains four jobs at 0/90/180/270 degrees. This is a
+proposed queue, not permission inferred to launch a large campaign or
+evidence that any of these jobs has started.
+
+| Priority | Group | Jobs | Purpose and preparation |
+| --- | --- | ---: | --- |
+| P0 | Short full-grid resource/output pilot | 1 temporary job | Measure initialization and first kinematics-output peak RSS; verify native record layout, top-phi parity and timing. Move the output window to early steps for this pilot only. |
+| P1 | kh=1, spread label 25, Akp=.12, integration dt=.1 | 4 | Reproduce current high-steepness main-group eta22/psi22 and eta20 with .2 s saved sampling. |
+| P1 | kh=5, spread label 15, Akp=.12, integration dt=.1 | 4 | Revisit the deeper case, especially eta20. This changes both depth and spread relative to P1 kh=1; it is not an isolated depth comparison. |
+| P2 | Repeat kh=1/spread25/Akp=.12 with integration dt=.2 | 4 | Full four-phase time-step comparison on identical .2 s output times. |
+| P2 | kh=1/spread25/Akp=.02 on the same grid/domain as P1 | 4 | Controlled steepness comparison. Requires consistently regenerated initial eta/psi from the same normalized first-order spectrum. Do not scale total nonlinear initial fields or silently reuse the old smaller-grid weak case. |
+
+The proposed production queue has **16 phase jobs / 4 groups**, excluding
+the short pilot. Prepare and fingerprint existing P1 input pairs first.
+P2 weak inputs are not yet generated or validated. Existing kh=5 main-group
+display limits are 211.979--260.021 s, so the proposed 120--360 s output
+window covers both existing strong cases. The scientific scope remains
+unchanged: sampled eta22 eligibility >= one-third of same-x centerline;
+raw versus oscillatory eta20 kept separate; no third-order MF12 comparison.
+
+After that first queue, useful separate controls are kh=2 at fixed spread,
+a changed directional spread at fixed depth, and a changed *frequency*
+bandwidth at fixed depth/spread/steepness. Each changes one input property
+with the same domain/grid checks. Do not equate the existing spread labels
+with frequency bandwidth or claim the mixed kh=1/kh=5 pair isolates depth.
+
+Live audit at 19:19:27 UTC found 48 visible logical CPUs, load
+0.24/0.18/0.12, 793099804672 bytes (738.6 GiB) available RAM and
+907689644032 bytes (845.4 GiB) available disk. A short vmstat sample showed
+idle CPUs and no swap-in/out. The current SSH session, user slice and
+parent slice have `cpu.max=max`, `memory.max=max`, `memory.high=max`;
+the effective CPU set is 0--47. These are guest-visible resources, not a
+guarantee of dedicated physical cores. No OW3D process appeared in the
+previous exact-name process check; no substantial compute load appeared
+in this refresh.
+
+Historical controllers scheduled 12--16 jobs on other grids, but no
+comparable recorded peak-RSS measurement was found in the inspected
+artifacts. Their schedules do not certify the capacity of this grid.
+The audited 2051*515*10 extended grid has 10562650 volume nodes. Using
+8-byte reals and 4-byte integers, the GMRES workspace at cap 55 is
+4.486 GiB and the fine-grid cross-derivative index/weight tables are
+4.250 GiB. Their **8.735 GiB subtotal is not total or peak memory**:
+multigrid matrices, preconditioner assembly, RK/state/work arrays and
+kinematics temporaries must also be measured. Narrow output does not
+shrink the computational domain or these core allocations.
+
+Propose a **600 GiB aggregate OW3D RAM budget**, leaving about 139 GiB
+of the currently available memory for MATLAB processing, the OS and
+headroom. Let M be the largest observed per-job peak RSS across setup,
+time stepping and kinematics. Use `floor(600/(1.25*M))` as the memory
+ceiling, subject to fresh availability and the separate CPU/I/O checks:
+
+| Concurrent phase jobs | Meaning | Peak RSS per job required for this budget |
+| ---: | --- | ---: |
+| 8 | Two four-phase groups | <=60 GiB |
+| 12 | Three groups | <=40 GiB |
+| 16 | Four groups | <=30 GiB |
+
+Start with the single resource pilot, then four jobs, and target eight
+concurrent jobs if the measurements support it. Twelve or sixteen are
+conditional expansion points, not verified capacities. Compare elapsed
+time per step/total throughput and I/O wait as concurrency grows; more
+logical CPUs used does not by itself imply faster completion. Measure
+actual process thread counts and keep MATLAB/BLAS thread use bounded.
+Do not count swap as additional calculation RAM or oversubscribe to 48
+simultaneous jobs merely because 48 CPUs are visible.
+
+At the current full-x/nine-row output design, each four-phase group costs
+about 88.67 GiB including sparse EP. Four production groups therefore
+reserve about **354.69 GiB** raw output, plus inputs, checkpoints and
+processed products. With a proposed 100 GiB free-disk reserve, at most
+eight such raw groups fit in today's free space before other overhead.
+That is a storage limit on retained results, not a concurrency limit;
+finishing a job does not free its files. All data remain remote, with no
+automatic old-run deletion. Rebudget larger Nz, wider output strips or
+longer windows separately.
+
+No resource pilot or production simulation has been executed for this
+assessment, so run duration and the optimal concurrency remain unmeasured.
+The resource transcript is `artifacts/remote_campaign_design/capacity_resource_audit.txt`.
+
 ## Sampling and storage
 
 `design_remote_sampling.m` evaluated the already-local initial positive-kx
