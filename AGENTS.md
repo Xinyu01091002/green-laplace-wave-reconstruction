@@ -1,0 +1,12 @@
+# Green–Laplace unidirectional time-series research
+
+- Work on `codex/unidirectional-time-series`; preserve published interfaces and put new work in `research/unidirectional_time_series/`.
+- The authority is the public GL repository, not archived SWORD worktrees. Do not delete, move, clean or modify historical local/remote directories or their shared Git metadata.
+- Distinguish known first-order spectra, separated eta1(t), and measured total eta(t). Only the first is authorized as the initialization baseline. Never silently treat total-wave FFT bins as free linear parents or initiate inversion.
+- Preserve the no-Stokes GL route. No diagonal, angular or empirical amplitude repairs. Retain Taylor terms required for true surface potential psi=phi(x,z=eta,t).
+- Declare frequency, wavenumber, depth, direction, units and phase conventions. Distinguish spatial/temporal spectra, harmonic sectors and perturbation orders. Initially restrict to unidirectional positive pure sums; do not expand to mixed signs, mean modes, resonance or nonlinear evolution.
+- New derivations and exact certification use Wolfram; numerical executors, reference reconstruction and field validation use MATLAB. Python is only for orchestration, file checks, hashes and data management. Reuse existing C++ only; do not create another physics implementation during initialization.
+- Generate every GL higher-order output from declared first-order input; never supply independent exact higher-order reference fields to GL. Compare GL/WIT/MF12 in identical physical units, coordinates, phase and variables without fitting gain, offset, sign, phase or shifts. Never select or tune formulas against numerical references.
+- Stop only the derivation dependent on unresolved physical conventions; continue independent initialization. Report implementation consistency separately from physical accuracy.
+- Put logs, large data and temporary output in ignored `artifacts/` or `results/`. Remote copies must correspond to a local commit or hashed snapshot; inspect destinations before creation and never overwrite existing contents. No long campaigns during initialization; no credentials in source control.
+- Scoped local commits are allowed. No automatic push, public-main merge, new public repository or publication. Preserve unrelated edits. Do not archive the current conversation or remove old projects during initialization.
