@@ -1,9 +1,11 @@
-function report=prepare_compact_wavegroup(designFile,mf12Root,out,phaseRandomizationSource)
+function report=prepare_compact_wavegroup(designFile,mf12Root,out,phaseRandomizationSource,randomSeed)
 % Independent MF12 order-2 initial fields; no GL formula or OW3D run here.
 % Read an immutable first-order design snapshot and write a new remote case set.
 % Optional fourth argument: preserve that family's modal amplitudes and
 % randomize phases only. Export periodic fields, not closed-wall OW3D inputs.
 randomized=nargin>=4;
+if nargin<5,randomSeed=20260925;end
+validateattributes(randomSeed,{'numeric'},{'scalar','integer','nonnegative','<',2^32});
 if isfolder(out),error('Case directory already exists.');end
 addpath(mf12Root);mkdir(out);d=load(designFile);r=d.report;
 g=r.g;h=r.h;kp=r.kp;nx=r.unique_FFT_nodes(1);ny=r.unique_FFT_nodes(2);
@@ -17,13 +19,13 @@ family='wavegroup';randomization=struct();
 if randomized
     parent=load(phaseRandomizationSource,'C','kx','ky','om');
     assert(isequal(kx,parent.kx) && isequal(ky,parent.ky) && isequal(om,parent.om));
-    rng(20260925,'twister');phaseIncrements=2*pi*rand(size(parent.C));
+    rng(randomSeed,'twister');phaseIncrements=2*pi*rand(size(parent.C));
     C=parent.C.*exp(1i*phaseIncrements);family='randomphase';tf=NaN;
     relativeAmplitudeChange=max(abs(abs(C)-abs(parent.C)))/max(abs(parent.C));
     assert(relativeAmplitudeChange<1e-14);
     sigma=sqrt(sum(abs(C).^2)/2);
     randomization=struct('rule','C_random=C_group*exp(i*independent_uniform_phase); no amplitude change', ...
-        'seed',20260925,'phase_increments',phaseIncrements,'source',phaseRandomizationSource, ...
+        'seed',randomSeed,'phase_increments',phaseIncrements,'source',phaseRandomizationSource, ...
         'maximum_relative_amplitude_change',relativeAmplitudeChange, ...
         'linear_spatial_rms_m',sigma,'linear_Hs_4sigma_m',4*sigma, ...
         'kp_Hs_over_2',kp*2*sigma,'focusing_Akp_label',kp*sum(abs(C)), ...
