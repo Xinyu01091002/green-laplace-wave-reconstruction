@@ -22,8 +22,9 @@ for j=1:6,plot(t,d.pred(:,j)-d.reference,styles{j},'Color',colors(j,:),'LineWidt
 xlim(limits); range=d.pred(mask,:)-d.reference(mask);
 ylim(1.1*[min(range,[],'all'),max(range,[],'all')]); grid on;
 ylabel('Prediction - OW3D (m)'); xlabel('Simulation elapsed time (s)');
-sgtitle(sprintf('Main group: k_p h = %.3g | first-order envelope peak +/- 2T_p', ...
-    d.report.kp_rad_m*d.report.depth_m));
+akp=0.02; if isfield(d.report,'steepness_akp'),akp=d.report.steepness_akp;end
+sgtitle(sprintf('Main group: k_p h = %.3g, Alpha = 1, Ak_p = %.3g | envelope peak +/- 2T_p', ...
+    d.report.kp_rad_m*d.report.depth_m,akp));
 exportgraphics(f,fullfile(out,'eta22_main_group.png'),'Resolution',180);
 exportgraphics(f,fullfile(out,'eta22_main_group.pdf'),'ContentType','vector'); close(f);
 fid=fopen(fullfile(out,'main_group_display.json'),'w'); assert(fid>=0);
@@ -31,4 +32,8 @@ cleanup=onCleanup(@()fclose(fid));
 fprintf(fid,'%s',jsonencode(struct('center_elapsed_s',center,'limits_elapsed_s',limits, ...
     'definition','shared first-order envelope peak +/- 2Tp; display only', ...
     'alignment_or_refit',false)));
+diff=d.pred(mask,:)-d.reference(mask);
+metric=table(d.names',vecnorm(diff)'/norm(d.reference(mask)), ...
+    'VariableNames',{'method','main_group_relative_L2'});
+writetable(metric,fullfile(out,'main_group_metrics.csv'));
 end

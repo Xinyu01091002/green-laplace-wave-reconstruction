@@ -1,13 +1,16 @@
-function report = run_ow3d_eta22_pilot(dataRoot,mf12Root,kph)
+function report = run_ow3d_eta22_pilot(dataRoot,mf12Root,kph,compact)
 % Read-only four-phase OW3D pilot. All methods receive identical parent bins.
 % Selection is fixed by GL domain and native temporal Nyquist, not reference error.
 if nargin<3, kph=1; end
 assert(ismember(kph,[0.5,0.6,0.8,1,2,5]));
 caseName=['kh',strrep(sprintf('%g',kph),'.','p'),'_alpha1_akp002'];
+steepness=0.02;
+if nargin>=4, caseName=compact.caseName; steepness=compact.steepness; end
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));
 addpath(root); setup_green_laplace('MF12Root',mf12Root);
 out=fullfile(root,'results','unidirectional_time_series',['ow3d_',caseName]);
 if ~isfolder(out), mkdir(out); end
+if nargin<4
 steps=(2800:4:4200)'; probe=3800; phases=[0,90,180,270];
 raw=zeros(numel(steps),4); rawpsi=raw;
 files=cell(numel(steps)*4,1); hashes=files; count=0;
@@ -38,6 +41,16 @@ end
 h=parameters(1); dt=4*parameters(2); g=parameters(3); kp=parameters(4); Tp=parameters(5);
 assert(abs(kp*h-kph)<1e-5,'Depth label and input metadata disagree.');
 t=steps*parameters(2); trel=t-t(1); N=numel(t);
+else
+    raw=compact.raw; rawpsi=compact.rawpsi; steps=compact.steps;
+    parameters=compact.parameters; probe=compact.probe;
+    xref=zeros(probe,1); xref(probe)=compact.x; yref=zeros(probe,1);
+    files=compact.files; hashes=compact.hashes;
+    metaFiles=compact.metaFiles; metaHashes=compact.metaHashes;
+    h=parameters(1); g=parameters(3); kp=parameters(4); Tp=parameters(5);
+    t=steps*parameters(2); dt=mean(diff(t)); trel=t-t(1); N=numel(t);
+    assert(max(abs(diff(t)-dt))<1e-10 && abs(kp*h-kph)<1e-5);
+end
 % Temporal Hilbert sign matches paperplot_VWA_time_series.m.
 H=imag(analytic_time(raw));
 eta1phase=(raw(:,1)-raw(:,3)-H(:,2)+H(:,4))/4;
@@ -77,9 +90,9 @@ for window=1:2
     mask=true(N,1); label="full";
     if window==2, mask=central; label="middle_half"; end
     for j=1:numel(names)
-        v=pred(mask,j); r=reference(mask); diff=v-r;
-        rows(end+1,:)={names(j),label,norm(diff)/norm(r),max(abs(diff))/max(abs(r)), ...
-            norm(diff)/(norm(v)+norm(r)),norm(v)/norm(r),max(v),min(v)}; %#ok<AGROW>
+        v=pred(mask,j); r=reference(mask); residual=v-r;
+        rows(end+1,:)={names(j),label,norm(residual)/norm(r),max(abs(residual))/max(abs(r)), ...
+            norm(residual)/(norm(v)+norm(r)),norm(v)/norm(r),max(v),min(v)}; %#ok<AGROW>
     end
 end
 metrics=cell2table(rows,'VariableNames',{'method','window','relative_L2','relative_Linf','Q','norm_ratio','max_m','min_m'});
@@ -90,7 +103,7 @@ trace=table(t,eta1phase,eta1,reference,gl(:,1),gl(:,2),gl(:,3),mf12,vwa,walker, 
     'VariableNames',{'simulation_time_s','first_phase_sector_m','common_eta1_m','ow3d_second_phase_sector_m', ...
     'gl6_m','gl8_m','gl12_m','spectral_mf12_m','vwa_m','walker_m'});
 writetable(trace,fullfile(out,'time_series.csv'));
-report=struct('case',caseName,'depth_m',h,'kp_rad_m',kp,'Tp_s',Tp, ...
+report=struct('case',caseName,'steepness_akp',steepness,'alpha',1,'depth_m',h,'kp_rad_m',kp,'Tp_s',Tp, ...
     'integration_dt_s',parameters(2),'sample_dt_s',dt,'sample_count',N, ...
     'probe_matlab_index',probe,'probe_x_m',xref(probe),'probe_y_m',yref(probe), ...
     'first_step',steps(1),'last_step',steps(end),'parent_count',numel(A), ...

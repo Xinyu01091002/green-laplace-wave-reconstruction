@@ -2,6 +2,15 @@
 
 ## 当前研究进度：首个二阶时间序列试验已完成
 
+最新：已比较 Alpha=1、kh=1 的 Akp=0.02 与 0.12，使用既有 ESC 项目的
+原始测点 CSV，并明确区分旧边界污染批次和已有边界修正批次，未导入 ESC/
+Stokes 修正。修正批次 Akp=0.12 主波组相对 OW3D 的 L2：GL12 3.8486%、
+spectral MF12 3.8566%、VWA 3.3047%、Walker 8.2223%。旧批次的约 53% 差异
+已复现，并有既有封闭水槽初始波包越界诊断作为来源解释。
+详见 `research/unidirectional_time_series/ALPHA1_STEEPNESS.md`；主图在
+`results/unidirectional_time_series/ow3d_boundary_kh1_alpha1_akp012/eta22_main_group.png`。
+旧结果保留在 `ow3d_compact_kh1_alpha1_akp*`，不应作为首选有限水深验证数据。
+
 后续按用户要求完成 kh=0.5、Alpha=1、Akp=0.02。结果在
 `results/unidirectional_time_series/ow3d_kh0p5_alpha1_akp002/`。
 GL12 与 spectral MF12 的相对 L2 差为 0.05252%，但相对 OW3D 全窗误差

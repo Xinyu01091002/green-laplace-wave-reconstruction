@@ -23,8 +23,9 @@ spec=2*abs(fft([reference,pred]))/N;
 semilogy(f,spec(1:numel(f),1),'k','LineWidth',1.4); hold on;
 for j=1:6,semilogy(f,spec(1:numel(f),j+1),styles{j},'Color',colors(j,:));end
 xlabel('Frequency (Hz)'); ylabel('Fourier amplitude (m)'); grid on; xlim([0,.5]); ylim([1e-10,1e-1]);
-sgtitle(sprintf('OW3D: k_p h = %.3g, Alpha = 1, Ak_p = 0.02 | same input, no alignment', ...
-    d.report.kp_rad_m*d.report.depth_m));
+akp=0.02; if isfield(d.report,'steepness_akp'),akp=d.report.steepness_akp;end
+sgtitle(sprintf('OW3D: k_p h = %.3g, Alpha = 1, Ak_p = %.3g | same input, no alignment', ...
+    d.report.kp_rad_m*d.report.depth_m,akp));
 exportgraphics(fig,fullfile(out,'eta22_comparison.png'),'Resolution',180);
 exportgraphics(fig,fullfile(out,'eta22_comparison.pdf'),'ContentType','vector'); close(fig);
 end
