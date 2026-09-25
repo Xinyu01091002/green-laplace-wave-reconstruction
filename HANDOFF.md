@@ -2,6 +2,15 @@
 
 ## 当前研究进度：首个二阶时间序列试验已完成
 
+最新推进：用户已授权 commit/push；研究分支已推送。完成非零差频 eta20 和
+正和频 eta33 时间序列试验，仍为 Alpha=1、kh=1、Akp=0.02/0.12 的边界修正
+原始数据。eta33 不计算、不绘制三阶 MF12；eta20 保留二阶 MF12 参考。
+主波组误差：eta20 GL16 为 2.2463%/4.3139%；eta33 GL8 为 2.1583%/11.4886%。
+eta20 是统一非零低频投影后的诊断，不包含严格零频均值；eta33 有明显求积阶数
+依赖，尚不宣称 GL8 已收敛。详见 `research/unidirectional_time_series/ETA20_ETA33_TRIAL.md`。
+图和字段位于 `results/unidirectional_time_series/eta20_eta33_boundary_alpha1_akp002/`
+及 `..._akp012/`。公开 main 与原空间实现未修改。
+
 最新：已比较 Alpha=1、kh=1 的 Akp=0.02 与 0.12，使用既有 ESC 项目的
 原始测点 CSV，并明确区分旧边界污染批次和已有边界修正批次，未导入 ESC/
 Stokes 修正。修正批次 Akp=0.12 主波组相对 OW3D 的 L2：GL12 3.8486%、
