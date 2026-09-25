@@ -132,3 +132,31 @@ the difference between cubic reconstruction and OW3D harmonic content.
 VWA's smaller large-steepness error than its small-steepness error is not
 proof of improved asymptotic accuracy; approximation errors can cancel
 higher-order input/output contributions. No compensation is fitted here.
+
+## User-requested eta20 band extension to 3 omega_p
+
+`reproject_eta20_band(3)` uses the saved, unfiltered eta20 candidates and OW3D
+four-phase-average record. It applies the identical mask
+`0 < abs(omega) < 3*omega_p` to all methods, leaving the first-order input,
+GL ranks/scales, interaction kernels and main-group window unchanged.
+There is no new physical calculation or three-order MF12 execution.
+The strict-zero mode remains excluded. Original 0.5*omega_p files remain intact;
+new output directories append `_eta20_band3` and include the original-versus-new
+main-group error table. This changes the output comparison bandwidth only.
+The enlarged OW3D phase-sector band should not be called a strict perturbation-
+order separation merely because its frequency limit has been increased.
+
+The 3*omega_p experiment passed finite-value and Code Analyzer checks. It
+retains 96 nonzero FFT bins rather than 16. Main-group relative L2 (%):
+
+| Method | Akp=0.02, band 0.5 -> 3 | Akp=0.12, band 0.5 -> 3 |
+|---|---:|---:|
+| GL6 diagnostic | 7.9154 -> 7.8149 | 9.6120 -> 9.6965 |
+| GL12 diagnostic | 2.6232 -> 2.5803 | 4.7325 -> 4.9904 |
+| GL16 diagnostic | 2.2463 -> 2.2047 | 4.3139 -> 4.5906 |
+| Spectral MF12, order 2 | 2.1407 -> 2.0988 | 4.1349 -> 4.4190 |
+| Walker Eq.14 | 82.8395 -> 82.8925 | 83.5765 -> 83.6290 |
+
+The wider output band does not substantially change these relative-error
+conclusions. This observation does not establish independence from all other
+filter choices or remove the phase-sector versus perturbation-order distinction.
