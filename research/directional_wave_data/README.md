@@ -88,4 +88,7 @@ fixed-time directional field test, then test6 kh=1, spread=25, Akp=0.12.
 Direction information must come from the declared directional input/spatial
 spectrum or adequate observations; the single-point eta1(t) workflow cannot
 simply assume every temporal frequency has a unique propagation direction.
-The present inventory does not yet define that reconstruction input contract.
+The user subsequently accepted knowledge of the initial linear spatial
+wave-number spectrum. See [INPUT_ASSUMPTION.md](INPUT_ASSUMPTION.md) for the
+complex-spectrum forward baseline and its distinction from using only a
+directional energy spectrum as a prior for an observed eta1(t).
