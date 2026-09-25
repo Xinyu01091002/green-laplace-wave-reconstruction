@@ -7,6 +7,12 @@ spectrum need not reproduce the probe record at larger steepness. Matching
 that linear prediction is therefore not a prerequisite for this research.
 No project rename or new OW3D run is implied.
 
+Execution update: the first prescribed conditional-amplitude trial has now
+been run. See [JOINT_INPUT_PILOT.md](JOINT_INPUT_PILOT.md) for the explicit
+allocation formula, source-convention audit, conditioning and limits. The
+assumption below remains a model; one successful weak case is not a general
+direction-recovery certification.
+
 ## Roles of the two inputs
 
 When available, retain the complex linear spectrum at a declared initial

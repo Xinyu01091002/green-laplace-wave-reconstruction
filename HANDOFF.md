@@ -2,6 +2,14 @@
 
 ## 当前研究进度：首个二阶时间序列试验已完成
 
+最新方向性试验：初始空间谱提供复方向权重，测点 eta1(t) 约束各频率的方向和。
+test1、kh=1、展宽标签25度、Akp=0.02 的首例已执行；相位约定核查后，7.5度
+方向离散的主波组 eta22/psi22 相对 L2 为 0.2668%/0.1402%。全窗误差为
+19.74%/22.70%，不能把主波组结果表述为全记录认证；方向尾部存在高条件数。
+详见 `research/directional_wave_data/JOINT_INPUT_PILOT.md`。只使用
+`results/directional_joint_input/verified_convention/` 里的物理结果；上一级
+保留的首轮未核查时间符号结果是无效调试记录。未进行高陡度方向性试验或新 OW3D 计算。
+
 当前综合状态已整理到 `research/unidirectional_time_series/STATUS.md`。
 新增自由面势 psi11/psi22 首轮试验，同一 eta1 输入、无 Stokes 修正；kh=1、
 Alpha=1、Akp=0.02/0.12 的 GL2+2 psi22 主波组误差为 0.2597%/2.0860%，
