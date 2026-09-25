@@ -1,5 +1,16 @@
 # 初始化交接 — 2026-09-25
 
+最新范围和实际设计见 `research/directional_wave_data/COMPACT_OW3D_DESIGN.md`，
+优先于下文旧队列：只做kpd=1、Akp=.12的波组与随机波，不做dt对照。
+远程独立克隆已建立在 `/home/lxy/green-laplace-unidirectional-time-series`；
+新数据位于 `results/ow3d_redesign/20260925-compact/`，没有下载新原始场。
+波组改为50λ×20λ、1025×257×17、110 s聚焦、220 s总长、0.2 s采样；
+独立MF12二阶四相位输入采用 `wavegroup-v4`，物理场来自 `wavegroup-v2`。
+远程8/8发布检查通过。正确解析的OW3D短测达到300 s时限，未完成首步，
+峰值RSS23.38 GiB；不能写成传播验证通过。t=0 kinematics phi与EP不一致，
+已改为初值取EP，kinematics从0.2 s开始。随机波仅完成单位幅值边界原型，
+待用户确认Akp是否指kp*Hs/2=.12；尚未生成其非线性输入或启动正式计算。
+
 并发安排更新：暂不修改OW3D求解器。建议队列为4组/16个单相位运行，
 短资源试跑后先4个、目标8个并发；12/16并发分别要求实测单例峰值内存
 不超过40/30 GiB（600 GiB总预算，含25%余量），还需通过CPU/I/O检查。

@@ -1,5 +1,11 @@
 # Remote OW3D time-resolution study
 
+**Superseded planning record:** the user cancelled the dt/depth/steepness
+queue and approved a compact kpd=1, Akp=.12 wavegroup/random-wave redesign.
+Use [COMPACT_OW3D_DESIGN.md](COMPACT_OW3D_DESIGN.md) for the current scope,
+actual remote paths, prepared inputs, timeout and pending random normalization.
+The older resource audit below is historical; it is not a launch instruction.
+
 Status on 2026-09-25: resource and output-format audit completed; no new OW3D
 run launched. Previous Akp=0.12 results are committed and pushed at
 `1038842c284a2d684f03766dfec4c6e774d380f0` on

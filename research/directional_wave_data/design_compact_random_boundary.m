@@ -1,0 +1,33 @@
+function report=design_compact_random_boundary(designFile,out)
+% Unit-RMS finite random-wave design; physical steepness remains undecided.
+if isfolder(out),error('Output directory already exists.');end
+mkdir(out);d=load(designFile);r=d.report;nx=r.unique_FFT_nodes(1);ny=r.unique_FFT_nodes(2);
+lambda=r.lambda_p_m;Lx=r.domain_m(1);Ly=r.domain_m(2);g=r.g;
+x=d.X(1,:);y=d.Y(:,1);wx=window(x,Lx,5*lambda);wy=window(y,Ly,3*lambda);
+raw=real(ifft2(nx*ny*d.randomUnit));target=raw.*(wy*wx);
+% Reconstruct phi from the final declared forward first-order elevation spectrum.
+% Do not multiply independently generated nonlinear eta and phi by a window.
+F=fft2(target)/(nx*ny);C=zeros(size(F));forward=d.kx>0;C(forward)=2*F(forward);
+eta=real(ifft2(nx*ny*C));P=zeros(size(C));P(forward)=-1i*g./d.omega(forward).*C(forward);
+psi=real(ifft2(nx*ny*P));core=d.X>=10*lambda&d.X<=40*lambda&d.Y>=5*lambda&d.Y<=15*lambda;
+edge=false(ny,nx);edge([1,end],:)=true;edge(:,[1,end])=true;
+sigma=sqrt(mean(eta(core).^2));wp=2*pi/r.Tp_s;
+report=struct('status','UNIT_AMPLITUDE_RANDOM_BOUNDARY_PROTOTYPE_NOT_RUN_READY', ...
+    'definition','Finite random-phase wave field with an interior sea region, not a stationary infinite random sea', ...
+    'physical_steepness','pending user choice','seed',r.random_prototype.seed, ...
+    'taper','Prescribed C2 quintic on the first-order elevation only; x edge width 5 lambda, y width 3 lambda', ...
+    'core_bounds_wavelengths',[10,40,5,15],'core_eta_rms',sigma, ...
+    'core_eta_change_from_untapered_relative_L2',norm(eta(core)-raw(core))/norm(raw(core)), ...
+    'forward_projection_relative_L2',norm(eta-target,'fro')/norm(target,'fro'), ...
+    'edge_eta_over_core_rms',max(abs(eta(edge)))/sigma, ...
+    'edge_psi_over_g_sigma_wp',max(abs(psi(edge)))/(g*sigma/wp), ...
+    'normalization','No physical amplitude normalization or nonlinear initialization performed', ...
+    'OW3D_boundary','Absorbing-zone configuration and usable duration still require checks; no periodic wall assumed');
+save(fullfile(out,'random_boundary.mat'),'report','C','P','eta','psi','core','wx','wy','-v7.3');
+fid=fopen(fullfile(out,'random_boundary.json'),'w');assert(fid>=0);guard=onCleanup(@()fclose(fid));
+fprintf(fid,'%s',jsonencode(report));disp(report);
+end
+
+function w=window(x,L,width)
+s=min(min(x,L-x)/width,1);s=max(s,0);w=10*s.^3-15*s.^4+6*s.^5;
+end
