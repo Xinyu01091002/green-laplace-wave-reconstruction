@@ -2,6 +2,12 @@
 
 ## 当前研究进度：首个二阶时间序列试验已完成
 
+当前综合状态已整理到 `research/unidirectional_time_series/STATUS.md`。
+新增自由面势 psi11/psi22 首轮试验，同一 eta1 输入、无 Stokes 修正；kh=1、
+Alpha=1、Akp=0.02/0.12 的 GL2+2 psi22 主波组误差为 0.2597%/2.0860%，
+二阶 MF12 为 0.05454%/1.9762%。psi20、psi33 尚未开展；不将自由面势
+结果表述为任意垂向位置的体势验证。详见 SURFACE_POTENTIAL_PILOT.md。
+
 最新推进：用户已授权 commit/push；研究分支已推送。完成非零差频 eta20 和
 正和频 eta33 时间序列试验，仍为 Alpha=1、kh=1、Akp=0.02/0.12 的边界修正
 原始数据。eta33 不计算、不绘制三阶 MF12；eta20 保留二阶 MF12 参考。
