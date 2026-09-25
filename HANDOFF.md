@@ -1,5 +1,15 @@
 # 初始化交接 — 2026-09-25
 
+## 当前目录入口（2026-09-25 清理后）
+
+- 唯一的日常 GL 工作目录是 `C:\Users\spet5947\Documents\green-laplace-unidirectional-time-series`。在 Codex 中选择此目录；旧任务绑定的发布目录和 SWORD 路径不再作为工作入口。
+- 本仓库的 `main` 保留公开版基线，`codex/unidirectional-time-series` 保留时间序列研究。GitHub `origin` 地址不变；目录清理没有合并或推送研究分支。
+- 旧发布克隆、各论文仓库、SWORD worktree 和旧压缩备份统一存放在 `C:\Users\spet5947\Documents\Archive\GL-cleanup-20260925-025101\workspaces`，保留原目录名。
+- 归档入口和移动清单在 `C:\Users\spet5947\Documents\Archive\GL-cleanup-20260925-025101`。历史目录作为只读资料；不要把论文、旧仓库或机器本地备份重新复制到公开代码目录。
+- 下文记录的是初始化当时的路径和命令。需要查询旧资料时，先按归档中的 `move-plan.json` 查找新位置，不要依赖旧绝对路径。
+
+## 原初始化记录
+
 - 本地：`C:\Users\spet5947\Documents\green-laplace-unidirectional-time-series`，独立 Git clone（git-common-dir 为本仓库 `.git`），可作为本地 Codex 工作目录打开。
 - 上游：<https://github.com/Xinyu01091002/green-laplace-wave-reconstruction.git>。
 - 采用基线：`eaca1576854ad29ad047527903145271b5fddb4d`；初始化前及验证后均用 ls-remote 核对 main，未发现相对给定 SHA 的更新。

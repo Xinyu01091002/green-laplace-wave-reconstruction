@@ -1,6 +1,7 @@
 # Green–Laplace unidirectional time-series research
 
 - Work on `codex/unidirectional-time-series`; preserve published interfaces and put new work in `research/unidirectional_time_series/`.
+- The active local checkout is `C:/Users/spet5947/Documents/green-laplace-unidirectional-time-series`. After the user-authorized directory consolidation, historical clones and SWORD worktrees live under `C:/Users/spet5947/Documents/Archive/GL-cleanup-20260925-025101/workspaces`. Use `HANDOFF.md` for the current path map; do not recreate the retired working directories.
 - The authority is the public GL repository, not archived SWORD worktrees. Do not delete, move, clean or modify historical local/remote directories or their shared Git metadata.
 - Distinguish known first-order spectra, separated eta1(t), and measured total eta(t). Only the first is authorized as the initialization baseline. Never silently treat total-wave FFT bins as free linear parents or initiate inversion.
 - Preserve the no-Stokes GL route. No diagonal, angular or empirical amplitude repairs. Retain Taylor terms required for true surface potential psi=phi(x,z=eta,t).
