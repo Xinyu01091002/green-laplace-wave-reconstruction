@@ -1,5 +1,20 @@
 # 初始化交接 — 2026-09-25
 
+## 当前研究进度：首个二阶时间序列试验已完成
+
+用户已明确正式输入为 eta1(t)，授权与 OW3D、spectral MF12、VWA、Walker 比较。
+已实现独立的 GL 二阶逐对时间重构，保留公开空间接口不变；Wolfram 四项代数检查、
+MATLAB 冻结核/空间接口/相位归一化检查通过。首例 kh=1、Alpha=1、Akp=0.02，
+四相位共 1404 个原始快照已读取并哈希。全窗相对 OW3D 第二谐波记录的 L2：
+GL6 0.2363%、GL8 0.1078%、GL12 0.09423%、spectral MF12 0.09420%、
+VWA 0.8954%、Walker 11.50%。这是四相位谐波记录比较，不是严格扰动阶次分离认证。
+
+执行说明、约定和限制见 `research/unidirectional_time_series/SECOND_ORDER_PILOT.md`；
+图、原始时间序列、指标和哈希见 `results/unidirectional_time_series/ow3d_kh1_alpha1_akp002/`。
+可运行 `plot_ow3d_eta22_pilot` 从保存的 MAT 结果重新绘图，无需再读取原始快照。
+建议下一例保持规则不变，检查同水深同幅值的 Alpha=8。未推送、未部署远程、未修改历史数据。
+下文初始化记录中的“唯一待回答的问题”已经解决。
+
 ## 当前目录入口（2026-09-25 清理后）
 
 - 唯一的日常 GL 工作目录是 `C:\Users\spet5947\Documents\green-laplace-unidirectional-time-series`。在 Codex 中选择此目录；旧任务绑定的发布目录和 SWORD 路径不再作为工作入口。
