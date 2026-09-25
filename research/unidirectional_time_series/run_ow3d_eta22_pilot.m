@@ -1,16 +1,19 @@
-function report = run_ow3d_eta22_pilot(dataRoot,mf12Root)
+function report = run_ow3d_eta22_pilot(dataRoot,mf12Root,kph)
 % Read-only four-phase OW3D pilot. All methods receive identical parent bins.
 % Selection is fixed by GL domain and native temporal Nyquist, not reference error.
+if nargin<3, kph=1; end
+assert(ismember(kph,[0.5,0.6,0.8,1,2,5]));
+caseName=['kh',strrep(sprintf('%g',kph),'.','p'),'_alpha1_akp002'];
 root=fileparts(fileparts(fileparts(mfilename('fullpath'))));
 addpath(root); setup_green_laplace('MF12Root',mf12Root);
-out=fullfile(root,'results','unidirectional_time_series','ow3d_kh1_alpha1_akp002');
+out=fullfile(root,'results','unidirectional_time_series',['ow3d_',caseName]);
 if ~isfolder(out), mkdir(out); end
 steps=(2800:4:4200)'; probe=3800; phases=[0,90,180,270];
 raw=zeros(numel(steps),4); rawpsi=raw;
 files=cell(numel(steps)*4,1); hashes=files; count=0;
 metaFiles={}; metaHashes={}; xref=[]; yref=[];
 for p=1:4
-    folder=fullfile(dataRoot,sprintf('T_init-40_Tp_Alpha_1.0_Akp_002_kd1.0_phi_%d',phases(p)));
+    folder=fullfile(dataRoot,sprintf('T_init-40_Tp_Alpha_1.0_Akp_002_kd%.1f_phi_%d',kph,phases(p)));
     inp=splitlines(string(fileread(fullfile(folder,'OceanWave3D.inp'))));
     grid=sscanf(inp(3),'%f'); timing=sscanf(inp(5),'%f'); gravity=sscanf(inp(6),'%f');
     rd=fileread(fullfile(folder,'OW_readme.txt'));
@@ -33,6 +36,7 @@ for p=1:4
     fprintf('Read phase %d: %d complete snapshots\n',phases(p),numel(steps));
 end
 h=parameters(1); dt=4*parameters(2); g=parameters(3); kp=parameters(4); Tp=parameters(5);
+assert(abs(kp*h-kph)<1e-5,'Depth label and input metadata disagree.');
 t=steps*parameters(2); trel=t-t(1); N=numel(t);
 % Temporal Hilbert sign matches paperplot_VWA_time_series.m.
 H=imag(analytic_time(raw));
@@ -86,7 +90,7 @@ trace=table(t,eta1phase,eta1,reference,gl(:,1),gl(:,2),gl(:,3),mf12,vwa,walker, 
     'VariableNames',{'simulation_time_s','first_phase_sector_m','common_eta1_m','ow3d_second_phase_sector_m', ...
     'gl6_m','gl8_m','gl12_m','spectral_mf12_m','vwa_m','walker_m'});
 writetable(trace,fullfile(out,'time_series.csv'));
-report=struct('case','kh1_alpha1_akp002','depth_m',h,'kp_rad_m',kp,'Tp_s',Tp, ...
+report=struct('case',caseName,'depth_m',h,'kp_rad_m',kp,'Tp_s',Tp, ...
     'integration_dt_s',parameters(2),'sample_dt_s',dt,'sample_count',N, ...
     'probe_matlab_index',probe,'probe_x_m',xref(probe),'probe_y_m',yref(probe), ...
     'first_step',steps(1),'last_step',steps(end),'parent_count',numel(A), ...

@@ -2,6 +2,13 @@
 
 ## 当前研究进度：首个二阶时间序列试验已完成
 
+后续按用户要求完成 kh=0.5、Alpha=1、Akp=0.02。结果在
+`results/unidirectional_time_series/ow3d_kh0p5_alpha1_akp002/`。
+GL12 与 spectral MF12 的相对 L2 差为 0.05252%，但相对 OW3D 全窗误差
+分别为 23.4560% 和 23.4545%。OW3D 第二相位分量在主波包之后仍有明显振荡，
+原因尚未确定；保留完整时间窗，不能把该差异简单归为 GL 误差。
+原 kh=1 数据和图保持不变。详细对照和输入投影比例见 SECOND_ORDER_PILOT.md。
+
 用户已明确正式输入为 eta1(t)，授权与 OW3D、spectral MF12、VWA、Walker 比较。
 已实现独立的 GL 二阶逐对时间重构，保留公开空间接口不变；Wolfram 四项代数检查、
 MATLAB 冻结核/空间接口/相位归一化检查通过。首例 kh=1、Alpha=1、Akp=0.02，

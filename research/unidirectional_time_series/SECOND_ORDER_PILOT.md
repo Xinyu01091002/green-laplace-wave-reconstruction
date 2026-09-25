@@ -146,3 +146,55 @@ projection and OW3D numerical error have not been separately measured here.
 The next validation should use the existing Alpha=8 case at the same kh and
 Akp, with the same predeclared rules, followed by a depth comparison; do not
 adjust the method based on the current OW3D waveform.
+
+## Shallower-water follow-up: kph=0.5
+
+At the user's request, the runner now accepts an optional third argument
+`kph` (default 1). This selects a data family and a separate output directory;
+it does not change the GL kernel or quadrature. Alpha=1, Akp=0.02, probe index
+3800, steps 2800:4:4200, ranks 6/8/12, support guards and metric definitions
+remain unchanged. Each depth uses its own source metadata, so the same steps
+do not imply the same physical time interval or number of peak periods.
+
+```matlab
+run_ow3d_eta22_pilot( ...
+    'C:/Research/VWA/VWA time series/unidirectional/timeseriesdata', ...
+    'C:/Research/spectral domain implementation of wave interaction theory',0.5);
+```
+
+The kh=1 results remain intact. The new results are written under
+`results/unidirectional_time_series/ow3d_kh0p5_alpha1_akp002/`.
+
+All 1404 files were read successfully. Source metadata give h=17.92115 m,
+dt_output=0.800668 s and Tp=17.667179 s; the elapsed-time interval is 560.4676
+to 840.7014 s. The identical support rule retains 78 parents and 99.9947792%
+of positive-frequency input energy. The input projection relative L2 is
+0.723736%, and excluded DC is 5.24465e-5 m. Minimum parent kh is 0.306859.
+
+| Method | Full-window relative L2 against OW3D (%) |
+|---|---:|
+| GL6 | 23.5069 |
+| GL8 | 23.4659 |
+| GL12 | 23.4560 |
+| Spectral MF12 | 23.4545 |
+| VWA | 23.7313 |
+| Walker | 36.5712 |
+
+GL6/8/12 against spectral MF12: 1.31954%, 0.407012%, 0.0525246% relative L2.
+The MF12 first-order reconstruction agrees with the common input to
+4.775e-14 relative L2. Both modified MATLAB files pass Code Analyzer.
+
+The complete waveform shows an OW3D second-phase-sector oscillation after
+approximately 730 s, after the first-order packet has passed. All four
+bound-wave methods lack that tail. Its physical/numerical origin has not
+been identified, and the raw phase sector cannot yet be treated as a pure
+bound eta22 reference. Do not attribute the full-window discrepancy solely
+to the GL approximation or suppress the tail to improve agreement. This
+time window covers a different part of the passage than kh=1; its fixed
+middle half is particularly unsuitable as a main-packet metric.
+
+An exploratory `window_diagnostic.csv` partitions the *saved* results at
+the time-window midpoint. It reports first-half errors and the second-half
+share of squared residual, without changing any inputs, predictions or
+primary full-window metrics. This diagnostic was added after inspecting
+the complete plot and is not a predeclared validation gate.
