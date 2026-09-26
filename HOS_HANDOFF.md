@@ -1,5 +1,54 @@
 # HOS-Ocean handoff
 
+## ACTIVE: JONSWAP low/high R4-GL, approx80Tp
+
+Read `research/unidirectional_time_series/hos_ocean/random/JONSWAP_CAMPAIGN.md`.
+Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-r4gl-80tp-20260926-v2`.
+Low kpHs/2=.02 full HOS started2026-09-26 21:26:00 UTC; high.12 is queued.
+Both1100.8s,5505 samples,1024x512,4 phases x8 MPI ranks. High2s short
+preflight passed all phases in532.805s; about7.72GiB aggregate peak RSS.
+R4 for20 plus GL16 for22, same11128-mode99%-energy JONSWAP gamma3.3 support.
+Original SPARK untouched; run-local R4 residual1e-8..1e-7 warns, higher stops.
+After both HOS cases, GL16 time-series processing and completion/failure email
+run automatically. Whole status pipeline-status.json; families low/status.json
+and high/status.json. Early time estimates: low~18h, high~81h; not guarantees.
+v1 preparation stopped on newline formatting before any HOS; only v2 active.
+
+## Latest: direct R4/MF12 11128-parent benchmark completed
+
+Read `research/unidirectional_time_series/hos_ocean/random/R4_MF12_RESULTS.md`.
+Remote: `/home/lxy/green-laplace-unidirectional-time-series-runs/r4-mf12-jonswap11128-20260926-v1`.
+Same99%-energy JONSWAP support, kp Hs/2=.12,1024x512. R4 eta/psi compute
+12.18/6.08s; MF12 full order2 coefficients plus one20 eta/psi surface230.82s.
+Process peak RSS1.55/1.64 versus67.41GiB. Both original R4 functions reject
+unrepaired-region Hermitian defects3.33e-8/1.79e-8 versus1e-8 threshold.
+Save-before-rejection diagnostics give raw L2 errors1.879% eta20 and1.774%
+psi20. No formulas/checks were relaxed; scores describe rejected intermediate
+fields. Automatic initialization remains unintegrated. No new HOS launched.
+
+## Latest: random high-only completed; record/direction audit completed
+
+High HOS ran 15:28:08--16:50:22 UTC on 2026-09-26 (1:22:14), peak aggregate
+RSS 4455952 KiB. GL completed; low was cancelled before initialization.
+Completion email was accepted by the local mail system, not inbox-confirmed.
+Read `research/unidirectional_time_series/hos_ocean/random/AUDIT_RESULTS.md`.
+Existing-data audit: center error at 7.5/3.75/1.875/.9375 degrees is
+4.6191/2.9730/2.6827/2.6926 percent. Record-length effects remain several
+percent; taper diagnostics do not establish a universal remedy. No new HOS
+or renormalized random simulation was launched. Historical active notes below
+are superseded by this completion checkpoint.
+
+## Active random-wave queue: 2026-09-26 15:28 UTC
+
+Read `research/unidirectional_time_series/hos_ocean/random/README.md`.
+Remote root: `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-random-fourphase-20260926-v1`.
+USER UPDATE: High focusing label Akp=.12 only; queued low .02 cancelled. Completion email enabled. Historical launch queue below is superseded.
+High focusing label Akp=.12 was launched; the original queue included low .02, with
+GL processing for each. Phase-only randomization, seed20260925, no Hs scaling.
+Four phases x eight MPI ranks, 220 s each. All four high initial-probe checks
+passed and nonzero-time advancement was verified. Whole queue: pipeline-status.json.
+No completed random-wave comparison is claimed at this launch checkpoint.
+
 ## Completed checkpoint: 2026-09-26
 
 Both directional focused-wavegroup HOS families and full-record GL processing
