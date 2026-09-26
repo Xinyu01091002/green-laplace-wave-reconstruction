@@ -1,0 +1,81 @@
+probe,filter,window,method,relative_L2,relative_Linf
+1,raw,available_full,Joint 15 deg,0.0458306753921862,0.0514482975167923
+1,raw,available_full,Joint 7.5 deg,0.0422539410527449,0.047872229262771
+1,raw,available_full,Initial spectrum only,0.105119747472021,0.11442125833006
+1,raw,available_full,Direction blind,0.208891471878291,0.20264569995904
+1,raw,main_group,Joint 15 deg,0.0457357161458136,0.0514482975167923
+1,raw,main_group,Joint 7.5 deg,0.0421457522818986,0.047872229262771
+1,raw,main_group,Initial spectrum only,0.105106064785008,0.11442125833006
+1,raw,main_group,Direction blind,0.208799086526863,0.20264569995904
+1,common_sum_band,available_full,Joint 15 deg,0.0458265135271016,0.0509325174047154
+1,common_sum_band,available_full,Joint 7.5 deg,0.0422494254304013,0.0473538336642182
+1,common_sum_band,available_full,Initial spectrum only,0.105117949299409,0.114514099364554
+1,common_sum_band,available_full,Direction blind,0.208890596811326,0.203486973328595
+1,common_sum_band,main_group,Joint 15 deg,0.0457319021543827,0.0509325174047154
+1,common_sum_band,main_group,Joint 7.5 deg,0.0421416356230865,0.0473538336642182
+1,common_sum_band,main_group,Initial spectrum only,0.10510444291633,0.114514099364554
+1,common_sum_band,main_group,Direction blind,0.208798796184101,0.203486973328595
+2,raw,available_full,Joint 15 deg,0.0344494662051126,0.0392330629545833
+2,raw,available_full,Joint 7.5 deg,0.0311129554057232,0.0360894798953891
+2,raw,available_full,Initial spectrum only,0.0983447797756805,0.101657168601207
+2,raw,available_full,Direction blind,0.234771218561526,0.227925351057752
+2,raw,main_group,Joint 15 deg,0.0342552791994474,0.0392330629545833
+2,raw,main_group,Joint 7.5 deg,0.0308908911144051,0.0360894798953891
+2,raw,main_group,Initial spectrum only,0.0982992522191509,0.101657168601207
+2,raw,main_group,Direction blind,0.234709895230123,0.227925351057752
+2,common_sum_band,available_full,Joint 15 deg,0.0344477867155396,0.0389034124801777
+2,common_sum_band,available_full,Joint 7.5 deg,0.0311110953924567,0.0357587508205374
+2,common_sum_band,available_full,Initial spectrum only,0.0983441964728262,0.10176019568243
+2,common_sum_band,available_full,Direction blind,0.234770985431566,0.228333939136264
+2,common_sum_band,main_group,Joint 15 deg,0.0342541392961997,0.0389034124801777
+2,common_sum_band,main_group,Joint 7.5 deg,0.0308896519367077,0.0357587508205374
+2,common_sum_band,main_group,Initial spectrum only,0.0982989195644192,0.10176019568243
+2,common_sum_band,main_group,Direction blind,0.234710055660165,0.228333939136264
+3,raw,available_full,Joint 15 deg,0.0352033492818214,0.0404367479318407
+3,raw,available_full,Joint 7.5 deg,0.0315349884402752,0.0365886624527537
+3,raw,available_full,Initial spectrum only,0.108287901925723,0.111768560825788
+3,raw,available_full,Direction blind,0.234771218561528,0.227925351057752
+3,raw,main_group,Joint 15 deg,0.035008947479099,0.0404367479318407
+3,raw,main_group,Joint 7.5 deg,0.0313134210680658,0.0365886624527537
+3,raw,main_group,Initial spectrum only,0.108250397645972,0.111768560825788
+3,raw,main_group,Direction blind,0.234709895230126,0.227925351057752
+3,common_sum_band,available_full,Joint 15 deg,0.0352017058467811,0.040195381321373
+3,common_sum_band,available_full,Joint 7.5 deg,0.0315331533696095,0.0363459755187459
+3,common_sum_band,available_full,Initial spectrum only,0.108287373281725,0.11187505724501
+3,common_sum_band,available_full,Direction blind,0.234770985431568,0.228333939136265
+3,common_sum_band,main_group,Joint 15 deg,0.03500784989206,0.040195381321373
+3,common_sum_band,main_group,Joint 7.5 deg,0.0313122087047144,0.0363459755187459
+3,common_sum_band,main_group,Initial spectrum only,0.108250105792751,0.11187505724501
+3,common_sum_band,main_group,Direction blind,0.234710055660167,0.228333939136265
+4,raw,available_full,Joint 15 deg,0.0294446020506235,0.0339208692101572
+4,raw,available_full,Joint 7.5 deg,0.0260737345220129,0.0303295980471802
+4,raw,available_full,Initial spectrum only,0.0980187996767326,0.0968273136998774
+4,raw,available_full,Direction blind,0.253723531530888,0.247664848463391
+4,raw,main_group,Joint 15 deg,0.0291436718022735,0.0339208692101572
+4,raw,main_group,Joint 7.5 deg,0.0257247915607516,0.0303295980471802
+4,raw,main_group,Initial spectrum only,0.097954082843997,0.0968273136998774
+4,raw,main_group,Direction blind,0.253688943452451,0.247664848463391
+4,common_sum_band,available_full,Joint 15 deg,0.0294434455043052,0.0337993226461507
+4,common_sum_band,available_full,Joint 7.5 deg,0.0260724282032364,0.0301642604690313
+4,common_sum_band,available_full,Initial spectrum only,0.0980184552986332,0.096991478849961
+4,common_sum_band,available_full,Direction blind,0.253723405847533,0.247901869576662
+4,common_sum_band,main_group,Joint 15 deg,0.0291431430969169,0.0337993226461507
+4,common_sum_band,main_group,Joint 7.5 deg,0.025724213918709,0.0301642604690313
+4,common_sum_band,main_group,Initial spectrum only,0.0979539724823924,0.096991478849961
+4,common_sum_band,main_group,Direction blind,0.253689125175675,0.247901869576662
+5,raw,available_full,Joint 15 deg,0.0301976850706736,0.0339752316169785
+5,raw,available_full,Joint 7.5 deg,0.0264976629938063,0.0304948405875284
+5,raw,available_full,Initial spectrum only,0.113775827410347,0.11268800152723
+5,raw,available_full,Direction blind,0.25372353153089,0.247664848463395
+5,raw,main_group,Joint 15 deg,0.0298968346436519,0.0339752316169785
+5,raw,main_group,Joint 7.5 deg,0.0261500546024531,0.0304948405875284
+5,raw,main_group,Initial spectrum only,0.113726588251084,0.11268800152723
+5,raw,main_group,Direction blind,0.253688943452453,0.247664848463395
+5,common_sum_band,available_full,Joint 15 deg,0.0301965574185982,0.0338729770658525
+5,common_sum_band,available_full,Joint 7.5 deg,0.0264963776041372,0.0303373999392698
+5,common_sum_band,available_full,Initial spectrum only,0.113775531725668,0.112855179760427
+5,common_sum_band,available_full,Direction blind,0.253723405847535,0.247901869576667
+5,common_sum_band,main_group,Joint 15 deg,0.0298963240163291,0.0338729770658525
+5,common_sum_band,main_group,Joint 7.5 deg,0.0261494890487653,0.0303373999392698
+5,common_sum_band,main_group,Initial spectrum only,0.113726499018601,0.112855179760427
+5,common_sum_band,main_group,Direction blind,0.253689125175678,0.247901869576667

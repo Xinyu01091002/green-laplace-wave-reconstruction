@@ -1,0 +1,17 @@
+import pathlib,subprocess,os,json,hashlib,shutil
+parent=pathlib.Path('/home/lxy/green-laplace-unidirectional-time-series-runs');old=parent/'hos-directional-fourphase-20260926-v1';r=parent/'hos-directional-fourphase-20260926-v2';mpi=parent/'hos-mpi-check-20260926-v1';base=pathlib.Path('/home/lxy/green-laplace-unidirectional-time-series/artifacts/hos-ocean-v2.1.0')
+assert not r.exists();r.mkdir();(r/'bin').mkdir();(r/'inputs').mkdir();env=os.environ.copy();env.update(json.loads((mpi/'environment.json').read_text()))
+src=r/'source';subprocess.run(['git','clone','--no-hardlinks',str(base/'source'),str(src)],check=True);subprocess.run(['git','-C',str(src),'apply',str(parent/'hos-gl-timeseries-20260926-v1/hos-io.patch')],check=True)
+p=src/'sources/HOS/output.f90';s=p.read_text();needle='    CALL MPI_BCAST(xprobe,maxprobes,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD, Statinfo)';assert s.count(needle)==2;s=s.replace(needle,'    CALL MPI_BCAST(nprobes,1,MPI_INTEGER,0,MPI_COMM_WORLD, Statinfo)\n'+needle)
+needle="    WRITE(99,'(201(ES25.16E3,X))') time * T_out, (eta_probe(ii)* L_out, ii=1,nprobes)";assert s.count(needle)==1;s=s.replace(needle,needle+'\n    FLUSH(99)');p.write_text(s);(r/'hos-output.patch').write_bytes(subprocess.check_output(['git','-C',str(src),'diff']))
+lib=base/'deps/usr/lib/x86_64-linux-gnu';dep=mpi/'deps/usr'
+commands=[(['cmake','-S',str(src),'-B',str(r/'build'),'-DCMAKE_Fortran_COMPILER='+str(base/'precision-v1/gfortran'),'-DMPI_Fortran_COMPILER='+str(dep/'bin/mpifort.openmpi'),'-DMPIEXEC_EXECUTABLE='+str(dep/'bin/mpirun.openmpi'),'-DUSE_MPI=ON','-DUSE_HDF5=OFF','-DBUILD_TESTING=OFF','-DCMAKE_Fortran_FLAGS=-I'+str(dep/'include'),'-DFFTW3_MPI_LIBRARY='+str(dep/'lib/x86_64-linux-gnu/libfftw3_mpi.so'),'-DBLAS_LIBRARIES='+str(lib/'blas/libblas.so.3'),'-DLAPACK_LIBRARIES='+str(lib/'lapack/liblapack.so.3')+';'+str(lib/'blas/libblas.so.3')],'configure.log'),(['cmake','--build',str(r/'build'),'--target','HOS-Ocean','-j','2'],'build.log')]
+for args,name in commands:
+    with (r/name).open('w') as f:p=subprocess.run(args,env=env,stdout=f,stderr=subprocess.STDOUT)
+    assert p.returncode==0,(r/name).read_text()[-3000:];print(name+' OK',flush=True)
+shutil.copy2(r/'build/sources/HOS-Ocean',r/'bin/HOS-Ocean');shutil.copy2(old/'bin/time',r/'bin/time');shutil.copy2(old/'inputs/initial_fields.mat',r/'inputs/initial_fields.mat');shutil.copy2(old/'settings.json',r/'settings.json');shutil.copy2(old/'environment.json',r/'environment.json');shutil.copy2(old/'prepare_directional_hos.m',r/'prepare_directional_hos.m')
+for phase in [0,90,180,270]:
+    name='phi%03d'%phase;d=r/'cases'/name;(d/'Results').mkdir(parents=True)
+    for file in ['input.yml','prob.inp']:shutil.copy2(old/'cases'/name/file,d/file)
+    for file in (old/'cases'/name/'Results').glob('3d_ini_*.dat'):shutil.copy2(file,d/'Results'/file.name)
+(r/'build-provenance.json').write_text(json.dumps({'binary_sha256':hashlib.sha256((r/'bin/HOS-Ocean').read_bytes()).hexdigest(),'patch_sha256':hashlib.sha256((r/'hos-output.patch').read_bytes()).hexdigest(),'reason':'Broadcast nprobes to all MPI ranks in probe init/restart; flush probe output; no evolution equations changed','upstream':'4deb3b4913d993c4e6ea16f736e5fc5792e14f12'},indent=2))
