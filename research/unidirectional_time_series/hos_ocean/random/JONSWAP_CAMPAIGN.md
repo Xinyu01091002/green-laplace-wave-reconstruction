@@ -1,5 +1,12 @@
 # Two-amplitude JONSWAP R4-GL HOS campaign
 
+Status update 2026-09-27: low completed all four phases through1100.8s;
+high phi270 stopped on the x-slope guard after the last saved5.6s record.
+The high controller stopped its other phases, and GL postprocessing was not
+reached. Failure mail was accepted locally. See
+`JONSWAP_FAILURE_20260927.md` for the verified guard/cache behavior and
+initial-field audit; the log does not yet prove physical breaking.
+
 User approved starting low then high on2026-09-26 and requested a longer record.
 Interpretation: increase record duration to80 peak periods, keep Tp unchanged.
 
