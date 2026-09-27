@@ -1,6 +1,8 @@
-function prepare_jonswap_rescaled(root,source,target)
+function prepare_jonswap_rescaled(root,source,target,durationTp)
 % Exact order-1/order-2 amplitude homogeneity of the frozen R4-GL input.
 % The source fields are generated initial conditions, not evolved references.
+if nargin<4,durationTp=80;end
+assert(ismember(durationTp,[20,80]));
 run=fullfile(root,'medium');assert(~isfolder(run));
 s=jsondecode(fileread(fullfile(source,'high','settings.json')));
 d=load(fullfile(source,'high','inputs','initial_fields.mat'));
@@ -54,6 +56,12 @@ audit.initial_statistics=[stats{:}];
 mkdir(run);mkdir(fullfile(run,'inputs'));
 save(fullfile(run,'inputs','initial_fields.mat'),'C','kx','ky','om','E','P','audit','-v7.3');
 s.kpHs_over_2=target;s.Hs_linear=Hs;s.source_campaign=source;s.amplitude_scaling=audit.amplitude_scaling;
+s.requested_duration_Tp=durationTp;
+s.duration_s=.4*round(durationTp*s.Tp/.4);
+s.duration_Tp=s.duration_s/s.Tp;
+s.expected_samples=round(s.duration_s/s.output_dt_s)+1;
+if durationTp==20,s.scoring_window_s=[3,17]*s.Tp;end
+assert(mod(s.expected_samples,2)==1);
 for j=1:4
     for p=1:size(s.probe_indices,1)
         s.expected_initial_probe_eta(j,p)=E(s.probe_indices(p,2),s.probe_indices(p,1),j);

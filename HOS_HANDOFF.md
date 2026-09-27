@@ -1,15 +1,21 @@
 # HOS-Ocean handoff
 
-## ACTIVE: JONSWAP kpHs/2=.06, approx80Tp
+## ACTIVE: JONSWAP kpHs/2=.06, first20Tp
 
 Read `research/unidirectional_time_series/hos_ocean/random/JONSWAP_KPHS006.md`.
-Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-80tp-20260927-v2`.
-Screen `hos-jonswap-kphs006-80tp-v2`; whole queue `pipeline-status.json`,
-HOS `medium/status.json`. Four phases x8 ranks started 2026-09-27 16:47:28 UTC.
+Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-20tp-20260927-v1`.
+Screen `hos-jonswap-kphs006-20tp`; whole queue `pipeline-status.json`,
+HOS `medium/status.json`. Four phases x8 ranks started 2026-09-27 17:11:16 UTC.
 Hs=4.30107527m; initial largest +x spatial wave approximately9.773m.
 Declared-input, order-scaling, MPI-export and live initial-probe checks pass.
-Same1024x512,1100.8s,.2s output; GL comparison and email follow automatically.
+Same1024x512;275.2s,.2s output,1377 samples; scoring3--17Tp.
+GL comparison and email follow automatically. Initial eta/psi MPI inputs and
+probe positions are byte-identical to the superseded80Tp launch.
 Source hashes and preparation-attempt history are in the linked report.
+
+The .06 80Tp attempt was intentionally stopped at8.0--8.2s on the user's
+duration change, without a solver failure or cancellation-failure email.
+Its files are retained under `hos-jonswap-kphs006-80tp-20260927-v2`.
 
 The previous .02 family completed1100.8s; .12 failed on the cached x-slope
 guard after phi270's last5.6s record, and its other phases were stopped.

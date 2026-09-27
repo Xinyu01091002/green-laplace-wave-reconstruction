@@ -25,6 +25,10 @@ PINNED = {
 ENV = os.environ.copy()
 ENV.update({k: '1' for k in ['OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS']})
 STATE = {'stage': 'starting', 'outcomes': {}, 'kpHs_over_2': .06, 'source_campaign': str(SOURCE)}
+LAUNCH = json.loads((ROOT / 'launch-source-manifest.json').read_text()) if (ROOT / 'launch-source-manifest.json').exists() else {}
+DURATION_TP = LAUNCH.get('requested_duration_Tp', 80)
+assert DURATION_TP in (20, 80)
+STATE['requested_duration_Tp'] = DURATION_TP
 
 
 def utc():
@@ -114,7 +118,7 @@ def prepare_runtime():
     mail = (ROOT / 'completion_email.sh').read_text()
     replacements = {
         'JONSWAP gamma3.3 low then high kpHs/2=.02/.12: four phases each, approx80Tp, R4-GL initialization.':
-        'JONSWAP gamma3.3 kpHs/2=.06: four phases, approx80Tp, same R4-GL input with linear x1/2 and quadratic x1/4.',
+        f'JONSWAP gamma3.3 kpHs/2=.06: four phases, approx{DURATION_TP}Tp, same R4-GL input with linear x1/2 and quadratic x1/4.',
         'Same99-percent-energy support and random phases; Hs normalized separately for both levels.':
         'Same11128 parents and random phases as the .12 source; no raw-data download.',
         'Completion means both HOS families and GL time-series processing completed; inspect summary.json for failures.':
@@ -190,7 +194,7 @@ def main():
         status('preparing_source')
         prepare_runtime()
         status('preparing_order_consistent_initial_conditions')
-        matlab(ROOT, "issues=checkcode('%s/prepare_jonswap_rescaled.m');for j=1:numel(issues),fprintf('Line %%d: %%s\\n',issues(j).line,issues(j).message);end;assert(isempty(issues));prepare_jonswap_rescaled('%s','%s',.06);" % (ROOT, ROOT, SOURCE), 'initialization', 32)
+        matlab(ROOT, "issues=checkcode('%s/prepare_jonswap_rescaled.m');for j=1:numel(issues),fprintf('Line %%d: %%s\\n',issues(j).line,issues(j).message);end;assert(isempty(issues));prepare_jonswap_rescaled('%s','%s',.06,%d);" % (ROOT, ROOT, SOURCE, DURATION_TP), 'initialization', 32)
         prepare_family(run)
         status('HOS_running', active_family='medium', continuous_run=True, past_10s=False)
         with (run / 'controller.log').open('x') as log:

@@ -1,5 +1,61 @@
 # JONSWAP kp Hs / 2 = 0.06 continuation
 
+## Current run: first 20Tp, requested 2026-09-27
+
+The user shortened this trial from approximately80Tp to approximately20Tp.
+The active root is now
+`/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-20tp-20260927-v1`.
+Screen: `hos-jonswap-kphs006-20tp`. HOS started **17:11:16 UTC** on2026-09-27.
+Read `pipeline-status.json` and `medium/status.json` there for current state.
+
+The new native solver endpoint is **275.2s**, 19.9971Tp, with the same.2s
+output interval and **1377 samples** per probe. Fixed comparison window:
+**3--17Tp = [41.2859913,233.9539505]s**. Full-record raw metrics and the
+existing10s-shorter-record sensitivity check remain. This is a shorter
+initial trial; the window does not certify that startup transients vanish.
+Its temporal frequency-bin spacing is about four times that of the80Tp
+design. No kernel, filter, amplitude, phase, direction or grid was changed.
+
+The deployed HOS reads the duration at startup; its inspected evolution loop
+has no stop-time reload. The former80Tp parent/controller and only their four
+MPI jobs were therefore stopped at17:10:51 UTC, before a fresh20Tp launch.
+Their last saved/logged times were8.2/8.2/8.0/8.0s. There was no HOS failure.
+Old inputs, logs and partial outputs remain in the80Tp directory, with
+`duration-change-before.json` preserving the prior status/process snapshot.
+Its terminal status is `stopped_for_user_duration_change`; it sends no
+failure email for this intentional cancellation. OW3D and other work are
+untouched. The old record has no restart state; the new record starts at0s.
+
+`duration-input-check.json` verifies that all32 new eta/psi input slabs and
+all four probe-position files are byte-identical to the former80Tp inputs.
+Only duration, sample count, requested-duration metadata and scoring-window
+settings differ. All four new YAML inputs specify275.2s. Code Analyzer,
+declared-first-order checks, MPI export equality and live initial probes pass.
+The unchanged HOS controller expects1377 finite records and native exit0;
+it will not mistake an interrupted partial record for completed20Tp.
+GL postprocessing and the existing one-shot completion/failure email follow.
+
+At17:13:58 UTC all four new phases had finite records through.6s and eight
+live ranks each; peak aggregate RSS was7.7235GiB. No old80Tp HOS ranks
+remained, all eight OW3D processes were still present, and the intentional
+80Tp cancellation had sent no failure email.
+
+Frozen local snapshot:
+`artifacts/hos_ocean/jonswap-kphs006-20tp-20260927-v1/`.
+`launch-source-manifest.json` records base commit
+`fe8d3272979f255be9309ca61e189702642b45f8`, both source hashes and the20Tp
+request. `previous-retirement.json` records the intentional stop, and
+`retire_previous_v2.py` is retained with its hash in the old before-snapshot.
+Actual launch in the new root:
+
+```sh
+python3 retire_previous_v2.py
+screen -dmS hos-jonswap-kphs006-20tp bash -c \
+  'exec python3 -u run_jonswap_rescaled.py > runtime.log 2>&1'
+```
+
+## Historical 80Tp launch, superseded by the run above
+
 User requested this amplitude on 2026-09-27 after the .12 family failed.
 This is a new four-phase family, preserving the previous random realization,
 spectral support, depth, grid and numerical parameters. The old .12 failure
