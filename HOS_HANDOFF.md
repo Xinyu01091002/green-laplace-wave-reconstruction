@@ -1,6 +1,22 @@
 # HOS-Ocean handoff
 
-## ACTIVE: JONSWAP low/high R4-GL, approx80Tp
+## ACTIVE: JONSWAP kpHs/2=.06, approx80Tp
+
+Read `research/unidirectional_time_series/hos_ocean/random/JONSWAP_KPHS006.md`.
+Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-80tp-20260927-v2`.
+Screen `hos-jonswap-kphs006-80tp-v2`; whole queue `pipeline-status.json`,
+HOS `medium/status.json`. Four phases x8 ranks started 2026-09-27 16:47:28 UTC.
+Hs=4.30107527m; initial largest +x spatial wave approximately9.773m.
+Declared-input, order-scaling, MPI-export and live initial-probe checks pass.
+Same1024x512,1100.8s,.2s output; GL comparison and email follow automatically.
+Source hashes and preparation-attempt history are in the linked report.
+
+The previous .02 family completed1100.8s; .12 failed on the cached x-slope
+guard after phi270's last5.6s record, and its other phases were stopped.
+Neither previous family's GL processing ran. They remain untouched; see
+`research/unidirectional_time_series/hos_ocean/random/JONSWAP_FAILURE_20260927.md`.
+
+## Historical launch: JONSWAP low/high R4-GL, approx80Tp
 
 Read `research/unidirectional_time_series/hos_ocean/random/JONSWAP_CAMPAIGN.md`.
 Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-r4gl-80tp-20260926-v2`.

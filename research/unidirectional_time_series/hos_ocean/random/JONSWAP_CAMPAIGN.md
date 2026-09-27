@@ -1,5 +1,9 @@
 # Two-amplitude JONSWAP R4-GL HOS campaign
 
+Latest continuation: the user requested kpHs/2=.06 after the .12 failure.
+The independent new run is documented in `JONSWAP_KPHS006.md`; this historical
+low/high campaign and its inputs/results remain unchanged.
+
 Status update 2026-09-27: low completed all four phases through1100.8s;
 high phi270 stopped on the x-slope guard after the last saved5.6s record.
 The high controller stopped its other phases, and GL postprocessing was not
