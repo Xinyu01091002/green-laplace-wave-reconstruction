@@ -1,0 +1,6 @@
+import hashlib,json,pathlib,shlex,subprocess
+s=pathlib.Path(__file__).resolve().parent;repo=s.parents[2];r='/home/lxy/green-laplace-unidirectional-time-series-runs/gpu-higher-harmonics-20260927T145332Z'
+files=[repo/'artifacts/hos_gpu/higher-harmonics-v1/check_first_harmonic_band.m',s/'run_band_controller.py'];opts=['-i',str(pathlib.Path.home()/'.ssh/id_ed25519_cursor'),'-o','BatchMode=yes'];ssh=['ssh','-p','60093',*opts,'root@60.188.112.99']
+subprocess.run(['scp','-P','60093',*opts,*map(str,files),'root@60.188.112.99:'+r+'/'],check=True)
+code="import pathlib,subprocess; r=pathlib.Path("+repr(r)+"); assert not (r/'first-band-check-v1').exists(); f=(r/'band-controller.log').open('x'); p=subprocess.Popen(['runuser','-u','lxy','--','python3',str(r/'run_band_controller.py')],cwd=r,stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True); print(p.pid)"
+p=subprocess.run([*ssh,'python3 -c '+shlex.quote(code)],text=True,capture_output=True,check=True);print(p.stdout);local=repo/'artifacts/hos_gpu/higher-20260927T145332Z/first-band-check-v1';local.mkdir();(local/'launch.json').write_text(json.dumps({'remote':r+'/first-band-check-v1','pid':int(p.stdout.strip()),'source_hashes':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in files}},indent=2))

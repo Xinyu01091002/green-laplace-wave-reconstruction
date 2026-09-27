@@ -1,0 +1,718 @@
+{
+  "gpu_snapshot": "/root/hos-rhs-check-20260927T013705Z",
+  "initial_reference_snapshot": "/home/lxy/green-laplace-unidirectional-time-series-runs/gpu-rhs-probe-20260927T013543Z",
+  "production_reference_snapshot": "/home/lxy/green-laplace-unidirectional-time-series-runs/gpu-rhs-probe-20260927T013931Z",
+  "production_binary_sha256": "93d64252f732449fad9d2171979c91e13b0b9de1d17a73d7587fa00721efcbb6",
+  "gpu_source_hashes": [
+    "1a42ea7924be88be81006b52c00c399063afe08c6accb7e59887abb81458fa64  band_diagnostic.cu",
+    "526036b6ca5bb98ff56060a6f54401259bad9c51acaaf8f4afed8357968972d6  benchmark.cu",
+    "22fffc569617ed88b2c5d6bc43a11d3125a032d1576616275a7fa63330a75045  CMakeLists.txt",
+    "b93301b79d9c97cade2e866abcea276aa7c2c534c6e55aade815ce07fb8a9d56  device_fft.cuh",
+    "4a31ac179d96b196a1023ada576e9cb3e582af105add7edd9361cc0a142f6af8  fft_check.cu",
+    "193a9a780034020d9a40dfbc8267608c53205a3113bcb915858dc8e7c1d3129a  hos_check.cu",
+    "296d72c20e4b08aaf21ba73c5718c00a106e7f8fc6477e0a83c07c16717dda28  hos_rhs.cuh",
+    "cf0cfbe58b3975c5b1686da6ad101772e3987aeae0a955da6ae430ea11881e30  ocean_check.cu",
+    "fb11eb070a38c396f7416af4738e8733b5aa11d5de251b09c46168ab78e99c35  ocean_q3.cuh",
+    "72f3598471f08b63815998543baa8c518d6047a0c620798b5375b8197948f4bd  rhs_check.cu",
+    "bdeb1acdfd5d26da7058d510843d8630f60b51d3e06182814d72ae5230bb2f50  rk4.cuh",
+    "a287e4701b5a4e05399438efc266f8072e78a218d73972e6d0f688758f8eb3f8  second_order_rhs.cuh",
+    "f69784f07b61df06573b9a0b0bba513fa785aa44fa5bf295034daaf406bfcb99  time_check.cu",
+    "89a04e7734c532475427e8204dfdf4bfcab6c7968d3d0169cce297528172cfa7  grid128x64_ocean_case1.bin",
+    "ca4608c163e161992ea073c5b0bdbe5c9e4f3bd235195134521cf3b1b32e321f  grid128x64_ocean_case2.bin",
+    "a0111194c53e6db20a14974b6c48d89d69156618169fcce4eeb42d38af9d06fb  grid128x64_ocean_case3.bin",
+    "e456342c974ca09f6d87afd28be3d5f4456ea1f68c0e90907ea021b0be5bd466  grid128x64_ocean_case4.bin",
+    "1f80af60e0322ea5d29f003de853b414f22621c0417e423ec26ce0a24d493db9  grid64x32_ocean_case1.bin",
+    "8244411c1c39f468fc4573f6e27f2a48d352b5364554f44b63cdc1722bc384d6  grid64x32_ocean_case2.bin",
+    "ab64b7941fac2cf1db085c76211aeb5e921badc1072d3270d1dcee9926fa51ff  grid64x32_ocean_case3.bin",
+    "70874381f0941750b6e1220d88fb569281a7960b014691e72f0ca8281ef8e2ad  grid64x32_ocean_case4.bin",
+    "78b88de263b64863bea3d65b8953d7ffb7861536985ef5c774c800e2a74b3d4b  run_ocean_checks.py"
+  ],
+  "production_reference_hashes": [
+    {
+      "path": "grid128x64/ocean_case1.bin",
+      "sha256": "89a04e7734c532475427e8204dfdf4bfcab6c7968d3d0169cce297528172cfa7",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid128x64/ocean_case2.bin",
+      "sha256": "ca4608c163e161992ea073c5b0bdbe5c9e4f3bd235195134521cf3b1b32e321f",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid128x64/ocean_case3.bin",
+      "sha256": "a0111194c53e6db20a14974b6c48d89d69156618169fcce4eeb42d38af9d06fb",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid128x64/ocean_case4.bin",
+      "sha256": "e456342c974ca09f6d87afd28be3d5f4456ea1f68c0e90907ea021b0be5bd466",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid64x32/ocean_case1.bin",
+      "sha256": "1f80af60e0322ea5d29f003de853b414f22621c0417e423ec26ce0a24d493db9",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid64x32/ocean_case2.bin",
+      "sha256": "8244411c1c39f468fc4573f6e27f2a48d352b5364554f44b63cdc1722bc384d6",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid64x32/ocean_case3.bin",
+      "sha256": "ab64b7941fac2cf1db085c76211aeb5e921badc1072d3270d1dcee9926fa51ff",
+      "identical_to_tested_reference": true
+    },
+    {
+      "path": "grid64x32/ocean_case4.bin",
+      "sha256": "70874381f0941750b6e1220d88fb569281a7960b014691e72f0ca8281ef8e2ad",
+      "identical_to_tested_reference": true
+    }
+  ],
+  "production_probe_provenance": {
+    "upstream_commit": "4deb3b4913d993c4e6ea16f736e5fc5792e14f12",
+    "main_before_sha256": "273a58d82eb9a8ba443c81ac8f1c71c46e785253c9d474d969c1ae3b95c62a1e",
+    "patched_main_sha256": "9541b7559ebee2dd1194c3bf82c422f9d8c4b552cfcbed2202d1563fa23c0b50",
+    "module_objects": [
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/HOS-ocean.f90.o",
+        "sha256": "d0b355ab4c5323ea77edae5bc31b6a131be36a0088b08e1505398f97712b4b06"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/energy_calc.f90.o",
+        "sha256": "91c1ccc536aafcd6289bbddb0ecb4bca86c673fde4c2204a8fba07c97f0b3515"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/initial_condition.f90.o",
+        "sha256": "ce6653616e553675b761368fa92e71c8dbd9d97880c21b5599427efe633cdb86"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/initialize_modal_space.f90.o",
+        "sha256": "d00ca4b0ff161652525ee82887a1503c9f0283708ce37a558ac61521ac22202d"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/input_HOS.f90.o",
+        "sha256": "6347ea3468aab50521649fd4a91fc7381e2cff1670399b04bc39c4ffad866ae7"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/resol_HOS.f90.o",
+        "sha256": "01d9c621f0adf7e533618b03da40f3916124ba3fbc2bf5ffddf9641c18ac6432"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/output.f90.o",
+        "sha256": "41dd270189b584d86ea755abc36182662679ad826dd49441e1bf9fecc42996a5"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/runge_kutta.f90.o",
+        "sha256": "a515e934551ae894f5099935745545275957fb2085265c16f849ae4b2728b334"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/variables_3D.f90.o",
+        "sha256": "cd4f113228a2cf57232937360394b1e0752094c27988b763627f55d3509acad0"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/HOS/velocities.f90.o",
+        "sha256": "20c4b7b800ff0871aa5667059d308a3d7e59ed19bbd65a015199a6b14cf3a3f8"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/Bivar.f90.o",
+        "sha256": "496be81653d21a968ec720f392e410ef71eac57ed59727d22e492a3492dcec1b"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/filters.f90.o",
+        "sha256": "df3d609bcd8b140e29c4b6dc1e54af193137e025b5546c5713a145e685da7a7f"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/fourier_r2c_FFTW3.f90.o",
+        "sha256": "9b5f807aa826323ec7ab769854d4abb092e8bffb5d1143123b4c4462f556b532"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/linear_wave.f90.o",
+        "sha256": "909e055a4989e08997d60516876ed8d83ebe522fcfe2cd70e447c15073e6cd54"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/maths.f90.o",
+        "sha256": "646fbdcf5ad61ba359860cdd13d8a87173d978130334ee39c213cd93ca1fb525"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/nrutil_tmp.f90.o",
+        "sha256": "9b4b88d02e01e6eb5c3a403652f7b0348ebc843ab37bf371ef299a4130092ef0"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/ramp.f90.o",
+        "sha256": "d212954041e7b0dedfeb50c3a7f7bead493ad7d1fc14818822e7d35b07e8960c"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/random_numbers.f90.o",
+        "sha256": "82328f09bc7a61a998906386166326f4566cfd56814956d18baaeb9dda7d8c3f"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/RF_solution.f90.o",
+        "sha256": "379188715df4f7f15ea05adb48239e8511e4608b94737b878bb61d8f3c07ab39"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/special_functions.f90.o",
+        "sha256": "5aadffe9086cdf52766d8b44e4ac3feb028ab89a422c41e001df46a62f366ed7"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/type.f90.o",
+        "sha256": "3271f226a8d73b2d41fc4cb3f171e8fc35c55b2c0d528309d6a510cf801f6200"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/wave_breaking.f90.o",
+        "sha256": "2b76b730ffa841367048c2abccb39389e0ecbe585cd870f4e27628ae9d1df8a0"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/current.f90.o",
+        "sha256": "51e8b6c9034e8adac73e7fcc47a4424c5b4951e9c7ae586ff87a49b608b75756"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/relaxation_zones.f90.o",
+        "sha256": "84bb0b71364c4c81a58c8a194d9eb1a212c5b097e4c373c4f56f8e4abf6cc304"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/interpolation.f90.o",
+        "sha256": "646385c34327c362e2b8f8c708795df7c67cf33e5d12de14f321cf681c7c88c8"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/bathymetry/bottom_def.f90.o",
+        "sha256": "8d38c8052cfc37593340cd1ec98265e811e9453e27f943c128777e72a1f1aed5"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/IO/yaml_parser_extensions.f90.o",
+        "sha256": "ac515a26329395717b6ad19afbab6abcce9bfe6de268d8b90c9c8ac27f06cc61"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/sources/CMakeFiles/HOS-Ocean.dir/utilities/utils.f90.o",
+        "sha256": "fe263a4aa287d6a6438978d5c87ec5986cd350f005fa146fb9fd309df705dabc"
+      },
+      {
+        "path": "/home/lxy/green-laplace-unidirectional-time-series-runs/hos-directional-fourphase-20260926-v2/build/_deps/yaml_parser-build/CMakeFiles/yaml_parser.dir/yaml_parser.F.o",
+        "sha256": "63142f79bf3e8b374d73698512f932fd040ea10fd93ceb934ff8a6220602d671"
+      }
+    ],
+    "source_hashes": {
+      "sources/HOS/input_HOS.f90": "8545f11c95faa4b9cd493a1cc991d04edb3a2a724aeae240acb4de595d7d1e90",
+      "sources/HOS/hdf5_interface.f90": "c8e052c0b9e59a686b5d9c9d433474e47e7d98080e4558087fb222f170f27e5f",
+      "sources/HOS/resol_HOS.f90": "9670dec6917f3f065bba4cf525cdcffc15b99626ecdbf4591051e91ace658e55",
+      "sources/HOS/runge_kutta.f90": "df1393acc1328330eb3a41474c0d8e20db38df793501b09efac81eebe0ef717b",
+      "sources/HOS/energy_calc.f90": "b168b3f8150cd922e65e643e64ab33464896e4fc4627c7226abbbf1945c67813",
+      "sources/HOS/variables_3D.f90": "53a6558982097ccec56ffaff89d2f1f31acc5f43001a64bfac17fb3ac076cd70",
+      "sources/HOS/initialize_modal_space.f90": "6c8c14eab0781737199418cd1d5e1961c7fdc7cbe057e245a303231171f34168",
+      "sources/HOS/initial_condition.f90": "4846ea3268f874a8f716ae3fafa1761ba68d19dae46cc5c92911b693a0095b7d",
+      "sources/HOS/velocities.f90": "ef7d691126bc28b22194b9fe95bdccff55da99218ac412dad9c09214f482fc03",
+      "sources/HOS/output.f90": "2272a7ca83ccecc1f297a3603556ff4bcd9abe81ba9c96569624d73297a16479",
+      "sources/HOS/HOS-ocean.f90": "273a58d82eb9a8ba443c81ac8f1c71c46e785253c9d474d969c1ae3b95c62a1e",
+      "sources/utilities/random_numbers.f90": "49b65f8755dc0f8988816ab2e4cb9a4979aaf6732144c044cfd3d930c065b7e8",
+      "sources/utilities/special_functions.f90": "631ae9e859ee4fe4171d70b86f80b6f81757938407689bb43d3420b156622042",
+      "sources/utilities/ramp.f90": "b6959f3b050252744043746444ea97e7034b12ebcf8171f823ca27b80ec3ca9f",
+      "sources/utilities/type.f90": "4f84fdb43b8027a9932194e6bd89a2e6fe75285aa1da7b93a07c1ec7020b3ac6",
+      "sources/utilities/Bivar.f90": "c9dfc6930fd79ed904cccce25d174f0b4f2836498f7b73bf82220562e364e825",
+      "sources/utilities/linear_wave.f90": "6ccdc8f6b0e4ddcc0e1926dcc557e23d52d63368709c7c172e77cd7337df3975",
+      "sources/utilities/interpolation.f90": "e56055e8100f211d3d82472a5a3b0ecd1b4c36dd3c55648443c31a099057cc7b",
+      "sources/utilities/relaxation_zones.f90": "dd4c5d0200b6913ca593de145c4a1cb2b98c01b283eead97df9dfe32196328d7",
+      "sources/utilities/current.f90": "b828603f5075dbbdc8e665e59455f82929d50ebc38a903384982045a32b1b86a",
+      "sources/utilities/filters.f90": "c987a3b5771b0f690ce741a81d8d602ca9ffc07a6457d211ca251db9304cc52d",
+      "sources/utilities/utils.f90": "0d8b7b357c41ae3a52781fd9fd15583f88a1eac4b7fb06443ecc2bc4ed39f896",
+      "sources/utilities/wave_breaking.f90": "a1324214344d9edda90f5d9ca54b990c8c22f01dab7cabd43e2be46b639626c0",
+      "sources/utilities/RF_solution.f90": "fa21f0832b27a349b1ce9135fb1ce681c4f6015578722c7542af5b2508fd3e1d",
+      "sources/utilities/fourier_r2c_FFTW3.f90": "c258fdc5ae7057981bb664b71d66e30cea28e82b66999f9665ed6e3031c91dac",
+      "sources/utilities/nrutil_tmp.f90": "71d2262f75e349a551a18710a28693e0fac0d531670f3ad84e6a5ca5de5c9a4c",
+      "sources/utilities/maths.f90": "c4e8f0076ee89f81cb988e40022437eabe3ca57d0ea67c9f4db2ea474385a149",
+      "sources/Benchmark/check_W_DYue.f90": "c4d089f81ec85fcc60808e02c71f2d04465859b1e9594a72409da1ec03f21329",
+      "sources/Benchmark/variables_3D_DYue.f90": "dd4265139646b48a2636c541aaa872d6667178c584cf88c9937186ad50f2fa74",
+      "sources/IO/yaml_parser_extensions.f90": "7279d8f253b4537afdd9b64f56e465b5c606f8e4d4eb88ac40383c3d7e0d69d4",
+      "sources/PostProcessing/Post_processing.f90": "139be5aaec3133c86455d888f4881dadb45d51203fb95cf8d955d36967e19e88",
+      "sources/PostProcessing/output_post_process.f90": "b660a53f4e33652406039a8833991da0f365d9e7e2904b976c4b8f3186839b5a",
+      "sources/PostProcessing/variables_post_process.f90": "fe834b2874fc510f74677abe9a37a8e86f9ff7a2aaa710b8c19fad1d8ae85d4c",
+      "sources/PostProcessing/read_files.f90": "1bbcef3d1d3d6d5b7a6ff497bcdd0dab27e6c0fe5e1756f2b6c2a648ffff75a0",
+      "sources/PostProcessing/reconstruction.f90": "44f2e486a806b7baf4fa09f7f3c7625106042cfb1ec3096a1ed3854fb433e5a1",
+      "sources/PostProcessing/analysis_wavefield.f90": "f6bea60a68644a61763e55878afeb9440e452d07691547c8d003282d6502b272",
+      "sources/PostProcessing/input_post_process.f90": "01155c6231d826e534605d81825b94ee8de56e53a6f2ec6b68eed072296681e2",
+      "sources/bathymetry/bottom_def.f90": "622b02c12785887e9c56f11a27b5e7262d4599b7cc94b5859607a3b1fb93a5a1"
+    },
+    "probe_binary_sha256": "2363f0884b6cb1c93ad82cfec9f7838ff58eb6e034cec7a8cd17ee67abce782f"
+  },
+  "records": [
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "expanded_eta",
+      "relative_l2": 4.040218414446846e-16,
+      "max_abs": 8.673617379884035e-18,
+      "reference_max": 0.009318687675139587,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "expanded_psi",
+      "relative_l2": 3.7043539130239383e-16,
+      "max_abs": 8.673617379884035e-18,
+      "reference_max": 0.010634386146269274,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "eta_nonlinear",
+      "relative_l2": 1.6719205721064083e-13,
+      "max_abs": 1.9081958235744878e-17,
+      "reference_max": 5.2110862085899385e-05,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "psi_nonlinear",
+      "relative_l2": 6.186457890563424e-15,
+      "max_abs": 2.4123498337802474e-18,
+      "reference_max": 0.0002075044253436203,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "eta_full",
+      "relative_l2": 3.6750789555257245e-15,
+      "max_abs": 1.5612511283791264e-16,
+      "reference_max": 0.0203740519806234,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 1,
+      "field": "psi_full",
+      "relative_l2": 2.1735762881445677e-16,
+      "max_abs": 5.204170427930421e-18,
+      "reference_max": 0.00938802337346143,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "expanded_eta",
+      "relative_l2": 1.626938204298063e-16,
+      "max_abs": 6.505213034913027e-19,
+      "reference_max": 0.0015396761314463991,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "expanded_psi",
+      "relative_l2": 9.594989132474687e-17,
+      "max_abs": 8.673617379884035e-19,
+      "reference_max": 0.003447159361172281,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "eta_nonlinear",
+      "relative_l2": 5.321547330262422e-12,
+      "max_abs": 1.8404331877941438e-17,
+      "reference_max": 1.6362942345284066e-06,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "psi_nonlinear",
+      "relative_l2": 4.957763058017878e-15,
+      "max_abs": 2.278518628114068e-19,
+      "reference_max": 2.9239354300571065e-05,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "eta_full",
+      "relative_l2": 8.0562211650385305e-16,
+      "max_abs": 3.469446951953614e-17,
+      "reference_max": 0.02220214750495841,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 2,
+      "field": "psi_full",
+      "relative_l2": 1.657422658486905e-16,
+      "max_abs": 4.336808689942018e-19,
+      "reference_max": 0.0015681569119242356,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "expanded_eta",
+      "relative_l2": 4.247873358865795e-16,
+      "max_abs": 7.209944447028604e-18,
+      "reference_max": 0.019398021987913107,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "expanded_psi",
+      "relative_l2": 2.6315939502366877e-16,
+      "max_abs": 1.0408340855860843e-17,
+      "reference_max": 0.021980068572569626,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "eta_nonlinear",
+      "relative_l2": 7.866906320894604e-15,
+      "max_abs": 3.0617869350990645e-16,
+      "reference_max": 0.060011514947365785,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "psi_nonlinear",
+      "relative_l2": 1.2644129191303734e-15,
+      "max_abs": 1.1102230246251565e-16,
+      "reference_max": 0.07629331559484998,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "eta_full",
+      "relative_l2": 7.616080712125968e-16,
+      "max_abs": 4.440892098500626e-16,
+      "reference_max": 0.7583936205571964,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 3,
+      "field": "psi_full",
+      "relative_l2": 1.0140742635992648e-15,
+      "max_abs": 1.1102230246251565e-16,
+      "reference_max": 0.09470061061555611,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "expanded_eta",
+      "relative_l2": 4.3678646458773324e-16,
+      "max_abs": 8.673617379884035e-18,
+      "reference_max": 0.009793599997186934,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "expanded_psi",
+      "relative_l2": 3.322163068803925e-16,
+      "max_abs": 7.806255641895632e-18,
+      "reference_max": 0.011061714587940027,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "eta_nonlinear",
+      "relative_l2": 4.555362622063923e-14,
+      "max_abs": 2.6291902682773483e-17,
+      "reference_max": 0.00045407788665525334,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "psi_nonlinear",
+      "relative_l2": 5.487077622040984e-15,
+      "max_abs": 2.6020852139652106e-18,
+      "reference_max": 0.0003470636852284816,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "eta_full",
+      "relative_l2": 2.6303807342373398e-15,
+      "max_abs": 1.5785983631388945e-16,
+      "reference_max": 0.041636627967609335,
+      "pass": true
+    },
+    {
+      "nx": 128,
+      "ny": 64,
+      "case": 4,
+      "field": "psi_full",
+      "relative_l2": 2.397422324131097e-16,
+      "max_abs": 4.336808689942018e-18,
+      "reference_max": 0.00983540310074034,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "expanded_eta",
+      "relative_l2": 3.478115165617705e-16,
+      "max_abs": 6.938893903907228e-18,
+      "reference_max": 0.009317323213921216,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "expanded_psi",
+      "relative_l2": 2.824000732482848e-16,
+      "max_abs": 5.204170427930421e-18,
+      "reference_max": 0.01063258940829562,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "eta_nonlinear",
+      "relative_l2": 1.6576952086971566e-13,
+      "max_abs": 1.803841364472758e-17,
+      "reference_max": 5.211086208589937e-05,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "psi_nonlinear",
+      "relative_l2": 2.651886464013163e-15,
+      "max_abs": 8.944667923005412e-19,
+      "reference_max": 0.00020727816894559244,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "eta_full",
+      "relative_l2": 1.5750611531133888e-15,
+      "max_abs": 5.898059818321144e-17,
+      "reference_max": 0.020370266812840442,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 1,
+      "field": "psi_full",
+      "relative_l2": 1.99745612089222e-16,
+      "max_abs": 3.469446951953614e-18,
+      "reference_max": 0.009377459830351965,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "expanded_eta",
+      "relative_l2": 1.6741519158867193e-16,
+      "max_abs": 6.505213034913027e-19,
+      "reference_max": 0.0015396761314463991,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "expanded_psi",
+      "relative_l2": 9.471246314207019e-17,
+      "max_abs": 8.673617379884035e-19,
+      "reference_max": 0.0034464799229716476,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "eta_nonlinear",
+      "relative_l2": 1.6834966253383257e-11,
+      "max_abs": 6.046121177501196e-18,
+      "reference_max": 2.044378260498969e-07,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "psi_nonlinear",
+      "relative_l2": 6.606389959721343e-15,
+      "max_abs": 5.082197683525802e-20,
+      "reference_max": 6.49232386213446e-06,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "eta_full",
+      "relative_l2": 7.558655672474518e-16,
+      "max_abs": 1.3877787807814457e-17,
+      "reference_max": 0.010604416807999168,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 2,
+      "field": "psi_full",
+      "relative_l2": 1.304830401923808e-16,
+      "max_abs": 4.336808689942018e-19,
+      "reference_max": 0.0015424118201590848,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "expanded_eta",
+      "relative_l2": 3.6349950564725296e-16,
+      "max_abs": 3.469446951953614e-18,
+      "reference_max": 0.012866021420978726,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "expanded_psi",
+      "relative_l2": 2.2613486789644545e-16,
+      "max_abs": 3.469446951953614e-18,
+      "reference_max": 0.017520957566317615,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "eta_nonlinear",
+      "relative_l2": 2.742441204299784e-14,
+      "max_abs": 6.461844948013606e-17,
+      "reference_max": 0.00835402130426978,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "psi_nonlinear",
+      "relative_l2": 9.609002726647663e-16,
+      "max_abs": 5.204170427930421e-18,
+      "reference_max": 0.0079350166486388,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "eta_full",
+      "relative_l2": 6.948236192217036e-16,
+      "max_abs": 1.1102230246251565e-16,
+      "reference_max": 0.30746834703279524,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 3,
+      "field": "psi_full",
+      "relative_l2": 3.7700995278477573e-16,
+      "max_abs": 5.637851296924623e-18,
+      "reference_max": 0.017484276507746553,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "expanded_eta",
+      "relative_l2": 3.4860213638038085e-16,
+      "max_abs": 6.938893903907228e-18,
+      "reference_max": 0.00974257453174363,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "expanded_psi",
+      "relative_l2": 2.9220269830595247e-16,
+      "max_abs": 5.637851296924623e-18,
+      "reference_max": 0.011061714587940025,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "eta_nonlinear",
+      "relative_l2": 8.57634995818201e-14,
+      "max_abs": 1.8973538018496328e-17,
+      "reference_max": 0.0002103097567487007,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "psi_nonlinear",
+      "relative_l2": 2.6909038223558882e-15,
+      "max_abs": 9.215718466126788e-19,
+      "reference_max": 0.0002569217632238063,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "eta_full",
+      "relative_l2": 1.5451692134086216e-15,
+      "max_abs": 6.765421556309548e-17,
+      "reference_max": 0.030925589414117355,
+      "pass": true
+    },
+    {
+      "nx": 64,
+      "ny": 32,
+      "case": 4,
+      "field": "psi_full",
+      "relative_l2": 2.1381042342871743e-16,
+      "max_abs": 3.469446951953614e-18,
+      "reference_max": 0.009787575579923598,
+      "pass": true
+    }
+  ]
+}

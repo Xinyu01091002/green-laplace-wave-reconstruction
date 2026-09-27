@@ -1,0 +1,16 @@
+--- a/sources/HOS/resol_HOS.f90
++++ b/sources/HOS/resol_HOS.f90
+@@ -1469,7 +1469,13 @@
+ CALL space_2_fourier(deta,  da_etark)
+ CALL space_2_fourier(dphis, da_phisrk)
+ !
++#ifdef MPI
++IF (local_y_start == 0) THEN
++    da_phisrk(1,1) = da_phisrk(1,1) - g_star*a_etark(1,1)
++ENDIF
++#else
+ da_phisrk(1,1) = da_phisrk(1,1) - g_star*a_etark(1,1)
++#endif
+ !
+ END SUBROUTINE solveHOS_lin
+ !

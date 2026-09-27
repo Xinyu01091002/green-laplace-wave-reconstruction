@@ -1,0 +1,56 @@
+{
+  "snapshot": "/root/hos-rhs-check-20260927T005948Z",
+  "source_hashes": [
+    "1a42ea7924be88be81006b52c00c399063afe08c6accb7e59887abb81458fa64  band_diagnostic.cu",
+    "f29d559f70118b337f3d26ef1ca4905ec2a9d3adfb216e45e78642aac2000bc5  CMakeLists.txt",
+    "b93301b79d9c97cade2e866abcea276aa7c2c534c6e55aade815ce07fb8a9d56  device_fft.cuh",
+    "4a31ac179d96b196a1023ada576e9cb3e582af105add7edd9361cc0a142f6af8  fft_check.cu",
+    "193a9a780034020d9a40dfbc8267608c53205a3113bcb915858dc8e7c1d3129a  hos_check.cu",
+    "296d72c20e4b08aaf21ba73c5718c00a106e7f8fc6477e0a83c07c16717dda28  hos_rhs.cuh",
+    "72f3598471f08b63815998543baa8c518d6047a0c620798b5375b8197948f4bd  rhs_check.cu",
+    "bdeb1acdfd5d26da7058d510843d8630f60b51d3e06182814d72ae5230bb2f50  rk4.cuh",
+    "a287e4701b5a4e05399438efc266f8072e78a218d73972e6d0f688758f8eb3f8  second_order_rhs.cuh",
+    "f69784f07b61df06573b9a0b0bba513fa785aa44fa5bf295034daaf406bfcb99  time_check.cu",
+    "9bb487f8a6132e8a25587e74eb728f5c7e7ed3e378324e886bdb02581f771ba8  make_time_reference.m",
+    "f001afe2ee2e9320c39aad4f4f034f6aebe2adab367dabb6b64503215088470f  hos_time.bin"
+  ],
+  "reference_refinement": {
+    "eta_coefficient_max_abs": 4.79940522083352e-11,
+    "psi_coefficient_max_abs": 7.64031397010185e-11,
+    "dt": 0.005,
+    "steps": 40,
+    "duration": 0.2
+  },
+  "records": [
+    {
+      "precision": "fp32",
+      "M": 5,
+      "nx": 64,
+      "ny": 32,
+      "dt": 0.005,
+      "steps": 40,
+      "eta_max_abs": 7.044381473905736e-07,
+      "psi_max_abs": 3.581313356731952e-06,
+      "eta_relative_l2": 1.2267662370153907e-05,
+      "psi_relative_l2": 1.4169088271316339e-05,
+      "eta_mean_change": -7.298076682912824e-10,
+      "device_bytes": 321536,
+      "pass": true
+    },
+    {
+      "precision": "fp64",
+      "M": 5,
+      "nx": 64,
+      "ny": 32,
+      "dt": 0.005,
+      "steps": 40,
+      "eta_max_abs": 3.5735303605122226e-16,
+      "psi_max_abs": 1.609823385706477e-15,
+      "eta_relative_l2": 5.090214569460582e-15,
+      "psi_relative_l2": 6.255262170144965e-15,
+      "eta_mean_change": -1.1275702593849246e-17,
+      "device_bytes": 643072,
+      "pass": true
+    }
+  ]
+}

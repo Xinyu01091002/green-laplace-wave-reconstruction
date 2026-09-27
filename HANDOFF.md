@@ -1,5 +1,10 @@
 # 初始化交接 — 2026-09-25
 
+2026-09-27 GPU HOS、MPS 和当前 GL 时间序列交接：先读
+[`research/unidirectional_time_series/hos_gpu/HANDOFF.md`](research/unidirectional_time_series/hos_gpu/HANDOFF.md)。
+用户已要求删除新增插值／低秩路线；快速 GL 时间序列实现尚未完成，不能把逐对参考计算当作加速版本。
+独立的 kpHs/2=.06 CPU HOS 任务以当前 AGENTS.md 和 JONSWAP_KPHS006.md 为准，不要与此混淆。
+
 本项目继续HOS-Ocean请先读根目录 `HOS_HANDOFF.md`。用户已授权16个OW3D
 进程及完成/失败邮件：1个波组+3个随机种子，各4相位；不是重复运行同一初值。
 固定run ID为 `ow3d16-kpd1-akp012-20260925T212822Z`，运行目录独立于当前Git
