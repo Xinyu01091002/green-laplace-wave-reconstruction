@@ -1,16 +1,26 @@
 # HOS-Ocean handoff
 
-## ACTIVE: JONSWAP kpHs/2=.06, first20Tp
+## COMPLETED: JONSWAP kpHs/2=.06, first20Tp
 
 Read `research/unidirectional_time_series/hos_ocean/random/JONSWAP_KPHS006.md`.
 Remote root `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-20tp-20260927-v1`.
 Screen `hos-jonswap-kphs006-20tp`; whole queue `pipeline-status.json`,
 HOS `medium/status.json`. Four phases x8 ranks started 2026-09-27 17:11:16 UTC.
+All four finished at275.2s with1377 finite records and exit0; the slowest
+finished2026-09-28 05:58:40 UTC (12h47m24s, peak7.73GiB). Raw probe records
+were freshly checked against their processing CSVs and snapshot hashes.
 Hs=4.30107527m; initial largest +x spatial wave approximately9.773m.
 Declared-input, order-scaling, MPI-export and live initial-probe checks pass.
 Same1024x512;275.2s,.2s output,1377 samples; scoring3--17Tp.
-GL comparison and email follow automatically. Initial eta/psi MPI inputs and
-probe positions are byte-identical to the superseded80Tp launch.
+The already queued legacy GL comparison finished06:00:48 UTC; completion mail
+was accepted by the local MTA at06:00:51 UTC. This old postprocessor forms
+ordered pairs and is superseded/prohibited by the latest instructions in
+`HANDOFF_TIME_SERIES_GL_20260928.md`; do not rerun it or present it as the new
+direct-time GL method. Its saved report has center L2 about26.7%, off-center
+9.9--11.5%, and55.7% center prediction sensitivity to removing the last10s.
+The HOS records are complete; the requested new time-series GL derivation
+remains separate and unfinished. Initial eta/psi MPI inputs and probe
+positions are byte-identical to the superseded80Tp launch.
 Source hashes and preparation-attempt history are in the linked report.
 
 The .06 80Tp attempt was intentionally stopped at8.0--8.2s on the user's

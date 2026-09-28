@@ -1,12 +1,75 @@
 # JONSWAP kp Hs / 2 = 0.06 continuation
 
-## Current run: first 20Tp, requested 2026-09-27
+## Verified completion, 2026-09-28
+
+The **HOS 20Tp family completed**. All four phases exited0 with1377 finite
+six-column probe records from0 to275.2s at.2s spacing. A fresh read of each
+raw `probes.dat` confirms those conditions, equality with the corresponding
+postprocessing CSV, and agreement of each CSV SHA256 with `snapshot.json`.
+No HOS processes from this run remain. This verifies native completion and
+record integrity, not independent spatial/time convergence or physical
+accuracy of the nonlinear simulation.
+
+| Phase | HOS finished UTC, 2026-09-28 | Wall seconds | Samples | Exit |
+| --- | --- | ---: | ---: | ---: |
+| 0 | 05:41:28 | 45011.86 | 1377 | 0 |
+| 90 | 05:40:57 | 44981.05 | 1377 | 0 |
+| 180 | 05:57:19 | 45963.22 | 1377 | 0 |
+| 270 | 05:58:40 | 46044.31 | 1377 | 0 |
+
+The four-phase wall time was about12h47m24s; aggregate HOS peak sampled RSS
+was8102964KiB (about7.73GiB). Frozen execution source commit:
+`802d1f67d931b92aa4a99e6f7fc3a4c7fa774e74`.
+The previously queued postprocessor finished at06:00:48 UTC, exit0, and the
+whole pipeline reports `completed_HOS_and_GL`. Mail was accepted by the local
+MTA at06:00:51 UTC (07:00:51 British Summer Time); inbox delivery is not
+independently confirmed. No additional email or numerical job was started
+in this completion audit. Raw and derived time records remain remote.
+
+### The automatic GL result is historical, not the new method
+
+The old queue automatically called its frozen
+`source/research/directional_wave_data/gl_directional_sum_time.m`, which
+explicitly forms ordered-pair arrays. This is the legacy implementation now
+prohibited by the latest user instructions in
+`HANDOFF_TIME_SERIES_GL_20260928.md`. The completion audit only read existing
+reports/source and checked files; it did not rerun that executor or load its
+prediction fields. Do not use the successful pipeline label as evidence
+that the requested new low-cost direct-time GL derivation is complete, and
+do not rerun this historical queue/comparison as a new benchmark.
+
+For provenance, the saved legacy report at
+`medium/gl-time-comparison-v1/report.json` has SHA256
+`86feb1cd79043d4d75050c17876e64fe9c5c932088ba6a8c3cdcb714759882d9`.
+Its fixed3--17Tp-window relative L2 values are recorded below, without new
+evaluation or tuning:
+
+| y offset (m) | Legacy raw L2 (%) | Legacy common sum-band L2 (%) |
+| --- | ---: | ---: |
+| 0 | 26.7147 | 26.7304 |
+| -52.7821 | 11.4855 | 11.5235 |
+| +52.7821 | 11.5059 | 11.4948 |
+| -70.3762 | 9.9023 | 9.9621 |
+| +70.3762 | 11.2850 | 11.2388 |
+
+All five probes pass the former one-third reference-amplitude eligibility
+rule (ratios.761--1.129 off center). Removing the final10s changes the
+center legacy prediction by55.6916% relative L2 in the same interior window,
+while its first input changes4.3843% and filtered reference2.3608%.
+That is sensitivity to record length, not a55.7% GL--HOS error measurement.
+The center uses38 retained frequencies; positive-frequency input energy
+retention across probes is99.4512--99.7327%, below the user's newer99.9%
+full-record requirement. These limitations preclude treating this historical
+comparison as an accepted reconstruction validation. The HOS records remain
+available as observations for the new derivation and subsequent validation.
+
+## Run design: first 20Tp, requested 2026-09-27
 
 The user shortened this trial from approximately80Tp to approximately20Tp.
-The active root is now
+The completed run root is
 `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap-kphs006-20tp-20260927-v1`.
 Screen: `hos-jonswap-kphs006-20tp`. HOS started **17:11:16 UTC** on2026-09-27.
-Read `pipeline-status.json` and `medium/status.json` there for current state.
+Read `pipeline-status.json` and `medium/status.json` there for terminal state.
 
 The new native solver endpoint is **275.2s**, 19.9971Tp, with the same.2s
 output interval and **1377 samples** per probe. Fixed comparison window:
