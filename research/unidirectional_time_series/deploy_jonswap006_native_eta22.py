@@ -1,0 +1,7 @@
+import hashlib,json,pathlib,shlex,subprocess,tarfile
+root=pathlib.Path(__file__).resolve().parents[2];src=root/'research/unidirectional_time_series';remote='/home/lxy/green-laplace-unidirectional-time-series-runs/hos-jonswap006-native-eta22-20260928-v2';local=root/'artifacts/unidirectional_time_series/hos-jonswap006-native-eta22-v2';local.mkdir(parents=True,exist_ok=False);names=['gl_native_joint_eta22.m','run_jonswap006_native_eta22.m'];files={n:src/n for n in names};(local/'source_hashes.json').write_text(json.dumps({n:hashlib.sha256(p.read_bytes()).hexdigest() for n,p in files.items()},indent=2))
+with tarfile.open(local/'source.tar.gz','w:gz') as a:
+    for n,p in files.items():a.add(p,arcname=n)
+key=str(pathlib.Path.home()/'.ssh/id_ed25519_cursor');ssh=['ssh','-p','60093','-i',key,'-o','BatchMode=yes','lxy@60.188.112.99'];subprocess.run(ssh+[f'test ! -e {remote} && mkdir {remote}'],check=True);subprocess.run(['scp','-P','60093','-i',key,str(local/'source.tar.gz'),f'lxy@60.188.112.99:{remote}/'],check=True);subprocess.run(ssh+[f'cd {remote} && tar -xzf source.tar.gz'],check=True);call="maxNumCompThreads(4);run_jonswap006_native_eta22(pwd);";r=subprocess.run(ssh+[f'cd {remote} && /home/lxy/Desktop/matlabr2026a/bin/matlab -batch {shlex.quote(call)} > run.log 2>&1']);subprocess.run(ssh+[f'tail -60 {remote}/run.log']);
+if r.returncode:raise SystemExit(r.returncode)
+for n in ['report.json','metrics.csv','run.log']:subprocess.run(['scp','-P','60093','-i',key,f'lxy@60.188.112.99:{remote}/{n}',str(local/n)],check=True)
