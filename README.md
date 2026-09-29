@@ -213,6 +213,18 @@ This software is a fixed-order computational reformulation of regular bound
 wave interaction kernels. It is not a solver for strict-zero modes, mean
 flow, resonant primary-harmonic corrections or coupled nonlinear evolution.
 
+## Version 0.4.0
+
+Version 0.4.0 adds the installable Python package under `python/`. It accepts a
+directional first-order spatial field `eta1(x,y)` and reconstructs elevation
+and surface potential through third order. It also accepts a single-direction
+first-order time record `eta1(t)` and reconstructs `eta20`, `eta22`, and
+`eta33`. The committed tests compare every implemented Python component with
+MATLAB FFT--GL output.
+
+The MATLAB execution path and the no-Stokes formulation are unchanged from
+version 0.3.0.
+
 ## Version 0.3.0
 
 **Version 0.3.0 uses the pure GL graph without Stokes-diagonal repairs.**

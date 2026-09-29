@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 - 2026-09-29
 
 - Added an installable Python package under `python/` with NumPy implementations
   for directional spatial `eta11/psi11`, `eta22/psi22`, and `eta33/psi33`
