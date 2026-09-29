@@ -59,10 +59,12 @@
 2026-09-29 的三 seed 单向随机相位检查已将 nominal `Ak_p` 扩展到 `.18`，对应实际
 `k_p H_s/2=.00324--.02919`；108 个 HOS 相位任务全部完成。最初未 taper 的
 FFT--Hilbert 提取被非零端点泄漏主导，原始 `89--133%` 误差无效。每端 `5T_p`
-raised-cosine taper 将三 seed 的 HOS third-sector 幅值幂恢复至 `2.975--2.999`。
+raised-cosine taper 将三 seed 的 HOS third-harmonic 幅值幂恢复至 `2.975--2.999`。
 重新用 tapered first harmonic 运行 GL8 后，`Ak_p>=.04` 的误差对 steepness 基本不变，
 但对 seed 敏感（约 `39--72%`）；该结果尚未通过 GL rank 和严格辅助域收敛认证。
 详见 `RANDOM_ETA33_STEEPNESS_EXPERIMENT_20260929.md`。
+将同一随机初值精确重复到 `136 lambda_p / 8192` 双域后，second/third harmonic 与
+原 `68 lambda_p / 4096` 结果分别只相差 `7.73e-12/4.62e-10`，空间周期边界不是主因。
 
 ## 证据入口
 
@@ -72,6 +74,7 @@ raised-cosine taper 将三 seed 的 HOS third-sector 幅值幂恢复至 `2.975--
 - `HOS_THIRD_ORDER_CHECK_20260927.md`
 - `ETA33_STEEPNESS_EXPERIMENT_20260929.md`
 - `RANDOM_ETA33_STEEPNESS_EXPERIMENT_20260929.md`
+- `RANDOM_PERIODIC_BOUNDARY_CHECK_20260929.md`
 - `DIRECT_MODAL_GL20.md`
 - `DIRECT_MODAL_GL22.md`
 - `DIRECT_MODAL_GL33.md`

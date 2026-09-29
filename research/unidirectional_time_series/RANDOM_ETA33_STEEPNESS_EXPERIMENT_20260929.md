@@ -4,10 +4,10 @@
 
 The first analysis applied an FFT Hilbert transform directly to stationary
 random-wave records whose two ends were nonzero and discontinuous under
-periodic extension. That analysis produced apparent HOS third phase sectors
+periodic extension. That analysis produced apparent HOS third harmonics
 with amplitude powers `1.06--1.54` and raw GL--HOS errors near 100%. A pure
 linear four-phase control produced almost exactly the same spurious third
-sector: at low amplitude its leakage/HOS-sector norm ratio was approximately
+harmonic: at low amplitude its leakage/HOS-third-harmonic norm ratio was approximately
 one and its waveform correlation was approximately one.
 
 Those untapered random-wave results are therefore invalid as `eta33` evidence.
@@ -58,7 +58,7 @@ Remote root:
 ## Taper selection and linear control
 
 Taper widths `0, 2, 5, 10 Tp` per edge were tested with a fixed central
-`15--35 Tp` diagnostic. The HOS third-sector norm powers are:
+`15--35 Tp` diagnostic. The HOS third-harmonic norm powers are:
 
 | Taper per edge | Seed 20260925 | Seed 20260926 | Seed 20260927 |
 |---:|---:|---:|---:|
@@ -69,9 +69,9 @@ Taper widths `0, 2, 5, 10 Tp` per edge were tested with a fixed central
 
 Thus a `5 Tp` taper already restores essentially cubic scaling while changing
 less of the record than `10 Tp`. At `5 Tp`, the pure-linear spurious-third norm
-is only `0.16--1.52%` of the HOS third-sector norm, compared with `65--95%`
+is only `0.16--1.52%` of the HOS third-harmonic norm, compared with `65--95%`
 without taper. This establishes that the same HOS solver produces a normal
-cubic third phase sector for the random waves once the finite-record extraction
+cubic third harmonic for the random waves once the finite-record extraction
 is treated correctly.
 
 ## Corrected tapered GL8 comparison
@@ -97,7 +97,7 @@ After `Akp=.04`, each seed's discrepancy is nearly amplitude-independent. The
 random-wave result therefore does **not** show the steepness-driven growth seen
 for the focused wave group. It shows a strong realization-dependent systematic
 difference: approximately `39--40%`, `52--53%`, and `71.5%` for the three
-seeds. The HOS sector and GL waveform correlations are approximately `0.92`,
+seeds. The HOS third harmonic and GL waveform correlations are approximately `0.92`,
 `0.85`, and `0.70` respectively.
 
 ## Numerical bounds
@@ -114,7 +114,7 @@ this sub-percent numerical uncertainty cannot explain the stable
 
 ### Fixed-input rank check
 
-At nominal `Akp=.12`, the same tapered inputs and HOS sectors were evaluated
+At nominal `Akp=.12`, the same tapered inputs and HOS third harmonics were evaluated
 with shared inner/outer GL4, GL6 and GL8:
 
 | Seed | GL4 error | GL6 error | GL8 error |
@@ -133,8 +133,8 @@ alone is unlikely to close the discrepancy.
 
 The corrected evidence supports the following bounded conclusions:
 
-1. The same HOS code produces a normal cubic third phase sector for focused
-   and random waves. The earlier claim that the random HOS sector was not cubic
+1. The same HOS code produces a normal cubic third harmonic for focused
+   and random waves. The earlier claim that the random HOS third harmonic was not cubic
    was an analysis error caused by untapered finite-record Hilbert leakage.
 2. Extending the nominal scale to `Akp=.18` is numerically stable for all three
    seeds, corresponding here to actual `kp Hs/2<=.02919`.
@@ -148,6 +148,12 @@ The corrected evidence supports the following bounded conclusions:
 
 The next discriminating step is a native-spatial/current-state comparison on
 the three frozen seeds, not a further steepness extension.
+
+An exact repeated-field domain-doubling check has also ruled out spatial
+periodicity as the cause: changing from `68 lambda_p / 4096` to
+`136 lambda_p / 8192` changes the central second and third harmonics by only
+`7.73e-12` and `4.62e-10` relative, respectively. See
+`RANDOM_PERIODIC_BOUNDARY_CHECK_20260929.md`.
 
 ## Evidence
 
