@@ -16,3 +16,8 @@ for folder,names in {
  target=local/folder;target.mkdir(exist_ok=False)
  subprocess.run(['scp','-P','60093','-i',key,'-o','BatchMode=yes',*[f'lxy@60.188.112.99:{remote}/{folder}/{n}' for n in names],str(target)],check=True)
 print((local/'tapered_gl/tapered_gl_aggregate.csv').read_text())
+for folder,names in {
+ 'boundary_plot':['random_eta33_boundary_effect.png','random_eta33_boundary_effect.pdf'],
+ 'tapered_rank':['tapered_rank_metrics.csv','tapered_rank.png','tapered_rank.pdf']}.items():
+ target=local/folder;target.mkdir(exist_ok=False)
+ subprocess.run(['scp','-P','60093','-i',key,'-o','BatchMode=yes',*[f'lxy@60.188.112.99:{remote}/{folder}/{n}' for n in names],str(target)],check=True)

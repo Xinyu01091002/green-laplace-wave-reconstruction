@@ -14,6 +14,8 @@ files={
  'diagnose_random_hilbert_leakage.m':research/'diagnose_random_hilbert_leakage.m',
  'diagnose_random_tapered_harmonics.m':research/'diagnose_random_tapered_harmonics.m',
  'analyze_hos_random_eta33_tapered_gl.m':research/'analyze_hos_random_eta33_tapered_gl.m',
+ 'plot_random_eta33_boundary_effect.m':research/'plot_random_eta33_boundary_effect.m',
+ 'analyze_hos_random_eta33_tapered_rank.m':research/'analyze_hos_random_eta33_tapered_rank.m',
  'snapshot/repo/research/unidirectional_time_series/gl_unidirectional_time_series.m':research/'gl_unidirectional_time_series.m',
  'snapshot/repo/symbolic/generated/finite_depth_directional_order2_eta22_pure_gl8.json':repo/'symbolic/generated/finite_depth_directional_order2_eta22_pure_gl8.json',
  'snapshot/repo/symbolic/generated/finite_depth_directional_order3_nested_green_laplace.json':repo/'symbolic/generated/finite_depth_directional_order3_nested_green_laplace.json'}
@@ -52,7 +54,11 @@ try:
  state['state']='taper_diagnostic';save();command="addpath('%s');diagnose_random_tapered_harmonics('%s');"%(r,r)
  state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'taper-diagnostic',env));save()
  state['state']='tapered_gl';save();command="addpath('%s');addpath('%s');analyze_hos_random_eta33_tapered_gl('%s');"%(r,r/'snapshot/repo/research/unidirectional_time_series',r)
- state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'tapered-gl',env));state.update(state='completed',finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save()
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'tapered-gl',env));save()
+ state['state']='boundary_plot';save();command="addpath('%s');plot_random_eta33_boundary_effect('%s',.12);"%(r,r)
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'boundary-plot',env));save()
+ state['state']='tapered_rank';save();command="addpath('%s');addpath('%s');analyze_hos_random_eta33_tapered_rank('%s',.12);"%(r,r/'snapshot/repo/research/unidirectional_time_series',r)
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'tapered-rank',env));state.update(state='completed',finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save()
 except Exception as exc:state.update(state='failed',error=str(exc),finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save();raise
 '''.replace('SOURCE',repr(source))
 (local/'controller.py').write_text(controller)

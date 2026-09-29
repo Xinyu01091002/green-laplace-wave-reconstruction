@@ -112,9 +112,22 @@ corrected GL8 curves are therefore not called spatially converged. However,
 this sub-percent numerical uncertainty cannot explain the stable
 `39--72%` seed-dependent differences.
 
-GL8 is also not rank-converged in the preceding focused-wave rank ladder.
-Higher certified GL rank may reduce part of the remaining error, but the
-present data do not quantify the GL-infinite-rank limit.
+### Fixed-input rank check
+
+At nominal `Akp=.12`, the same tapered inputs and HOS sectors were evaluated
+with shared inner/outer GL4, GL6 and GL8:
+
+| Seed | GL4 error | GL6 error | GL8 error |
+|---:|---:|---:|---:|
+| 20260925 | 53.59% | 52.60% | 52.49% |
+| 20260926 | 42.28% | 40.00% | 39.69% |
+| 20260927 | 72.47% | 71.67% | 71.56% |
+
+The waveform correlations change by less than about `0.0012` from GL4 to
+GL8. Rank therefore contributes a few percentage points at most in this
+diagnostic and cannot explain the stable `39--72%` seed-dependent difference.
+GL8 is not a mathematically certified infinite-rank limit, but increasing rank
+alone is unlikely to close the discrepancy.
 
 ## Interpretation
 
@@ -127,13 +140,14 @@ The corrected evidence supports the following bounded conclusions:
    seeds, corresponding here to actual `kp Hs/2<=.02919`.
 3. After proper tapering, the GL8 discrepancy is largely independent of
    steepness but strongly dependent on the random phase realization.
-4. The remaining difference may include unresolved GL rank/domain error,
+4. The fixed-input GL4/6/8 diagnostic rules out low GL rank as the dominant
+   cause. The remaining difference may include native spatial representation,
    free versus bound third-order evolution, and sensitivity of broadband
    interaction accumulation to the phase realization. It is not evidence of a
    simple high-steepness breakdown.
 
-The next discriminating step is a fixed-input higher-rank/native-spatial
-comparison on the three frozen seeds, not a further steepness extension.
+The next discriminating step is a native-spatial/current-state comparison on
+the three frozen seeds, not a further steepness extension.
 
 ## Evidence
 
@@ -142,6 +156,8 @@ Local ignored outputs:
 - `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/taper_diagnostic/`
 - `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/tapered_gl/`
 - `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/hilbert_leakage/`
+- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/boundary_plot/`
+- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/tapered_rank/`
 
 Tracked reproduction entries include:
 
@@ -150,4 +166,6 @@ Tracked reproduction entries include:
 - `diagnose_random_hilbert_leakage.m`
 - `diagnose_random_tapered_harmonics.m`
 - `analyze_hos_random_eta33_tapered_gl.m`
+- `plot_random_eta33_boundary_effect.m`
+- `analyze_hos_random_eta33_tapered_rank.m`
 - `collect_hos_random_eta33_steepness.py`
