@@ -1,5 +1,5 @@
 function analyze_hos_random_eta33_amplitude_order(runRoot)
-% Extract the cubic-in-amplitude coefficient from HOS and GL random-wave records.
+% Historical untapered diagnostic; cubic coefficients are not validation data.
 arguments
     runRoot (1,:) char
 end
@@ -35,6 +35,7 @@ metrics=cell2table(rows,'VariableNames',{'seed','cubic_relative','cubic_cosine',
 writetable(metrics,fullfile(out,'amplitude_order_metrics.csv'));
 report=struct('amplitude_coordinate','nominal Akp divided by 0.18','basis3','a,a^3,a^5','basis4','a,a^3,a^5,a^7', ...
     'primary','four-term all-nine-point least squares','sensitivity','relative change of cubic coefficient between three- and four-term bases', ...
-    'no_interaction_enumerator',true);
+    'no_interaction_enumerator',true,'valid_eta33_reference',false, ...
+    'superseded_by','5Tp raised-cosine taper before Hilbert separation');
 fid=fopen(fullfile(out,'amplitude_order_report.json'),'w');fprintf(fid,'%s\n',jsonencode(report));fclose(fid);disp(metrics);disp(report);
 end

@@ -1,5 +1,5 @@
 function plot_hos_random_eta33_results(resultRoot)
-% Reader-facing plot from collected random-phase eta33 metrics.
+% Historical untapered leakage plot; not a valid eta33 comparison.
 arguments
     resultRoot (1,:) char
 end

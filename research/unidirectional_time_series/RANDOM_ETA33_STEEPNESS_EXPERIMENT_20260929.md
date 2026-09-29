@@ -1,22 +1,38 @@
-# Unidirectional random-phase eta33 steepness experiment, 2026-09-29
+# Unidirectional random-phase eta33 steepness experiment, corrected 2026-09-29
 
-## Design and completed execution
+## Correction to the first analysis
 
-This experiment replaces the coherent focusing phases of the earlier wave-group
-family by independent uniform positive-mode phases while preserving the same
-unidirectional semi-Gaussian modal magnitudes. Three reproducible MT19937
-realizations use seeds `20260925`, `20260926` and `20260927`. Each realization
-uses the same random phases at every amplitude.
+The first analysis applied an FFT Hilbert transform directly to stationary
+random-wave records whose two ends were nonzero and discontinuous under
+periodic extension. That analysis produced apparent HOS third phase sectors
+with amplitude powers `1.06--1.54` and raw GL--HOS errors near 100%. A pure
+linear four-phase control produced almost exactly the same spurious third
+sector: at low amplitude its leakage/HOS-sector norm ratio was approximately
+one and its waveform correlation was approximately one.
 
-The nominal amplitude ladder is
+Those untapered random-wave results are therefore invalid as `eta33` evidence.
+They diagnose finite-record Hilbert leakage, not missing HOS `eta33` and not GL
+physical error.
+
+Following the user's correction, the final procedure applies the same
+raised-cosine taper to both ends of all four phase records before the Hilbert--
+four-phase separation and evaluates only a central interval. A `5 Tp` taper at
+each end of the complete `50 Tp` record is retained; the scoring interval is
+`15--35 Tp`, at least `10 Tp` away from either tapered edge.
+
+## Frozen random-wave campaign
+
+The experiment uses the same unidirectional semi-Gaussian modal magnitudes as
+the focused family, but independent uniform positive-mode phases. Three
+reproducible MT19937 realizations use seeds `20260925`, `20260926` and
+`20260927`; each seed retains the same phases across the amplitude ladder.
 
 ```text
-Akp = 0.02, 0.04, ..., 0.18
+nominal Akp = 0.02, 0.04, ..., 0.18
+kph = 1
 ```
 
-at fixed `kph=1`. No realization is renormalized to a target Hs. Consequently
-the actual random-sea steepness is much smaller than the nominal focusing
-label:
+No Hs renormalization is applied. The actual random-sea steepness is:
 
 | Nominal Akp | Actual kp Hs / 2 |
 |---:|---:|
@@ -30,119 +46,108 @@ label:
 | 0.16 | 0.025945 |
 | 0.18 | 0.029188 |
 
-For each seed and amplitude, four global phases were initialized with MF12
-`11+20+22+33`, no `31`, `muStar=0`, and linear frequencies. HOS used order 5,
-50 Tp duration and Tp/40 probe output. A highest-amplitude smoke test passed,
-then all 108 production HOS phase runs completed with exit code zero. At most
-24 single-thread HOS processes ran concurrently. Solver SHA-256:
+Each seed/amplitude uses four global phases initialized with MF12
+`11+20+22+33`, no `31`, `muStar=0`, and linear frequencies. HOS uses order 5,
+50 Tp duration and Tp/40 output. A highest-amplitude smoke test passed, and all
+108 production HOS phase runs completed with exit code zero. Solver SHA-256:
 `13c4bae40855f3d3a29da12d5567559c4a41e415c27bc5f67d5b927db6c2f060`.
 
 Remote root:
 `/home/lxy/green-laplace-unidirectional-time-series-runs/hos-eta33-random-steepness-20260929-v1`.
 
-The first and third Hilbert--four-phase sectors were extracted on the complete
-50 Tp records before cropping to the fixed 10--40 Tp scoring interval. GL8
-used only the non-enumerating `gl_unidirectional_time_series` implementation.
-No gain, phase, time or spatial alignment was fitted.
+## Taper selection and linear control
 
-## Direct comparison is not an eta33 validation
+Taper widths `0, 2, 5, 10 Tp` per edge were tested with a fixed central
+`15--35 Tp` diagnostic. The HOS third-sector norm powers are:
 
-The raw GL8--HOS-third-sector errors are:
-
-| Nominal Akp | Actual kp Hs/2 | Median error | Three-seed range | Median GL/HOS norm |
-|---:|---:|---:|---:|---:|
-| 0.02 | 0.003243 | 100.01% | 100.00--100.04% | 0.0159 |
-| 0.04 | 0.006486 | 99.96% | 99.81--100.29% | 0.0634 |
-| 0.06 | 0.009729 | 99.81% | 98.91--101.03% | 0.1418 |
-| 0.08 | 0.012973 | 99.40% | 97.20--102.74% | 0.2494 |
-| 0.10 | 0.016216 | 98.57% | 95.36--105.90% | 0.3829 |
-| 0.12 | 0.019459 | 97.17% | 94.24--110.80% | 0.5364 |
-| 0.14 | 0.022702 | 95.05% | 94.13--117.38% | 0.7016 |
-| 0.16 | 0.025945 | 94.88% | 92.20--125.08% | 0.7545 |
-| 0.18 | 0.029188 | 96.28% | 88.68--133.08% | 0.7820 |
-
-The trend is seed-dependent and is not a monotone steepness law. At low
-steepness the GL output is tiny relative to the HOS third phase sector and the
-normalized waveform inner product is approximately zero. The median inner
-product rises from `0.007` to `0.438` over the ladder, but remains realization
-dependent.
-
-The decisive diagnostic is amplitude scaling. Across the nine amplitudes,
-the GL `eta33` norm scales with powers `2.97`, `3.00` and `3.01` for the three
-seeds, as a cubic quantity should. The raw HOS third-sector norm scales only
-with powers `1.06`, `1.08` and `1.54`. Thus the HOS third phase sector is not a
-pure cubic `eta33` reference for these long random-wave records. Treating its
-raw relative error as GL physical error would be incorrect.
-
-## Amplitude-order regression
-
-The nine amplitudes permit a pointwise odd-power regression
-
-```text
-q(a,t) = a q1(t) + a^3 q3(t) + a^5 q5(t) + a^7 q7(t),
-a = nominal_Akp / 0.18.
-```
-
-This removes the dominant linear-in-amplitude leakage before comparing the
-cubic coefficients. Four-term fit residuals are `1e-5--1e-4`, and changing to
-the three-term basis changes the extracted HOS cubic coefficient by `4.2--8.8%`.
-The resulting cubic comparisons are:
-
-| Seed | Cubic relative error | Cosine | GL/HOS cubic norm |
+| Taper per edge | Seed 20260925 | Seed 20260926 | Seed 20260927 |
 |---:|---:|---:|---:|
-| 20260925 | 200.61% | 0.287 | 2.049 |
-| 20260926 | 45.63% | 0.890 | 0.882 |
-| 20260927 | 86.03% | 0.564 | 0.804 |
+| 0 | 1.155 | 1.193 | 1.607 |
+| 2 Tp | 2.565 | 2.676 | 2.933 |
+| 5 Tp | 2.975 | 2.977 | 2.999 |
+| 10 Tp | 2.999 | 2.998 | 2.987 |
 
-The regression is numerically consistent but does not make the HOS cubic
-coefficient equal to positive pure-sum `eta33`. It contains the complete cubic
-response admitted by the nonlinear evolution, including main-harmonic and
-mixed-sign sectors. In a broadband random wave these sectors overlap in
-temporal frequency, whereas the current GL result contains only positive
-pure-sum `eta33`. This explains the strong seed dependence and prevents the
-current HOS coefficient from serving as a unique `eta33` oracle.
+Thus a `5 Tp` taper already restores essentially cubic scaling while changing
+less of the record than `10 Tp`. At `5 Tp`, the pure-linear spurious-third norm
+is only `0.16--1.52%` of the HOS third-sector norm, compared with `65--95%`
+without taper. This establishes that the same HOS solver produces a normal
+cubic third phase sector for the random waves once the finite-record extraction
+is treated correctly.
+
+## Corrected tapered GL8 comparison
+
+GL is recomputed from the tapered first-harmonic record over the complete
+50 Tp interval; only 15--35 Tp is scored. The comparison uses the
+non-enumerating `gl_unidirectional_time_series` GL8 implementation, no fitted
+adjustments and no Stokes correction.
+
+| Nominal Akp | Actual kp Hs/2 | Median error | Three-seed range | Median cosine | Median GL/HOS norm |
+|---:|---:|---:|---:|---:|---:|
+| 0.02 | 0.003243 | 60.83% | 51.54--71.61% | 0.794 | 0.784 |
+| 0.04 | 0.006486 | 53.25% | 40.86--71.55% | 0.847 | 0.835 |
+| 0.06 | 0.009729 | 52.70% | 40.03--71.55% | 0.850 | 0.838 |
+| 0.08 | 0.012973 | 52.58% | 39.84--71.55% | 0.851 | 0.838 |
+| 0.10 | 0.016216 | 52.53% | 39.75--71.55% | 0.851 | 0.838 |
+| 0.12 | 0.019459 | 52.49% | 39.69--71.56% | 0.851 | 0.837 |
+| 0.14 | 0.022702 | 52.44% | 39.62--71.56% | 0.852 | 0.837 |
+| 0.16 | 0.025945 | 52.39% | 39.54--71.57% | 0.852 | 0.836 |
+| 0.18 | 0.029188 | 52.33% | 39.46--71.59% | 0.852 | 0.836 |
+
+After `Akp=.04`, each seed's discrepancy is nearly amplitude-independent. The
+random-wave result therefore does **not** show the steepness-driven growth seen
+for the focused wave group. It shows a strong realization-dependent systematic
+difference: approximately `39--40%`, `52--53%`, and `71.5%` for the three
+seeds. The HOS sector and GL waveform correlations are approximately `0.92`,
+`0.85`, and `0.70` respectively.
 
 ## Numerical bounds
 
-The fixed `4 omega_p` GL input retains an observed first-sector projection with
-relative errors `2.75--4.63%`. The final `L/h=1600` successive-domain changes
-are `0.198--0.315%`, so the predeclared `5e-4` domain gate is not met. These
-errors are material for a precision claim and are reported as failures of the
-declared numerical gates. They are nevertheless much smaller than the raw
-`89--133%` sector mismatch and do not alter the conclusion that the reference
-sector is not pure `eta33`.
+The taper reduces the first-input projection error to only
+`0.0011--0.0039%`. Thus the earlier `2.75--4.63%` projection error was also a
+consequence of using the untapered finite record.
 
-No input frequencies were silently removed to force the gate, and no result is
-called converged. A future precision run would need a broader representable
-input band and larger auxiliary domains, but should only be undertaken after a
-sector-matched physical reference is defined.
+At the final `L/h=1600`, successive-domain changes are `0.359--0.478%`; none
+of the 27 cases passes the stricter predeclared `0.05%` domain gate. The
+corrected GL8 curves are therefore not called spatially converged. However,
+this sub-percent numerical uncertainty cannot explain the stable
+`39--72%` seed-dependent differences.
 
-## Conclusion
+GL8 is also not rank-converged in the preceding focused-wave rank ladder.
+Higher certified GL rank may reduce part of the remaining error, but the
+present data do not quantify the GL-infinite-rank limit.
 
-The experiment successfully extends the nominal amplitude scale through
-`Akp=.18`, but the actual random-sea range is only
-`kp Hs/2=0.00324--0.02919`. All simulations are stable. The experiment does
-not validate or falsify GL `eta33` accuracy because the available long-record
-HOS third phase sector is not the same physical component.
+## Interpretation
 
-The next valid comparison must isolate positive pure-sum `eta33` itself, for
-example from a perturbation-order spatial reference or a sector-complete
-third-order decomposition. Merely increasing the number of random seeds or
-fitting the raw third phase sector more accurately will not close that physical
-definition gap.
+The corrected evidence supports the following bounded conclusions:
+
+1. The same HOS code produces a normal cubic third phase sector for focused
+   and random waves. The earlier claim that the random HOS sector was not cubic
+   was an analysis error caused by untapered finite-record Hilbert leakage.
+2. Extending the nominal scale to `Akp=.18` is numerically stable for all three
+   seeds, corresponding here to actual `kp Hs/2<=.02919`.
+3. After proper tapering, the GL8 discrepancy is largely independent of
+   steepness but strongly dependent on the random phase realization.
+4. The remaining difference may include unresolved GL rank/domain error,
+   free versus bound third-order evolution, and sensitivity of broadband
+   interaction accumulation to the phase realization. It is not evidence of a
+   simple high-steepness breakdown.
+
+The next discriminating step is a fixed-input higher-rank/native-spatial
+comparison on the three frozen seeds, not a further steepness extension.
 
 ## Evidence
 
 Local ignored outputs:
 
-- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/analysis/`
-- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/amplitude_order/`
+- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/taper_diagnostic/`
+- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/tapered_gl/`
+- `artifacts/unidirectional_time_series/hos-eta33-random-steepness-20260929-v1/hilbert_leakage/`
 
-Tracked reproduction entries:
+Tracked reproduction entries include:
 
 - `prepare_hos_random_eta33_steepness.m`
 - `deploy_hos_random_eta33_steepness.py`
-- `analyze_hos_random_eta33_steepness.m`
-- `analyze_hos_random_eta33_amplitude_order.m`
-- `plot_hos_random_eta33_results.m`
+- `diagnose_random_hilbert_leakage.m`
+- `diagnose_random_tapered_harmonics.m`
+- `analyze_hos_random_eta33_tapered_gl.m`
 - `collect_hos_random_eta33_steepness.py`

@@ -11,6 +11,9 @@ files={
  'analyze_hos_random_eta33_steepness.m':research/'analyze_hos_random_eta33_steepness.m',
  'analyze_hos_random_eta33_amplitude_order.m':research/'analyze_hos_random_eta33_amplitude_order.m',
  'plot_hos_random_eta33_results.m':research/'plot_hos_random_eta33_results.m',
+ 'diagnose_random_hilbert_leakage.m':research/'diagnose_random_hilbert_leakage.m',
+ 'diagnose_random_tapered_harmonics.m':research/'diagnose_random_tapered_harmonics.m',
+ 'analyze_hos_random_eta33_tapered_gl.m':research/'analyze_hos_random_eta33_tapered_gl.m',
  'snapshot/repo/research/unidirectional_time_series/gl_unidirectional_time_series.m':research/'gl_unidirectional_time_series.m',
  'snapshot/repo/symbolic/generated/finite_depth_directional_order2_eta22_pure_gl8.json':repo/'symbolic/generated/finite_depth_directional_order2_eta22_pure_gl8.json',
  'snapshot/repo/symbolic/generated/finite_depth_directional_order3_nested_green_laplace.json':repo/'symbolic/generated/finite_depth_directional_order3_nested_green_laplace.json'}
@@ -44,10 +47,12 @@ try:
   for item in pool.map(simulate,tasks):state['runs'].append(item);save()
  state['state']='analyzing';save();command="addpath('%s');analyze_hos_random_eta33_steepness('%s');"%(r/'snapshot/repo/research/unidirectional_time_series',r)
  state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'analyze',env));save()
- state['state']='amplitude_order';save();command="addpath('%s');analyze_hos_random_eta33_amplitude_order('%s');"%(r,r)
- state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'amplitude-order',env));save()
- state['state']='plotting';save();command="addpath('%s');plot_hos_random_eta33_results('%s');"%(r,r)
- state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'plot-final',env));state.update(state='completed',finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save()
+ state['state']='linear_hilbert_control';save();command="addpath('%s');diagnose_random_hilbert_leakage('%s');"%(r,r)
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'linear-hilbert-control',env));save()
+ state['state']='taper_diagnostic';save();command="addpath('%s');diagnose_random_tapered_harmonics('%s');"%(r,r)
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'taper-diagnostic',env));save()
+ state['state']='tapered_gl';save();command="addpath('%s');addpath('%s');analyze_hos_random_eta33_tapered_gl('%s');"%(r,r/'snapshot/repo/research/unidirectional_time_series',r)
+ state['runs'].append(run([matlab,'-singleCompThread','-batch',command],r,'tapered-gl',env));state.update(state='completed',finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save()
 except Exception as exc:state.update(state='failed',error=str(exc),finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save();raise
 '''.replace('SOURCE',repr(source))
 (local/'controller.py').write_text(controller)

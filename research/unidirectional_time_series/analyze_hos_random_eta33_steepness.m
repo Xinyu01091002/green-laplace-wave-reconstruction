@@ -1,5 +1,5 @@
 function analyze_hos_random_eta33_steepness(runRoot)
-% Non-enumerating GL8 analysis of fixed-amplitude random-phase HOS families.
+% Untapered leakage diagnostic only; not a valid eta33 comparison.
 arguments
     runRoot (1,:) char
 end
@@ -58,7 +58,8 @@ fits=cell2table(seedFits,'VariableNames',{'seed','E0','quadratic_coefficient','R
 report=struct('seeds',seeds,'nominal_Akp',amplitudes,'fit_coordinate','actual kp*Hs/2', ...
     'median_fit_E0',b(1),'median_fit_quadratic_coefficient',b(2),'median_fit_R2',R2, ...
     'scoring_window_Tp',[10 40],'harmonic_extraction','complete 50Tp Hilbert-four-phase extraction before crop', ...
-    'GL','non-enumerating gl_unidirectional_time_series GL8','no_fitted_adjustments',true);
+    'GL','non-enumerating gl_unidirectional_time_series GL8','no_fitted_adjustments',true, ...
+    'valid_eta33_reference',false,'superseded_by','5Tp raised-cosine taper and central 15--35Tp scoring');
 out=fullfile(runRoot,'analysis');assert(~isfolder(out));mkdir(out);
 writetable(metrics,fullfile(out,'random_eta33_metrics.csv'));writetable(aggregate,fullfile(out,'random_eta33_aggregate.csv'));
 writetable(fits,fullfile(out,'random_eta33_seed_fits.csv'));
