@@ -56,6 +56,12 @@
 同样可做，但尚未纳入该单向非枚举 API，应单独迁移和验证。实测总波面 `eta(t)`
 不能直接当作这个 API 的一阶输入。
 
+2026-09-29 的三 seed 单向随机相位检查已将 nominal `Ak_p` 扩展到 `.18`，对应实际
+`k_p H_s/2=.00324--.02919`；108 个 HOS 相位任务全部完成。但长记录 HOS third phase
+sector 的幅值标度仅约一次到 1.5 次，不是纯三次 `eta33` reference；原始 `89--133%`
+误差不得解读为 GL 精度。幅值回归后的完整 cubic coefficient 仍包含主谐波和混合符号分量，
+与正和频 `eta33` 不同。详见 `RANDOM_ETA33_STEEPNESS_EXPERIMENT_20260929.md`。
+
 ## 证据入口
 
 - `UNIDIRECTIONAL_GL_TIME.md`
@@ -63,6 +69,7 @@
 - `ETA20_ETA33_TRIAL.md`
 - `HOS_THIRD_ORDER_CHECK_20260927.md`
 - `ETA33_STEEPNESS_EXPERIMENT_20260929.md`
+- `RANDOM_ETA33_STEEPNESS_EXPERIMENT_20260929.md`
 - `DIRECT_MODAL_GL20.md`
 - `DIRECT_MODAL_GL22.md`
 - `DIRECT_MODAL_GL33.md`
