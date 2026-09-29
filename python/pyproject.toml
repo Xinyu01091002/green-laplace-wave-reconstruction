@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "green-laplace"
+version = "0.1.0.dev0"
+description = "Green--Laplace reconstruction of finite-depth bound waves"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Xinyu Liu" }]
+dependencies = ["numpy>=1.24"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.urls]
+Repository = "https://github.com/Xinyu01091002/green-laplace-wave-reconstruction"
+Documentation = "https://github.com/Xinyu01091002/green-laplace-wave-reconstruction/tree/main/python"
+Issues = "https://github.com/Xinyu01091002/green-laplace-wave-reconstruction/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/green_laplace"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

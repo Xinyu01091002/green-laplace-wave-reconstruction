@@ -2,6 +2,20 @@
 
 ## Required
 
+### Python package
+
+The package under `python/` requires CPython 3.10 or newer and NumPy 1.24 or
+newer. SciPy and compiled FFT extensions are not required. Install it from the
+`python/` directory with:
+
+```bash
+python -m pip install .
+```
+
+Testing additionally requires pytest 8 or newer and is installed with
+`python -m pip install -e ".[test]"`. MATLAB is used to regenerate the committed
+cross-language fixtures, but is not a runtime dependency of the Python package.
+
 ### MATLAB
 
 The release is tested with MATLAB R2022b using double precision. Only base
