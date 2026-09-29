@@ -13,8 +13,10 @@
   `Ak_p=.12` 的非枚举 GL8 结果约 `3.72%`。
 - 非零差频 `eta20`：GL16 在 `Ak_p=.02/.12` 主波群的误差约
   `2.25%/4.31%`。严格零波数均值、体积约束和完整平均流不在这个 claim 内。
-- 正和频 `eta33`：低陡度 HOS 比较约 `0.33--0.61%`，OW3D 主波群比较约
-  `2.08%`；高陡度比较仍有约 `8.6--10.2%` 差异。
+- 正和频 `eta33`：固定 `k_p h=1` 的六点 HOS steepness 试验中，当前非枚举
+  GL8 主窗误差从 `Ak_p=.02` 的 `2.06%` 单调增至 `.12` 的 `10.24%`。
+  六点满足约 `1.83% + c(Ak_p)^2`（`R^2=0.999960`）；GL4/6/8 检查表明 GL rank
+  也是重要误差源，GL8 尚不能称为 rank 收敛。
 - 时间执行器与原空间 FFT--GL 图在自包含 fixture 上的 `eta22/eta33`
   相对差为 `2.16e-15/2.52e-12`。这证明实现一致性，不是广泛物理精度认证。
 
@@ -60,6 +62,7 @@
 - `SECOND_ORDER_PILOT.md`
 - `ETA20_ETA33_TRIAL.md`
 - `HOS_THIRD_ORDER_CHECK_20260927.md`
+- `ETA33_STEEPNESS_EXPERIMENT_20260929.md`
 - `DIRECT_MODAL_GL20.md`
 - `DIRECT_MODAL_GL22.md`
 - `DIRECT_MODAL_GL33.md`
