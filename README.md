@@ -1,14 +1,15 @@
 # Green--Laplace wave reconstruction
 
-MATLAB implementations and paper reproduction material for Green--Laplace
-reconstruction of finite-depth directional bound waves from first-order
-surface elevation. The repository also includes the C++ implementations,
-inputs and results used for the paper's fourth-order comparison with Wave
-Interaction Theory (WIT).
+MATLAB and Python implementations, together with paper reproduction material,
+for Green--Laplace reconstruction of finite-depth directional bound waves from
+first-order surface elevation. The repository also includes the C++
+implementations, inputs and results used for the paper's fourth-order
+comparison with Wave Interaction Theory (WIT).
 
 | I want to... | Start here |
 |---|---|
 | Run a GL reconstruction in MATLAB | [Quick start](#quick-start), then the [minimal example](examples/run_minimal_example.m) |
+| Use the Python implementation | [Python package](python/README.md) |
 | Reproduce the paper's results | [Paper guide](paper/README.md); for fourth-order fields and timings, use the [GL--WIT package](paper/order4/README.md) |
 | Inspect the derivation and frozen formulas | [Euler residuals](symbolic/residuals), [Wolfram generators](symbolic/wolfram), and [exported interfaces](symbolic/generated) |
 
@@ -113,6 +114,7 @@ fixed-FFT production implementation is not claimed as validated.
 
 | Task | Dependencies |
 |---|---|
+| Run the Python spatial or time-series implementation | CPython 3.10+ and NumPy 1.24+ |
 | Run the example, release tests, or preserved fourth-order plots | MATLAB R2022b; base MATLAB only |
 | Recompute fourth-order GL fields against the preserved WIT reference | MATLAB R2022b; base MATLAB only |
 | Build and rerun the fourth-order C++ comparison | Linux or WSL, C++17 compiler, OpenMP, FFTW3 with its threads library, GNU patch, Python 3 for process orchestration |
@@ -210,6 +212,18 @@ every research case. Evidence outside the declared domains is not a release clai
 This software is a fixed-order computational reformulation of regular bound
 wave interaction kernels. It is not a solver for strict-zero modes, mean
 flow, resonant primary-harmonic corrections or coupled nonlinear evolution.
+
+## Version 0.4.0
+
+Version 0.4.0 adds the installable Python package under `python/`. It accepts a
+directional first-order spatial field `eta1(x,y)` and reconstructs elevation
+and surface potential through third order. It also accepts a single-direction
+first-order time record `eta1(t)` and reconstructs `eta20`, `eta22`, and
+`eta33`. The committed tests compare every implemented Python component with
+MATLAB FFT--GL output.
+
+The MATLAB execution path and the no-Stokes formulation are unchanged from
+version 0.3.0.
 
 ## Version 0.3.0
 

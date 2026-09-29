@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-09-29
+
+- Added an installable Python package under `python/` with NumPy implementations
+  for directional spatial `eta11/psi11`, `eta22/psi22`, and `eta33/psi33`
+  reconstruction from `eta1(x,y)`.
+- Added single-direction `eta11`, nonzero difference-frequency `eta20`, and
+  positive sum-frequency `eta22/eta33` time reconstruction from `eta1(t)`.
+- Added frozen MATLAB--Python fixtures for every implemented component,
+  including a nonzero-time directional field and a fixed-phase time record,
+  together with pytest and GitHub Actions checks.
+
 ## 0.3.0 - 2026-09-23
 
 - Replaced the third-order API and paper executors with the pure GL graph,
