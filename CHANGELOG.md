@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Replaced the single-direction auxiliary-domain time executor with a
+  one-dimensional modal-resolvent implementation for `eta22/eta33`.
+- Added automatic modal-grid refinement and a 27-case random-phase HOS
+  comparison covering three seeds and nine amplitudes.
+
 ## 0.4.0 - 2026-09-29
 
 - Added an installable Python package under `python/` with NumPy implementations
