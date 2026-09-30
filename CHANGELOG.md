@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 - 2026-09-30
 
 - Replaced the single-direction auxiliary-domain time executor with a
   one-dimensional modal-resolvent implementation for `eta22/eta33`.
