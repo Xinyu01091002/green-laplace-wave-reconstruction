@@ -213,6 +213,17 @@ This software is a fixed-order computational reformulation of regular bound
 wave interaction kernels. It is not a solver for strict-zero modes, mean
 flow, resonant primary-harmonic corrections or coupled nonlinear evolution.
 
+## Version 0.5.0
+
+Version 0.5.0 replaces the single-direction auxiliary-domain time executor
+with a one-dimensional modal-resolvent implementation. The time API now
+refines the modal grid directly until `eta22` and `eta33` satisfy the declared
+successive-grid tolerance. A three-seed, nine-amplitude random-phase HOS
+comparison confirms equivalent HOS accuracy, smaller numerical changes and
+substantially lower runtime.
+
+Directional spatial reconstruction is unchanged.
+
 ## Version 0.4.0
 
 Version 0.4.0 adds the installable Python package under `python/`. It accepts a
